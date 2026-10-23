@@ -1524,9 +1524,10 @@ def make_favicons(dist_dir):
 
 def make_post_image(post, out_path):
     """Branded cover art for a post: stream-colored ground, bunting strip,
-    badge, wrapped title. Placeholder posts get this generated art until
-    real photography ships with the seed content (B4)."""
-    from PIL import Image, ImageDraw, ImageFont
+    centered badge. Titles stay in the HTML overlay (they double-read and
+    crop badly inside card cutouts); placeholder posts get this generated
+    art until real photography ships with the seed content (B4)."""
+    from PIL import Image, ImageDraw
 
     width, height = 1600, 1000
     canvas = Image.new("RGB", (width, height), NAVY if post["stream"] == "human" else RUST)
@@ -1541,28 +1542,9 @@ def make_post_image(post, out_path):
 
     badge = Image.open(BADGE_PATH).convert("RGBA")
     badge = badge.crop(badge.getbbox())
-    badge_h = 240
+    badge_h = 300
     badge = badge.resize((round(badge.width * badge_h / badge.height), badge_h), Image.LANCZOS)
-    badge_y = 160
-    canvas.paste(badge, ((width - badge.width) // 2, badge_y), badge)
-
-    font = ImageFont.truetype(
-        "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf", 68
-    )
-    max_text_w = 1200
-    lines, current = [], ""
-    for word in post["title"].split():
-        attempt = f"{current} {word}".strip()
-        if draw.textlength(attempt, font=font) <= max_text_w:
-            current = attempt
-        else:
-            lines.append(current)
-            current = word
-    lines.append(current)
-    text_top = badge_y + badge_h + 64
-    for i, line in enumerate(lines):
-        w = draw.textlength(line, font=font)
-        draw.text(((width - w) / 2, text_top + i * 80), line, font=font, fill=CREAM)
+    canvas.paste(badge, ((width - badge.width) // 2, (height - badge_h) // 2), badge)
 
     canvas.save(out_path, "PNG")
 
