@@ -590,7 +590,10 @@ section { padding: 56px 0; }
   display: flex;
   gap: 22px;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  /* proximity, not mandatory: mandatory snap yanks programmatic scrolls
+     back to a card boundary, so the arrow scrolls bounced to rest at 0
+     when the row's remaining overflow is less than one card. */
+  scroll-snap-type: x proximity;
   padding: 6px 4px 18px;
 }
 .blog-card {
