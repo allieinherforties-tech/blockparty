@@ -596,7 +596,10 @@ section { padding: 56px 0; }
 .blog-card {
   position: relative;
   display: block;
-  flex: 0 0 320px;
+  /* 360px: three trend cards (1124px) overflow the 1072px container at the
+     1440 desktop width, so the scroll affordance shows at the primary
+     viewport; at narrow widths the row scrolls proportionally more. */
+  flex: 0 0 360px;
   aspect-ratio: 4 / 5;
   border-radius: var(--radius-md);
   overflow: hidden;
