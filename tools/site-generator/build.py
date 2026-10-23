@@ -511,6 +511,72 @@ def faqpage_jsonld(qa_pairs):
         ],
     }
 
+def website_jsonld():
+    """WebSite node for the homepage (R10), joined to the business entity."""
+    return {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": f"{DOMAIN}/#website",
+        "url": f"{DOMAIN}/",
+        "name": SITE_NAME,
+        "publisher": {"@id": f"{DOMAIN}/#business"},
+    }
+
+def offer_catalog_jsonld():
+    """OfferCatalog for the rentals index (R10): packages + à-la-carte items."""
+    elements = [
+        {
+            "@type": "Offer",
+            "itemOffered": {
+                "@type": "Service",
+                "name": p["name"],
+                "description": p["subtitle"],
+            },
+            "price": str(p["price"]),
+            "priceCurrency": "USD",
+        }
+        for p in PACKAGES
+    ]
+    for item in CATALOG:
+        for o in item["offers"]:
+            offer = {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": item["name"],
+                    "url": f"{DOMAIN}/rentals/{item['slug']}.html",
+                },
+                "price": str(o["price"]),
+                "priceCurrency": "USD",
+            }
+            if o.get("variant"):
+                offer["name"] = offer_variant_name(o["variant"])
+            elements.append(offer)
+    return {
+        "@context": "https://schema.org",
+        "@type": "OfferCatalog",
+        "@id": f"{DOMAIN}/rentals/#catalog",
+        "name": "BlockParty Rentals & Packages",
+        "url": f"{DOMAIN}/rentals/",
+        "itemListElement": elements,
+    }
+
+def breadcrumb_jsonld(trail):
+    """BreadcrumbList (R10). trail: (name, path) pairs from Home to this page."""
+    return {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": i + 1,
+                "name": name,
+                "item": DOMAIN + path,
+            }
+            for i, (name, path) in enumerate(trail)
+        ],
+    }
+
 # ---------------------------------------------------------------------------
 # Page builders
 # ---------------------------------------------------------------------------
@@ -597,7 +663,7 @@ def build_home():
         description="Brooklyn-only party equipment rentals: cornhole, giant Jenga, giant beer pong, slushie machines, basketball hoops, and ball pits. We deliver, we pick up, and we call you first.",
         path="/",
         body=body,
-        json_ld_objects=[local_business_jsonld()],
+        json_ld_objects=[local_business_jsonld(), website_jsonld()],
     )
 
 
@@ -649,6 +715,7 @@ def build_about():
         description="Why BlockParty exists: a Brooklyn-only equipment rental company built so block parties don't require a storage unit or a yearly commitment. Delivery, pickup, and a confirmation call on every booking.",
         path="/about.html",
         body=body,
+        json_ld_objects=[breadcrumb_jsonld([("Home", "/"), ("Our Story", "/about.html")])],
     )
 
 
@@ -703,6 +770,7 @@ def build_how_it_works():
         description="Browse rentals, book a confirmation call, and BlockParty delivers and picks up everything for your Brooklyn block party. No self-service pickup, no guesswork.",
         path="/how-it-works.html",
         body=body,
+        json_ld_objects=[breadcrumb_jsonld([("Home", "/"), ("How It Works", "/how-it-works.html")])],
     )
 
 
@@ -795,22 +863,10 @@ def build_catalog_index():
         description="Classic ($185), Full ($420), and Deluxe ($675) Block Party packages, plus à la carte cornhole, giant Jenga, giant beer pong, slushie machines, a basketball hoop, and a ball pit. Brooklyn delivery and pickup included.",
         path="/rentals/",
         body=body,
-        json_ld_objects=[{
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": i + 1,
-                    "item": {
-                        "@type": "Service",
-                        "name": item["name"],
-                        "url": f"{DOMAIN}/rentals/{item['slug']}.html",
-                    },
-                }
-                for i, item in enumerate(CATALOG)
-            ],
-        }],
+        json_ld_objects=[
+            breadcrumb_jsonld([("Home", "/"), ("Packages & Catalog", "/rentals/")]),
+            offer_catalog_jsonld(),
+        ],
     )
 
 
@@ -861,7 +917,15 @@ def build_item_page(item):
         description=item["answer"],
         path=f"/rentals/{item['slug']}.html",
         body=body,
-        json_ld_objects=[service_jsonld(item), faqpage_jsonld(item["item_faq"])],
+        json_ld_objects=[
+            breadcrumb_jsonld([
+                ("Home", "/"),
+                ("Packages & Catalog", "/rentals/"),
+                (item["name"], f"/rentals/{item['slug']}.html"),
+            ]),
+            service_jsonld(item),
+            faqpage_jsonld(item["item_faq"]),
+        ],
     )
 
 
@@ -902,7 +966,10 @@ def build_faq():
         description="Answers on Brooklyn delivery, the confirmation call, booking lead time, order minimums, street permits, and what BlockParty does and doesn't rent.",
         path="/faq.html",
         body=body,
-        json_ld_objects=[faqpage_jsonld(FAQS)],
+        json_ld_objects=[
+            breadcrumb_jsonld([("Home", "/"), ("FAQ", "/faq.html")]),
+            faqpage_jsonld(FAQS),
+        ],
     )
 
 
