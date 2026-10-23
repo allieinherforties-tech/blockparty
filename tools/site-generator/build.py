@@ -291,9 +291,9 @@ CORE_PAGES = [
 ]
 
 # ---------------------------------------------------------------------------
-# Blog — Allie Intelligence (B1–B4)
+# Blog — The Block Party Playbook (B1–B4)
 # Two authorship streams: "human" posts are written by Allie; "ai" posts are
-# written by the Allie Intelligence desk and ship only with a named human
+# written by the BlockParty Trends Desk and ship only with a named human
 # reviewer (publish gate, enforced by check_publish_gate). The B4 seed
 # content lands as DRAFTS: "published": False keeps every post out of the
 # live build — not rendered, not in the sitemap, not in llms.txt, absent
@@ -306,7 +306,7 @@ CORE_PAGES = [
 POSTS = [
     {
         "slug": "why-we-throw-the-party",
-        "stream": "human",  # "human" (Allie) or "ai" (Allie Intelligence)
+        "stream": "human",  # "human" (Allie) or "ai" (Trends Desk)
         "title": "Why we throw the party",
         "subhead": "Block parties are how a block becomes a neighborhood — a note on what BlockParty is really for.",
         "date": "2026-10-23",   # datePublished (ISO)
@@ -546,7 +546,7 @@ def footer_html():
         <h4>Explore</h4>
         <ul>
           <li><a href="/rentals/">Packages &amp; Catalog</a></li>
-          <li><a href="/blog/">Allie Intelligence</a></li>
+          <li><a href="/blog/">The Block Party Playbook</a></li>
           <li><a href="/how-it-works.html">How It Works</a></li>
           <li><a href="/about.html">Our Story</a></li>
           <li><a href="/faq.html">FAQ</a></li>
@@ -798,9 +798,9 @@ def blog_author_jsonld(post):
         }
     return {
         "@type": "Organization",
-        "@id": f"{DOMAIN}/blog/#allie-intelligence",
-        "name": "Allie Intelligence",
-        "description": "The AI-written trends desk of the BlockParty blog. Every post it publishes is reviewed and approved by Allie Esslinger before it ships.",
+        "@id": f"{DOMAIN}/blog/#trends-desk",
+        "name": "BlockParty Trends Desk",
+        "description": "The AI-written trends desk of The Block Party Playbook. Every post it publishes is reviewed and approved by Allie Esslinger before it ships.",
         "parentOrganization": {"@id": f"{DOMAIN}/#business"},
     }
 
@@ -831,7 +831,7 @@ def blog_jsonld():
         "@type": "Blog",
         "@id": f"{DOMAIN}/blog/#blog",
         "url": f"{DOMAIN}/blog/",
-        "name": "Allie Intelligence",
+        "name": "The Block Party Playbook",
         "description": "The BlockParty blog: Allie Esslinger on block-party life, plus AI-written trend scans reviewed and approved by Allie before they ship.",
         "publisher": {"@id": f"{DOMAIN}/#business"},
     }
@@ -1310,7 +1310,7 @@ def build_blog_hub():
     else:
         second = """
       <div class="blog-soon">
-        <h3>More from Allie is on the way</h3>
+        <h3>From the Stoop is on the way</h3>
         <p>Her next piece is being written &mdash; it lands here when it's ready.</p>
       </div>"""
 
@@ -1339,7 +1339,7 @@ def build_blog_hub():
   <div class="container hero-inner">
     <div class="bunting">{''.join('<span></span>' for _ in range(11))}</div>
     <span class="eyebrow">The BlockParty Blog</span>
-    <h1>Allie Intelligence</h1>
+    <h1>The Block Party Playbook</h1>
     <p class="hero-sub">Field notes from Allie Esslinger on why block parties matter &mdash; plus trend scans from the AI desk she reviews before anything ships.</p>
     <img class="blog-hero-img" src="/blog/images/hub-hero.png" alt="Illustration of a Brooklyn block party outside cream and rust brownstones, with bunting flags overhead" width="1344" height="750">
   </div>
@@ -1356,7 +1356,7 @@ def build_blog_hub():
 <section>
   <div class="container">
     <div class="section-head">
-      <h2>More from Allie</h2>
+      <h2>From the Stoop</h2>
     </div>
     {second}
   </div>
@@ -1384,12 +1384,12 @@ def build_blog_hub():
 </script>
 """
     return page(
-        title="Allie Intelligence — The BlockParty Blog",
+        title="The Block Party Playbook — The BlockParty Blog",
         description="The BlockParty blog: Allie Esslinger on why block parties matter, plus AI-written Brooklyn trend scans — reviewed and approved by Allie before they ship.",
         path=BLOG_PATH,
         body=body,
         json_ld_objects=[
-            breadcrumb_jsonld([("Home", "/"), ("Allie Intelligence", BLOG_PATH)]),
+            breadcrumb_jsonld([("Home", "/"), ("The Block Party Playbook", BLOG_PATH)]),
             blog_jsonld(),
         ],
     )
@@ -1429,16 +1429,16 @@ def build_post_page(post):
             + "</p>"
         )
     if post["stream"] == "human":
-        byline = f'<div class="blog-byline">{stream_badge("human")} By <strong>Allie Esslinger</strong>, Founder</div>'
+        byline = f'<div class="blog-byline">{stream_badge("human")} From the Stoop &middot; By <strong>Allie Esslinger</strong>, Founder</div>'
         disclosure = ""
     else:
-        byline = f'<div class="blog-byline">{stream_badge("ai")} By <strong>Allie Intelligence</strong></div>'
+        byline = f'<div class="blog-byline">{stream_badge("ai")} By <strong>BlockParty Trends Desk</strong></div>'
         disclosure = f'<p class="blog-disclosure">AI-written &middot; reviewed and approved by {post.get("reviewed_by") or "review pending"}</p>'
 
     body = f"""
 <section class="hero" style="padding-bottom:0;">
   <div class="container hero-inner" style="text-align:left; max-width:820px;">
-    <div class="breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/blog/">Allie Intelligence</a> &rsaquo; {html.escape(post['title'])}</div>
+    <div class="breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/blog/">The Block Party Playbook</a> &rsaquo; {html.escape(post['title'])}</div>
     {byline}
     <h1>{html.escape(post['title'])}</h1>
     <p class="hero-sub" style="margin:0;">{html.escape(post['subhead'])}</p>
@@ -1464,21 +1464,21 @@ def build_post_page(post):
       <p>Browse the packages or the full catalog &mdash; delivery, pickup, and a confirmation call are included either way.</p>
       <div class="btn-row">
         <a class="btn btn-primary" href="/rentals/">Browse rentals</a>
-        <a class="btn btn-secondary" href="/blog/">&larr; Back to Allie Intelligence</a>
+        <a class="btn btn-secondary" href="/blog/">&larr; Back to The Block Party Playbook</a>
       </div>
     </div>
   </div>
 </section>
 """
     return page(
-        title=f"{post['title']} — Allie Intelligence",
+        title=f"{post['title']} — The Block Party Playbook",
         description=post["subhead"],
         path=post_path(post),
         body=body,
         json_ld_objects=[
             breadcrumb_jsonld([
                 ("Home", "/"),
-                ("Allie Intelligence", BLOG_PATH),
+                ("The Block Party Playbook", BLOG_PATH),
                 (post["title"], post_path(post)),
             ]),
             blogposting_jsonld(post),
@@ -1585,14 +1585,14 @@ def llms_txt():
         f"- [{item['name']}]({DOMAIN}/rentals/{item['slug']}.html): {item['short']} {item['price_label']}."
         for item in CATALOG
     ]
-    lines += ["", "## Allie Intelligence (blog)", ""]
+    lines += ["", "## The Block Party Playbook (blog)", ""]
     lines += [
-        f"- [Allie Intelligence]({DOMAIN}/blog/): the BlockParty blog — Allie Esslinger on block-party life, plus AI-written trend scans (every AI post is reviewed and approved by Allie before it ships)."
+        f"- [The Block Party Playbook]({DOMAIN}/blog/): the BlockParty blog — Allie Esslinger's From the Stoop essays on block-party life, plus AI-written trend scans (every AI post is reviewed and approved by Allie before it ships)."
     ]
     lines += [
         f"- [{p['title']}]({DOMAIN}/blog/{p['slug']}.html): {p['subhead']}"
         + (
-            " By Allie Esslinger, Founder."
+            " From the Stoop — by Allie Esslinger, Founder."
             if p["stream"] == "human"
             else f" AI-written, reviewed and approved by {p['reviewed_by']}."
         )
