@@ -1,4 +1,27 @@
 User-agent: *
 Allow: /
 
+# AI answer engines (retrieval) — allowed
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+# AI training crawlers — allowed (visibility-first; revisit any time)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://blockpartysupply.co/sitemap.xml

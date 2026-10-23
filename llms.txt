@@ -1,0 +1,29 @@
+# BlockParty
+
+> BlockParty is a Brooklyn-only party equipment rental company: cornhole, giant Jenga, giant/human-sized beer pong, a slushie or frozen cocktail machine, a portable basketball hoop, and a ball pit — delivered to your block, set up, and picked up after the party, with a confirmation call included in every booking. Packages: Classic $185 / Full $420 / Deluxe $675. À la carte rentals are also available; standalone single-item orders carry a $150 minimum order value. To book, email reserve@blockpartysupply.co and we'll set up your confirmation call.
+
+## Pages
+
+- [Home](https://blockpartysupply.co/): Brooklyn block party and backyard party rentals — we deliver, we pick up, and we call you first.
+- [Packages & Rentals](https://blockpartysupply.co/rentals/): Every package and à la carte item, with prices.
+- [How It Works](https://blockpartysupply.co/how-it-works.html): Browse, book a confirmation call, and we deliver and pick up.
+- [Our Story](https://blockpartysupply.co/about.html): Why BlockParty exists.
+- [FAQ](https://blockpartysupply.co/faq.html): Delivery, booking lead time, order minimums, and street permits.
+
+- [Sitemap](https://blockpartysupply.co/sitemap.xml): machine-readable index of every page.
+
+## Rentals
+
+- [Cornhole Set Rental](https://blockpartysupply.co/rentals/cornhole-rental-brooklyn.html): Regulation 2-board cornhole set with bags, delivered and picked up. $65/day bundled.
+- [Giant Jenga Rental](https://blockpartysupply.co/rentals/giant-jenga-rental-brooklyn.html): Oversized stacking-block game, 3–5 feet tall fully built. $65/day bundled.
+- [Giant / Human-Sized Beer Pong Rental](https://blockpartysupply.co/rentals/human-beer-pong-rental-brooklyn.html): Oversized buckets and balls, scaled up for a block-party crowd. $75/day bundled.
+- [Slushie & Frozen Cocktail Machine Rental](https://blockpartysupply.co/rentals/slushie-machine-rental-brooklyn.html): A real commercial frozen-drink machine, delivered, set up, and picked up after your event. $275/day single-flavor, $375/day double-flavor.
+- [Portable Basketball Hoop Rental](https://blockpartysupply.co/rentals/basketball-hoop-rental-brooklyn.html): A real portable hoop system, not a toy-tier set. $85/day bundled.
+- [Ball Pit Rental](https://blockpartysupply.co/rentals/ball-pit-rental-brooklyn.html): 6x6 to 8x8 ball pit with balls included, delivered and set up. $325/day.
+
+## Allie Intelligence (blog)
+
+- [Allie Intelligence](https://blockpartysupply.co/blog/): the BlockParty blog — Allie Esslinger on block-party life, plus AI-written trend scans (every AI post is reviewed and approved by Allie before it ships).
+- [Block party permits: the 60-day rule](https://blockpartysupply.co/blog/brooklyn-block-party-permits.html): Brooklyn block-party permits are due 60 days before your event — the CECM/SAPO timeline, the $25 fee, and when to book the fun stuff. AI-written, reviewed and approved by Allie Esslinger.
+- [Cornhole brackets that actually work](https://blockpartysupply.co/blog/cornhole-tournament-brackets.html): The 8-team, single-elimination cornhole bracket Brooklyn blocks actually finish — timing, rules, board placement, and the bracket to print. AI-written, reviewed and approved by Allie Esslinger.
+- [Block party food & frozen-drink trends](https://blockpartysupply.co/blog/frozen-drink-station-trends.html): Frozen-drink stations are becoming the anchor of Brooklyn block-party menus — single- vs double-flavor machines, and food that survives a sidewalk. AI-written, reviewed and approved by Allie Esslinger.
