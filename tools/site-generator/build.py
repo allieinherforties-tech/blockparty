@@ -603,10 +603,10 @@ def page(title, description, path, body, json_ld_objects=None, extra_head=""):
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="{OG_IMAGE_URL}">
 <meta name="twitter:image:alt" content="{OG_IMAGE_ALT}">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1606,6 +1606,7 @@ def llms_txt():
 # ---------------------------------------------------------------------------
 
 BADGE_PATH = os.path.join(ROOT, "assets", "badge.png")
+FAVICON_ASSET_DIR = os.path.join(ROOT, "assets", "brand")
 CREAM = (255, 248, 236)   # #FFF8EC — site cream
 NAVY = (29, 39, 49)       # #1D2731 — site navy
 RUST = (228, 87, 46)      # #E4572E — site rust
@@ -1636,34 +1637,30 @@ def make_og_image(out_path):
 
     canvas.save(out_path, "PNG")
 
+# Approved favicon art: pre-cut brownstone-tile rasters from the brand kit
+# (corners cut with transparency outside). Shipped as build inputs and copied
+# verbatim so every machine — local or CI — emits byte-identical, art-approved
+# favicons with no runtime resampling to drift between environments.
+FAVICON_FILES = [
+    # (source tile, rendered name)
+    ("favicon-16.png", "favicon-16.png"),
+    ("favicon-32.png", "favicon-32.png"),
+    ("favicon-64.png", "favicon-64.png"),
+    ("favicon-180.png", "apple-touch-icon.png"),  # iOS home-screen icon
+    ("favicon-192.png", "favicon-192.png"),       # high-density / manifest use
+    ("favicon-512.png", "favicon-512.png"),       # PWA-grade master
+]
+
 def make_favicons(dist_dir):
-    """Rasterize favicon.svg to PNG fallbacks: 32/16 + apple-touch 180 (R7)."""
-    sizes = [(32, "favicon-32.png"), (16, "favicon-16.png"), (180, "apple-touch-icon.png")]
-    try:
-        import cairosvg
-    except (ImportError, OSError):
-        # Documented fallback: derive the PNGs from the badge raster with PIL.
-        # OSError covers cairosvg present but its native cairo lib missing.
-        from PIL import Image
-        badge = Image.open(BADGE_PATH).convert("RGBA")
-        side = min(badge.size)
-        square = badge.crop((
-            (badge.width - side) // 2,
-            (badge.height - side) // 2,
-            (badge.width + side) // 2,
-            (badge.height + side) // 2,
-        ))
-        for size, name in sizes:
-            square.resize((size, size), Image.LANCZOS).save(os.path.join(dist_dir, name), "PNG")
-        return
-    svg = os.path.join(ROOT, "favicon.svg")
-    for size, name in sizes:
-        cairosvg.svg2png(
-            url=svg,
-            write_to=os.path.join(dist_dir, name),
-            output_width=size,
-            output_height=size,
-        )
+    """Emit the approved brand-tile favicons (16/32/64, apple-touch 180,
+    192/512), replacing the placeholder favicon.svg pipeline (R7)."""
+    for src_name, out_name in FAVICON_FILES:
+        src = os.path.join(FAVICON_ASSET_DIR, src_name)
+        if not os.path.isfile(src):
+            # Fail loudly: a missing approved tile must stop the build, not
+            # silently ship a stale or partial icon set.
+            raise SystemExit(f"make_favicons: approved brand tile missing: {src}")
+        shutil.copyfile(src, os.path.join(dist_dir, out_name))
 
 def make_post_image(post, out_path):
     """Branded cover art for a post: stream-colored ground, bunting strip,
@@ -1746,7 +1743,6 @@ def main():
         write(f"blog/{post['slug']}.html", build_post_page(post))
 
     shutil.copyfile(os.path.join(ROOT, "style.css"), os.path.join(DIST, "style.css"))
-    shutil.copyfile(os.path.join(ROOT, "favicon.svg"), os.path.join(DIST, "favicon.svg"))
     shutil.copyfile(os.path.join(ROOT, "CNAME"), os.path.join(DIST, "CNAME"))
 
     write("sitemap.xml", sitemap_xml())
