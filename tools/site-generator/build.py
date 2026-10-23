@@ -104,10 +104,13 @@ def icon(key, css_class="icon"):
 # Catalog data — sourced verbatim from art_le2BjCpS / art_K7lqnl0A
 # ---------------------------------------------------------------------------
 
+# Packages: `price_label` is the display string; `price` is the structured
+# numeric price JSON-LD must never drift from.
 PACKAGES = [
     {
         "name": "Classic Block Party Package",
-        "price": "$185",
+        "price_label": "$185",
+        "price": 185,
         "subtitle": "Cornhole, Giant Jenga, and Giant/Human-Sized Beer Pong, delivered and picked up in one trip.",
         "group_size": "~10–25 people",
         "desc": "For blocks of about 10–25 people who want a few solid lawn games without extra setup. One delivery run covers all three games, which is why the package runs below the combined à la carte price. Includes delivery, pickup, and a pre-event confirmation call.",
@@ -116,7 +119,8 @@ PACKAGES = [
     },
     {
         "name": "Full Block Party Package",
-        "price": "$420",
+        "price_label": "$420",
+        "price": 420,
         "subtitle": "Everything in the Classic package, plus a single-flavor slushie or frozen-cocktail machine.",
         "group_size": "~25–50 people",
         "desc": "Built for bigger blocks (roughly 25–50 people) who want a drink station alongside the games. Includes delivery, pickup, and a pre-event confirmation call.",
@@ -125,7 +129,8 @@ PACKAGES = [
     },
     {
         "name": "Deluxe Block Party Package",
-        "price": "$675",
+        "price_label": "$675",
+        "price": 675,
         "subtitle": "Everything in the Full package, plus a ball pit.",
         "group_size": "~40–75 people",
         "desc": "The flagship package for larger, family-heavy blocks (roughly 40–75 people). Like every other BlockParty rental, it's drop-off service — no on-site attendant required for any item in this package. Includes delivery, pickup, and a pre-event confirmation call.",
@@ -135,12 +140,15 @@ PACKAGES = [
 ]
 
 # Each catalog item: slug drives /rentals/<slug>.html
+# `offers` carries the structured numeric prices (R9) that JSON-LD renders;
+# `price_label` is display-only and may hold two prices for one item.
 CATALOG = [
     {
         "slug": "cornhole-rental-brooklyn",
         "icon": "cornhole",
         "name": "Cornhole Set Rental",
         "price_label": "$65/day bundled",
+        "offers": [{"price": 65}],
         "solo_note": "$150 solo-order minimum",
         "short": "Regulation 2-board cornhole set with bags, delivered and picked up.",
         "who": "Works for groups of any size — most blocks run 2–4 boards' worth of players at once.",
@@ -157,6 +165,7 @@ CATALOG = [
         "icon": "jenga",
         "name": "Giant Jenga Rental",
         "price_label": "$65/day bundled",
+        "offers": [{"price": 65}],
         "solo_note": "$150 solo-order minimum",
         "short": "Oversized stacking-block game, 3–5 feet tall fully built.",
         "who": "A low-effort, all-ages game that works on pavement, sidewalk, or a closed street.",
@@ -173,6 +182,7 @@ CATALOG = [
         "icon": "beerpong",
         "name": "Giant / Human-Sized Beer Pong Rental",
         "price_label": "$75/day bundled",
+        "offers": [{"price": 75}],
         "solo_note": "$150 solo-order minimum",
         "short": "Oversized buckets and balls, scaled up for a block-party crowd.",
         "who": "Not a kids' version — plays with water or any drink of your choice.",
@@ -189,6 +199,10 @@ CATALOG = [
         "icon": "slushie",
         "name": "Slushie & Frozen Cocktail Machine Rental",
         "price_label": "$275/day single-flavor, $375/day double-flavor",
+        "offers": [
+            {"price": 275, "variant": "single-flavor"},
+            {"price": 375, "variant": "double-flavor"},
+        ],
         "solo_note": "Clears the solo-order minimum on its own",
         "short": "A real commercial frozen-drink machine, delivered, set up, and picked up after your event.",
         "who": "Single-flavor for one crowd-pleasing mix, double-flavor for two options running side by side.",
@@ -205,6 +219,7 @@ CATALOG = [
         "icon": "basketball",
         "name": "Portable Basketball Hoop Rental",
         "price_label": "$85/day bundled",
+        "offers": [{"price": 85}],
         "solo_note": "$150 solo-order minimum",
         "short": "A real portable hoop system, not a toy-tier set.",
         "who": "Works on a closed street or driveway.",
@@ -221,6 +236,7 @@ CATALOG = [
         "icon": "ballpit",
         "name": "Ball Pit Rental",
         "price_label": "$325/day",
+        "offers": [{"price": 325}],
         "solo_note": "Clears the solo-order minimum on its own",
         "short": "6x6 to 8x8 ball pit with balls included, delivered and set up.",
         "who": "A good fit for blocks with younger kids.",
@@ -284,6 +300,10 @@ def page_registry():
 # ---------------------------------------------------------------------------
 # Layout helpers
 # ---------------------------------------------------------------------------
+
+def offer_variant_name(variant):
+    """Human label distinguishing multi-variant offers (slushie single/double)."""
+    return f"{variant.capitalize()} day rental"
 
 def nav_html(active=""):
     links = "\n".join(
@@ -402,6 +422,11 @@ def local_business_jsonld():
         "description": "Brooklyn-based party-equipment rental company. We deliver and pick up cornhole, giant Jenga, giant/human-sized beer pong, slushie and frozen cocktail machines, portable basketball hoops, and ball pits for block parties and private events.",
         "url": DOMAIN,
         "email": EMAIL,
+        # Brand assets emitted by the build (R8). logo is the square badge
+        # raster; image is the 1200x630 social card. No NAP beyond what is
+        # real: no telephone, openingHours, sameAs, or geo (locked decision).
+        "logo": f"{DOMAIN}/apple-touch-icon.png",
+        "image": OG_IMAGE_URL,
         "areaServed": {
             "@type": "City",
             "name": "Brooklyn, NY"
@@ -413,44 +438,48 @@ def local_business_jsonld():
             "addressCountry": "US"
         },
         "priceRange": "$65-$675",
+        # Derived from PACKAGES so schema prices can never drift from the
+        # prices the pages display (same rule as R9).
         "makesOffer": [
             {
                 "@type": "Offer",
                 "itemOffered": {
                     "@type": "Service",
-                    "name": "Classic Block Party Package",
-                    "description": "Cornhole, Giant Jenga, and Giant/Human-Sized Beer Pong, delivered and picked up in one trip.",
+                    "name": p["name"],
+                    "description": p["subtitle"],
                 },
-                "price": "185",
+                "price": str(p["price"]),
                 "priceCurrency": "USD",
-            },
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "Full Block Party Package",
-                    "description": "Classic package plus a single-flavor slushie or frozen-cocktail machine.",
-                },
-                "price": "420",
-                "priceCurrency": "USD",
-            },
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "Deluxe Block Party Package",
-                    "description": "Full package plus a ball pit.",
-                },
-                "price": "675",
-                "priceCurrency": "USD",
-            },
+            }
+            for p in PACKAGES
         ],
     }
 
+def item_offers_jsonld(item):
+    """Structured offers for a catalog item (R9).
+
+    Prices come from the item's numeric `offers` data — never parsed from
+    the display label, which can hold two prices (e.g. the slushie machine).
+    """
+    offers = []
+    for o in item["offers"]:
+        offer = {
+            "@type": "Offer",
+            "price": str(o["price"]),
+            "priceCurrency": "USD",
+        }
+        if o.get("variant"):
+            offer["name"] = offer_variant_name(o["variant"])
+        offers.append(offer)
+    return offers
+
 def service_jsonld(item):
+    page_url = f"{DOMAIN}/rentals/{item['slug']}.html"
     return {
         "@context": "https://schema.org",
         "@type": "Service",
+        "@id": f"{page_url}#service",
+        "url": page_url,
         "serviceType": item["name"],
         "provider": {
             "@type": "LocalBusiness",
@@ -462,11 +491,7 @@ def service_jsonld(item):
             "name": "Brooklyn, NY"
         },
         "description": item["short"],
-        "offers": {
-            "@type": "Offer",
-            "price": item["price_label"].split("$")[1].split("/")[0] if "$" in item["price_label"] else None,
-            "priceCurrency": "USD",
-        },
+        "offers": item_offers_jsonld(item),
     }
 
 def faqpage_jsonld(qa_pairs):
@@ -486,6 +511,72 @@ def faqpage_jsonld(qa_pairs):
         ],
     }
 
+def website_jsonld():
+    """WebSite node for the homepage (R10), joined to the business entity."""
+    return {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": f"{DOMAIN}/#website",
+        "url": f"{DOMAIN}/",
+        "name": SITE_NAME,
+        "publisher": {"@id": f"{DOMAIN}/#business"},
+    }
+
+def offer_catalog_jsonld():
+    """OfferCatalog for the rentals index (R10): packages + à-la-carte items."""
+    elements = [
+        {
+            "@type": "Offer",
+            "itemOffered": {
+                "@type": "Service",
+                "name": p["name"],
+                "description": p["subtitle"],
+            },
+            "price": str(p["price"]),
+            "priceCurrency": "USD",
+        }
+        for p in PACKAGES
+    ]
+    for item in CATALOG:
+        for o in item["offers"]:
+            offer = {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": item["name"],
+                    "url": f"{DOMAIN}/rentals/{item['slug']}.html",
+                },
+                "price": str(o["price"]),
+                "priceCurrency": "USD",
+            }
+            if o.get("variant"):
+                offer["name"] = offer_variant_name(o["variant"])
+            elements.append(offer)
+    return {
+        "@context": "https://schema.org",
+        "@type": "OfferCatalog",
+        "@id": f"{DOMAIN}/rentals/#catalog",
+        "name": "BlockParty Rentals & Packages",
+        "url": f"{DOMAIN}/rentals/",
+        "itemListElement": elements,
+    }
+
+def breadcrumb_jsonld(trail):
+    """BreadcrumbList (R10). trail: (name, path) pairs from Home to this page."""
+    return {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": i + 1,
+                "name": name,
+                "item": DOMAIN + path,
+            }
+            for i, (name, path) in enumerate(trail)
+        ],
+    }
+
 # ---------------------------------------------------------------------------
 # Page builders
 # ---------------------------------------------------------------------------
@@ -497,7 +588,7 @@ def build_home():
         <div class="tile">
           <h3>{p['name']}</h3>
           <p>{p['subtitle']}</p>
-          <span class="price">{p['price']}</span>
+          <span class="price">{p['price_label']}</span>
         </div>
         </a>""" for p in PACKAGES
     )
@@ -572,7 +663,7 @@ def build_home():
         description="Brooklyn-only party equipment rentals: cornhole, giant Jenga, giant beer pong, slushie machines, basketball hoops, and ball pits. We deliver, we pick up, and we call you first.",
         path="/",
         body=body,
-        json_ld_objects=[local_business_jsonld()],
+        json_ld_objects=[local_business_jsonld(), website_jsonld()],
     )
 
 
@@ -624,6 +715,7 @@ def build_about():
         description="Why BlockParty exists: a Brooklyn-only equipment rental company built so block parties don't require a storage unit or a yearly commitment. Delivery, pickup, and a confirmation call on every booking.",
         path="/about.html",
         body=body,
+        json_ld_objects=[breadcrumb_jsonld([("Home", "/"), ("Our Story", "/about.html")])],
     )
 
 
@@ -678,6 +770,7 @@ def build_how_it_works():
         description="Browse rentals, book a confirmation call, and BlockParty delivers and picks up everything for your Brooklyn block party. No self-service pickup, no guesswork.",
         path="/how-it-works.html",
         body=body,
+        json_ld_objects=[breadcrumb_jsonld([("Home", "/"), ("How It Works", "/how-it-works.html")])],
     )
 
 
@@ -691,7 +784,7 @@ def build_catalog_index():
         <div class="package-card{featured_cls}">
           {badge}
           <h3>{p['name']}</h3>
-          <div class="price">{p['price']}</div>
+          <div class="price">{p['price_label']}</div>
           <div class="group-size">{p['group_size']}</div>
           <p class="desc">{p['desc']}</p>
           <div class="includes">Includes:</div>
@@ -770,22 +863,10 @@ def build_catalog_index():
         description="Classic ($185), Full ($420), and Deluxe ($675) Block Party packages, plus à la carte cornhole, giant Jenga, giant beer pong, slushie machines, a basketball hoop, and a ball pit. Brooklyn delivery and pickup included.",
         path="/rentals/",
         body=body,
-        json_ld_objects=[{
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": i + 1,
-                    "item": {
-                        "@type": "Service",
-                        "name": item["name"],
-                        "url": f"{DOMAIN}/rentals/{item['slug']}.html",
-                    },
-                }
-                for i, item in enumerate(CATALOG)
-            ],
-        }],
+        json_ld_objects=[
+            breadcrumb_jsonld([("Home", "/"), ("Packages & Catalog", "/rentals/")]),
+            offer_catalog_jsonld(),
+        ],
     )
 
 
@@ -836,7 +917,15 @@ def build_item_page(item):
         description=item["answer"],
         path=f"/rentals/{item['slug']}.html",
         body=body,
-        json_ld_objects=[service_jsonld(item), faqpage_jsonld(item["item_faq"])],
+        json_ld_objects=[
+            breadcrumb_jsonld([
+                ("Home", "/"),
+                ("Packages & Catalog", "/rentals/"),
+                (item["name"], f"/rentals/{item['slug']}.html"),
+            ]),
+            service_jsonld(item),
+            faqpage_jsonld(item["item_faq"]),
+        ],
     )
 
 
@@ -877,7 +966,10 @@ def build_faq():
         description="Answers on Brooklyn delivery, the confirmation call, booking lead time, order minimums, street permits, and what BlockParty does and doesn't rent.",
         path="/faq.html",
         body=body,
-        json_ld_objects=[faqpage_jsonld(FAQS)],
+        json_ld_objects=[
+            breadcrumb_jsonld([("Home", "/"), ("FAQ", "/faq.html")]),
+            faqpage_jsonld(FAQS),
+        ],
     )
 
 
@@ -944,7 +1036,7 @@ def robots_txt():
 def llms_txt():
     """Curated Markdown for AI answer engines, generated from site data (R3)."""
     pkg_prices = " / ".join(
-        f"{p['name'].replace(' Block Party Package', '')} {p['price']}"
+        f"{p['name'].replace(' Block Party Package', '')} {p['price_label']}"
         for p in PACKAGES
     )
     summary = (

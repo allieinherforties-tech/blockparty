@@ -19,9 +19,10 @@ Pages:
 - `faq.html` — FAQ (FAQPage JSON-LD)
 - `404.html`
 
-Structured data: `LocalBusiness` on the homepage, `Service` + `FAQPage` JSON-LD
-on each rental item page, `FAQPage` JSON-LD on `faq.html`, `ItemList` on the
-catalog page.
+Structured data: `LocalBusiness` + `WebSite` on the homepage, `BreadcrumbList`
+on every subpage, `Service` + `FAQPage` JSON-LD on each rental item page,
+`FAQPage` JSON-LD on `faq.html`, and an `OfferCatalog` (packages + à la carte
+items) on the catalog page.
 
 ## Regenerating the site
 
