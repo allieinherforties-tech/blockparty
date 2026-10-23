@@ -16,7 +16,7 @@ DIST = os.path.join(ROOT, "dist")
 SITE_NAME = "BlockParty"
 DOMAIN = "https://blockpartysupply.co"
 EMAIL = "reserve@blockpartysupply.co"
-TAGLINE = "Your Source for Brooklyn Block Party Fun"
+TAGLINE = "We bought it so you don't have to"
 
 # Social card image (R4) — generated at build time from assets/badge.png
 OG_IMAGE_PATH = "/og-image.png"
@@ -360,9 +360,9 @@ POSTS = [
         "date": "2026-10-23",
         "modified": None,
         "series": ("brooklyn-trends", "Brooklyn Trends"),
-        "reviewed_by": None,     # publish gate: stays empty until Allie reviews
-        "published": False,      # B4 gate: draft — reviewed_by stamps at approval
-        "note": "Awaiting Allie's review — reviewed_by gets stamped and published flips after approval.",
+        "reviewed_by": "Allie Esslinger",   # approved via review card 2026-10-23
+        "published": True,       # approved for publish by Allie
+        "note": "Approved by Allie Esslinger, 2026-10-23.",
         "body": [
             "File your block-party permit application at least 60 days before your event date. In New York City, block parties are permitted through the Street Activity Permit Office (SAPO) — now part of the Mayor's Office of Citywide Event Coordination and Management (CECM) — and the application carries a $25 processing fee that is not refunded if you withdraw or are denied.",
             "Every summer, Brooklyn's block-party calendar fills through this exact process. On the public permit rolls you'll find parties like Tiffany Place between Degraw Street and Kane Street (Community Board 6, 76th precinct) or 17th Street between Prospect Park West and 10th Avenue (Community Board 7, 72nd precinct) — real blocks, real closures, all filed through the same system.",
@@ -385,9 +385,9 @@ POSTS = [
         "date": "2026-10-23",
         "modified": None,
         "series": ("brooklyn-trends", "Brooklyn Trends"),
-        "reviewed_by": None,     # publish gate: stays empty until Allie reviews
-        "published": False,      # B4 gate: draft — reviewed_by stamps at approval
-        "note": "Awaiting Allie's review — reviewed_by gets stamped and published flips after approval.",
+        "reviewed_by": "Allie Esslinger",   # approved via review card 2026-10-23
+        "published": True,       # approved for publish by Allie
+        "note": "Approved by Allie Esslinger, 2026-10-23.",
         "body": [
             "The cornhole tournament that works on a Brooklyn block is an 8-team, single-elimination bracket with a 21-point or 15-minute cap per game, run on two boards with a losers' game alongside. Sixteen teams sounds inclusive; it turns your afternoon into a bracket-management job. Eight teams, run well, plays everyone and still ends before the slushie melts.",
             ("h2", "Why 8 teams is the sweet spot"),
@@ -412,9 +412,9 @@ POSTS = [
         "date": "2026-10-23",
         "modified": None,
         "series": ("brooklyn-trends", "Brooklyn Trends"),
-        "reviewed_by": None,     # publish gate: stays empty until Allie reviews
-        "published": False,      # B4 gate: draft — reviewed_by stamps at approval
-        "note": "Awaiting Allie's review — reviewed_by gets stamped and published flips after approval.",
+        "reviewed_by": "Allie Esslinger",   # approved via review card 2026-10-23
+        "published": True,       # approved for publish by Allie
+        "note": "Approved by Allie Esslinger, 2026-10-23.",
         "body": [
             "The trend Brooklyn hosts are planning around this season: the frozen-drink station as the anchor of the block-party menu. One commercial slushie machine — a kids' flavor on one side, an adult frozen-cocktail mix on the other — does the work a cooler full of melting ice used to do, and it makes sense to plan the food around it instead of the other way around.",
             ("h2", "Single flavor or double flavor?"),
