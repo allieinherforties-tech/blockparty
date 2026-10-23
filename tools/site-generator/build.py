@@ -291,12 +291,16 @@ CORE_PAGES = [
 ]
 
 # ---------------------------------------------------------------------------
-# Blog — Allie Intelligence (B1–B3)
+# Blog — Allie Intelligence (B1–B4)
 # Two authorship streams: "human" posts are written by Allie; "ai" posts are
 # written by the Allie Intelligence desk and ship only with a named human
-# reviewer (publish gate, enforced by check_publish_gate before anything
-# renders). Placeholder posts prove the pipeline end to end; real content
-# replaces them in the seed-content task (B4).
+# reviewer (publish gate, enforced by check_publish_gate). The B4 seed
+# content lands as DRAFTS: "published": False keeps every post out of the
+# live build — not rendered, not in the sitemap, not in llms.txt, absent
+# from the hub — until Allie reviews and the flags flip. AI posts
+# additionally require a named "reviewed_by" before they can ship.
+# Body items are paragraph strings, ("h2"/"h3", text) headings, or
+# ("html", raw) pre-built blocks.
 # ---------------------------------------------------------------------------
 
 POSTS = [
@@ -309,58 +313,46 @@ POSTS = [
         "modified": None,        # dateModified; None = never edited since publish
         "series": None,          # (key, label) or None
         "reviewed_by": None,     # AI posts only: name of the human reviewer
-        "placeholder": True,     # show the visible placeholder notice
+        "published": False,      # B4 gate: draft — ships only after Allie's sign-off
+        "note": "Draft for Allie to edit — every word is hers to change before publish.",
         "body": [
-            "A block party looks simple from the sidewalk: chairs out, kids sprinting between a cornhole board and the hydrant, somebody's uncle judging the Jenga stack. But anyone who has run one knows the day is carried by a handful of neighbors who decided it should happen.",
-            "That gap — between the fun everyone remembers and the labor almost nobody sees — is the whole reason BlockParty exists. The games, the slushie machine, the pickup afterward: we're renting back the organizer's evening so the people who planned the party actually get to be at it.",
-            "This blog is where we'll keep the notes: what blocks book, what they add late, and why the tradition is worth keeping. Written by Allie, and meant to be useful long before you ever email us to book.",
+            "You know the scene. The folding chairs come out at ten, somebody's uncle is judging the Jenga stack by noon, and the kids have claimed the hydrant spray like it's a water park they own. Nobody hands out trophies for any of this — and yet, every summer, the same handful of people make it happen again.",
+            ("h2", "The quiet tax on the fun part"),
+            "Here's what nobody sees when the party's good: the group chat that took four months to get an answer, the permit paperwork, the tables borrowed from three different stoops, the garage slowly turning into storage for games that come out twice a year. Block parties run on emotional labor, and it's usually the same neighbor paying the tax every year.",
+            "BlockParty started with a simple wish: the party should be exciting for the kids tearing around the hydrant spray and for the parents trying to have one conversation that isn't about logistics. Not another thing to manage. A thing that just happens, and is good.",
+            ("h2", "Why we rent instead of sell"),
+            "So here's the pitch: you don't need to purchase everything and store it for the year. Rent from us, and figure out what works for the people on your block. Let the party evolve with your neighbors. Try new stuff. Build traditions. Just don't be left figuring out what to do with the stuff all year.",
+            "That's the whole idea behind the company — <a href=\"/rentals/\">cornhole, giant Jenga, a slushie machine, a ball pit</a> that shows up on your block and leaves again, with delivery, pickup, and a confirmation call included either way.",
+            ("h2", "What this blog is for"),
+            "This is where we'll keep the notes: what Brooklyn blocks book, what they add late, what actually got played, and how the traditions got built. Some of it will be practical — permit timelines, tournament brackets, what to serve — and some of it will just be about why the block party might be the best thing a city ever invented.",
+            "Written by me, Allie — founder, Brooklynite, and the person who answers reserve@blockpartysupply.co. If your block is planning its day, <a href=\"mailto:reserve@blockpartysupply.co\">email me</a> and we'll figure it out together.",
         ],
     },
     {
-        "slug": "brooklyn-block-party-trends",
-        "stream": "ai",
-        "title": "Brooklyn block-party trends to watch",
-        "subhead": "What Brooklyn blocks are booking, building, and drinking this season — scanned by the Trends Desk.",
+        "slug": "the-lifestyle-business-i-started-now",
+        "stream": "human",
+        "title": "A lifestyle business, started mid-life",
+        "subhead": "Why BlockParty exists as a rental company, why now, and why a share of the profits flows back to the PTAs and PTOs of the blocks we serve.",
         "date": "2026-10-23",
         "modified": None,
-        "series": ("brooklyn-trends", "Brooklyn Trends"),
-        "reviewed_by": "Allie Esslinger",  # publish gate: AI posts ship only with a named reviewer
-        "placeholder": True,
+        "series": None,
+        "reviewed_by": None,
+        "published": False,      # B4 gate: draft — ships only after Allie's sign-off
+        "note": "Draft for Allie to edit. The bracketed paragraph needs the real profit-share terms before publish.",
         "body": [
-            "Every season, Brooklyn blocks remix the same handful of ingredients — lawn games, a frozen-drink station, a court for the big kids, a patch of foam for the little ones. The trends worth watching are less about new equipment and more about new pairings: double-flavor slushie machines alongside a Classic package, ball pits on streets that used to skip the under-5s.",
-            "The Trends Desk tracks what blocks book, what they add late, and what they ask about first. Every claim here is checked by a human — Allie reviews each post before it ships — so the trends you read are the ones Brooklyn blocks are actually living.",
+            "The classic startup story is twenty-somethings in a garage. Mine is a woman in her forties looking at a folding table and thinking: this city's best tradition runs on borrowed stuff and burnout. There has to be a better way to throw a block party — and maybe a better way to build a business while I'm at it.",
+            ("h2", "What a lifestyle business means here"),
+            "BlockParty is a lifestyle business on purpose. It's built small and deliberate: Brooklyn only — no other boroughs, no exceptions. Rentals, never sales. Delivery, pickup, and a confirmation call on every booking. It's a company sized to the life around it, not the other way around — starting at this stage of life means I'm not chasing scale for its own sake, I'm building the thing I actually want to run.",
+            "The idea itself is simple: the fun stuff — <a href=\"/rentals/cornhole-rental-brooklyn.html\">cornhole</a>, <a href=\"/rentals/giant-jenga-rental-brooklyn.html\">giant Jenga</a>, a <a href=\"/rentals/slushie-machine-rental-brooklyn.html\">slushie machine</a> — shouldn't require a storage unit or a standing yearly commitment. Rent what your block wants this year. Skip it next year if the block's into something else.",
+            ("h2", "The profit-sharing part"),
+            "Here's the piece I care about most. Block parties don't happen in a vacuum — they happen around schools. The PTAs and PTOs are the ones running the bake sales, organizing the fairs, showing up for their blocks all year long. So BlockParty is built mission-first: a share of the company's profits goes back to the PTAs and PTOs of the communities we serve. When the blocks we rent to thrive, the schools inside them should feel it too.",
+            "[Allie: this is the paragraph to finish — the exact profit-share terms, the percentage or mechanism, and how schools get nominated. It ships with real numbers or not at all.]",
+            ("h2", "Why now"),
+            "Because the timing argument cuts both ways. I know what people say about starting over mid-life — that it's risky, that it's late. But the skills are real, the community is real, and the second act is allowed to be the good one. The garage full of games nobody uses is somebody else's business model; mine is making sure it never has to be yours.",
+            "If your block is planning its party, <a href=\"/how-it-works.html\">here's how it works</a> — and if you want the founder directly, that's <a href=\"mailto:reserve@blockpartysupply.co\">reserve@blockpartysupply.co</a>.",
         ],
     },
-    {
-        "slug": "cornhole-tournament-brackets",
-        "stream": "ai",
-        "title": "Cornhole tournament brackets that work",
-        "subhead": "How Brooklyn blocks are running cornhole tournaments a whole street can join — boards, timing, and prizes.",
-        "date": "2026-10-16",
-        "modified": None,
-        "series": ("brooklyn-trends", "Brooklyn Trends"),
-        "reviewed_by": "Allie Esslinger",
-        "placeholder": True,
-        "body": [
-            "This is a placeholder draft from the Trends Desk. AI-written trend posts ship only after review and approval by Allie Esslinger; the final version lands in the seed-content pass.",
-            "The tournament bracket is the quiet engine of a great block-party afternoon: a fixed bracket keeps the cornhole boards moving, and a losers' bracket keeps everyone playing. The final post will break down board counts, match timing, and prize ideas for a 16-player street bracket.",
-        ],
-    },
-    {
-        "slug": "frozen-drink-station-trends",
-        "stream": "ai",
-        "title": "Frozen-drink stations to watch",
-        "subhead": "The slushie station is becoming the block's main attraction — what Brooklyn hosts are pouring this season.",
-        "date": "2026-10-09",
-        "modified": None,
-        "series": ("brooklyn-trends", "Brooklyn Trends"),
-        "reviewed_by": "Allie Esslinger",
-        "placeholder": True,
-        "body": [
-            "This is a placeholder draft from the Trends Desk. AI-written trend posts ship only after review and approval by Allie Esslinger; the final version lands in the seed-content pass.",
-            "Frozen-drink stations are quietly becoming the centerpiece rental: one machine, two flavors, and a line of kids on the slushie side while the adults discover the frozen-cocktail side. The final post will cover single- versus double-flavor setups and where the station belongs on a block.",
-        ],
-    },
+
 ]
 
 BLOG_PATH = "/blog/"
@@ -369,11 +361,23 @@ def post_path(post):
     return f"{BLOG_PATH}{post['slug']}.html"
 
 def post_image_path(post):
-    """Build-time cover art for a post, emitted to dist (absolute path)."""
+    """Host-relative URL for HTML/CSS references (img src, backgrounds) —
+    works on any host serving dist, including the non-canonical preview."""
     return f"{BLOG_PATH}images/{post['slug']}.png"
 
+def post_image_url(post):
+    """Absolute canonical URL for machine-facing metadata (BlogPosting image)."""
+    return f"{DOMAIN}{BLOG_PATH}images/{post['slug']}.png"
+
+def published_posts():
+    """POSTS that ship. Drafts (published=False — the B4 review gate) stay out
+    of every public artifact: not rendered, not in the sitemap, not in
+    llms.txt, absent from the hub. The flag defaults to True so a post
+    without one behaves as before."""
+    return [p for p in POSTS if p.get("published", True)]
+
 # The hub changes whenever a post lands, so its lastmod tracks the newest post.
-BLOG_LASTMOD = max((p["date"] for p in POSTS), default=DEFAULT_LASTMOD)
+BLOG_LASTMOD = max((p["date"] for p in published_posts()), default=DEFAULT_LASTMOD)
 
 MONTHS = [
     "January", "February", "March", "April", "May", "June", "July",
@@ -398,6 +402,8 @@ def check_publish_gate():
                 f"{post_path(post)}: unknown stream {post['stream']!r} (use 'human' or 'ai')"
             )
             continue
+        if not post.get("published", True):
+            continue  # drafts ship nowhere, so they cannot violate the gate
         if post["stream"] == "ai" and not (post.get("reviewed_by") or "").strip():
             problems.append(
                 f"{post_path(post)}: AI-written post has no 'reviewed_by' — "
@@ -418,7 +424,7 @@ def page_registry():
         for item in CATALOG
     ]
     pages += [{"path": BLOG_PATH, "lastmod": BLOG_LASTMOD}]
-    pages += [{"path": post_path(p), "lastmod": p["date"]} for p in POSTS]
+    pages += [{"path": post_path(p), "lastmod": p["date"]} for p in published_posts()]
     return pages
 
 # ---------------------------------------------------------------------------
@@ -732,7 +738,7 @@ def blogposting_jsonld(post):
         "url": page_url,
         "headline": post["title"],
         "description": post["subhead"],
-        "image": DOMAIN + post_image_path(post),
+        "image": post_image_url(post),
         "datePublished": post["date"],
         "dateModified": post.get("modified") or post["date"],
         "author": blog_author_jsonld(post),
@@ -1192,12 +1198,13 @@ def feature_card_html(post):
 def build_blog_hub():
     """Hub at /blog/ per Allie's sketch: hero feature, Trends Desk row, a
     second Allie feature, and titled series rows (B1)."""
+    posts = published_posts()
     human_posts = sorted(
-        (p for p in POSTS if p["stream"] == "human"),
+        (p for p in posts if p["stream"] == "human"),
         key=lambda p: p["date"], reverse=True,
     )
     ai_posts = sorted(
-        (p for p in POSTS if p["stream"] == "ai"),
+        (p for p in posts if p["stream"] == "ai"),
         key=lambda p: p["date"], reverse=True,
     )
 
@@ -1234,7 +1241,7 @@ def build_blog_hub():
     # series/tag index pages stay unmade until a series holds 3+ posts
     # (thin-page rule, B1) — the hub section itself is the only surface.
     groups = {}
-    for post in POSTS:
+    for post in published_posts():
         if post.get("series"):
             groups.setdefault(post["series"], []).append(post)
     series_rows = ""
@@ -1257,6 +1264,7 @@ def build_blog_hub():
     <span class="eyebrow">The BlockParty Blog</span>
     <h1>Allie Intelligence</h1>
     <p class="hero-sub">Field notes from Allie Esslinger on why block parties matter &mdash; plus trend scans from the AI desk she reviews before anything ships.</p>
+    <img class="blog-hero-img" src="/blog/images/hub-hero.png" alt="Illustration of a Brooklyn block party outside cream and rust brownstones, with bunting flags overhead" width="1344" height="750">
   </div>
 </section>
 
@@ -1310,20 +1318,45 @@ def build_blog_hub():
     )
 
 
+def render_post_body(post):
+    """B4 body renderer: strings are paragraphs, ("h2"/"h3", text) are
+    headings, ("html", raw) is a pre-built block (tables, lists). Unknown
+    shapes fail the build loudly instead of flattening into prose."""
+    out = []
+    for block in post["body"]:
+        if isinstance(block, str):
+            out.append(f"<p>{block}</p>")
+        elif isinstance(block, tuple) and len(block) == 2:
+            kind, text = block
+            if kind in ("h2", "h3"):
+                out.append(f"<{kind}>{text}</{kind}>")
+            elif kind == "html":
+                out.append(text)
+            else:
+                raise ValueError(f"{post['slug']}: unknown body block kind {kind!r}")
+        else:
+            raise ValueError(f"{post['slug']}: bad body block {block!r}")
+    return "".join(out)
+
 def build_post_page(post):
     """Post template: structural, visible authorship (B2) with breadcrumbs (B3)."""
-    paragraphs = "".join(f"<p>{text}</p>" for text in post["body"])
-    placeholder_note = (
-        '<p class="blog-placeholder-note"><strong>Placeholder copy.</strong> '
-        "This draft proves the blog pipeline end to end — final copy ships separately, after review.</p>"
-        if post.get("placeholder") else ""
-    )
+    paragraphs = render_post_body(post)
+    draft_note = ""
+    if not post.get("published", True):
+        extra = post.get("note") or ""
+        draft_note = (
+            '<p class="blog-placeholder-note"><strong>Draft &mdash; not published.</strong> '
+            "This post stays out of the live site until Allie reviews it and the "
+            "published flag flips. "
+            + (f"<em>{extra}</em>" if extra else "")
+            + "</p>"
+        )
     if post["stream"] == "human":
         byline = f'<div class="blog-byline">{stream_badge("human")} By <strong>Allie Esslinger</strong>, Founder</div>'
         disclosure = ""
     else:
         byline = f'<div class="blog-byline">{stream_badge("ai")} By <strong>Allie Intelligence</strong></div>'
-        disclosure = f'<p class="blog-disclosure">AI-written &middot; reviewed and approved by {post["reviewed_by"]}</p>'
+        disclosure = f'<p class="blog-disclosure">AI-written &middot; reviewed and approved by {post.get("reviewed_by") or "review pending"}</p>'
 
     body = f"""
 <section class="hero" style="padding-bottom:0;">
@@ -1343,7 +1376,7 @@ def build_post_page(post):
 </section>
 <section style="padding-top:12px;">
   <div class="container narrative">
-    {placeholder_note}
+    {draft_note}
     {paragraphs}
   </div>
 </section>
@@ -1486,7 +1519,7 @@ def llms_txt():
             if p["stream"] == "human"
             else f" AI-written, reviewed and approved by {p['reviewed_by']}."
         )
-        for p in POSTS
+        for p in published_posts()
     ]
     lines.append("")
     return "\n".join(lines)
@@ -1585,11 +1618,25 @@ def make_post_image(post, out_path):
     canvas.save(out_path, "PNG")
 
 def make_post_images(dist_dir):
-    """Emit one cover image per post to dist/blog/images/."""
+    """Emit one cover image per post to dist/blog/images/, plus the hub hero.
+
+    Generated brand art (B4) lives in assets/blog/<slug>.png and ships as-is;
+    a post without a generated asset falls back to the programmatic art below,
+    so the pipeline never breaks on a missing file. Draft posts still get
+    their art emitted (unlinked), which keeps preview builds complete."""
     out_dir = os.path.join(dist_dir, "blog", "images")
     os.makedirs(out_dir, exist_ok=True)
+    assets_dir = os.path.join(ROOT, "assets", "blog")
+    hero = os.path.join(assets_dir, "hub-hero.png")
+    if os.path.isfile(hero):
+        shutil.copyfile(hero, os.path.join(out_dir, "hub-hero.png"))
     for post in POSTS:
-        make_post_image(post, os.path.join(out_dir, f"{post['slug']}.png"))
+        dest = os.path.join(out_dir, f"{post['slug']}.png")
+        asset = os.path.join(assets_dir, f"{post['slug']}.png")
+        if os.path.isfile(asset):
+            shutil.copyfile(asset, dest)
+        else:
+            make_post_image(post, dest)
 
 # ---------------------------------------------------------------------------
 # Write files
@@ -1618,7 +1665,7 @@ def main():
     for item in CATALOG:
         write(f"rentals/{item['slug']}.html", build_item_page(item))
     write("blog/index.html", build_blog_hub())
-    for post in POSTS:
+    for post in published_posts():
         write(f"blog/{post['slug']}.html", build_post_page(post))
 
     shutil.copyfile(os.path.join(ROOT, "style.css"), os.path.join(DIST, "style.css"))
