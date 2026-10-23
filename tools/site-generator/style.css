@@ -520,3 +520,215 @@ section { padding: 56px 0; }
   font-weight: 600;
   color: var(--teal);
 }
+
+/* ---------- Blog / Allie Intelligence ---------- */
+
+.blog-feature {
+  position: relative;
+  display: block;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: var(--ink);
+  aspect-ratio: 16 / 7;
+}
+.blog-feature:hover { text-decoration: none; transform: translateY(-2px); transition: transform 0.15s ease; }
+.blog-feature-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.blog-feature-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 44px;
+  background: linear-gradient(180deg, rgba(29, 39, 49, 0) 25%, rgba(29, 39, 49, 0.9) 82%);
+}
+.blog-feature-overlay h2 { color: var(--white); margin: 0; }
+.blog-feature-overlay p {
+  color: rgba(255, 248, 236, 0.92);
+  margin: 0;
+  max-width: 640px;
+}
+.blog-feature-overlay .blog-byline { color: rgba(255, 248, 236, 0.85); margin: 0; }
+.blog-feature-overlay .blog-byline strong { color: var(--white); }
+
+.blog-card-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+.blog-date-badge {
+  background: rgba(255, 248, 236, 0.94);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.blog-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.blog-badge-human { background: var(--teal); color: var(--white); }
+.blog-badge-ai { background: var(--red); color: var(--white); }
+
+.blog-row {
+  display: flex;
+  gap: 22px;
+  overflow-x: auto;
+  /* proximity, not mandatory: mandatory snap yanks programmatic scrolls
+     back to a card boundary, so the arrow scrolls bounced to rest at 0
+     when the row's remaining overflow is less than one card. */
+  scroll-snap-type: x proximity;
+  padding: 6px 4px 18px;
+}
+.blog-card {
+  position: relative;
+  display: block;
+  /* 360px: three trend cards (1124px) overflow the 1072px container at the
+     1440 desktop width, so the scroll affordance shows at the primary
+     viewport; at narrow widths the row scrolls proportionally more. */
+  flex: 0 0 360px;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: var(--ink);
+  scroll-snap-align: start;
+}
+.blog-card:hover { text-decoration: none; transform: translateY(-3px); transition: transform 0.15s ease; }
+.blog-card-tall { flex: 0 0 280px; aspect-ratio: 3 / 4; }
+.blog-card-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.blog-card-body {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 22px;
+  background: linear-gradient(180deg, rgba(29, 39, 49, 0.05) 40%, rgba(29, 39, 49, 0.9) 85%);
+}
+.blog-card-body h3 { color: var(--white); margin: 0; font-size: 1.25rem; }
+
+.blog-row-nav { display: flex; gap: 10px; justify-content: flex-end; margin-top: 4px; }
+.blog-nav-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.blog-nav-btn:hover { background: var(--ink); color: var(--white); }
+
+.blog-soon {
+  border: 2px dashed var(--cream-line);
+  border-radius: var(--radius-md);
+  padding: 40px;
+  text-align: center;
+  background: var(--white);
+}
+.blog-soon h3 { margin-bottom: 6px; }
+.blog-soon p { margin: 0; }
+.blog-series { padding-top: 24px; }
+
+/* Post page */
+.blog-post-img {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  width: 100%;
+}
+.blog-post-meta { margin-top: 16px; }
+.blog-byline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+  color: var(--ink-soft);
+}
+.blog-byline strong { color: var(--ink); }
+.blog-disclosure {
+  background: var(--bg-alt);
+  border-left: 4px solid var(--red);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 14px 0 0;
+}
+.blog-placeholder-note {
+  background: var(--bg-alt);
+  border-left: 4px solid var(--yellow);
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+}
+.blog-placeholder-note strong { color: var(--ink); }
+
+@media (max-width: 700px) {
+  .blog-feature { aspect-ratio: 4 / 5; }
+  .blog-feature-overlay { padding: 24px; }
+  .blog-card { flex-basis: 260px; }
+}
+
+/* ---------- Blog hero image + post extras (B4) ---------- */
+
+.blog-hero-img {
+  width: 100%;
+  max-width: 980px;
+  margin: 28px auto 0;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+}
+
+.narrative h2 { margin-top: 1.5em; }
+.narrative h3 { margin-top: 1.2em; }
+
+.bracket-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 0 0 1.2em;
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.bracket-table th {
+  background: var(--ink);
+  color: var(--white);
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.bracket-table td {
+  padding: 10px 14px;
+  border-top: 1px solid var(--cream-line);
+  color: var(--ink-soft);
+  vertical-align: top;
+}
+.bracket-table td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
+.bracket-table tr:nth-child(even) td { background: var(--bg); }
+

@@ -1,0 +1,35 @@
+name: Validate SEO build
+
+# R12: build + validate on every PR and on pushes to main and the release
+# branch. The validator exits non-zero on any metadata/schema/sitemap drift,
+# so a red run gates the merge. GitHub-Pages-from-branch deploy plumbing is
+# deliberately untouched — this workflow only checks.
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - feat/technical-seo-geo
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      # build.py composes og-image.png with Pillow and rasterizes favicons
+      # with cairosvg (with a PIL fallback), so both must be installed.
+      - name: Install build dependencies
+        run: pip install pillow cairosvg
+
+      - name: Build site
+        run: python3 tools/site-generator/build.py
+
+      - name: Validate build output
+        run: python3 tools/site-generator/validate.py
