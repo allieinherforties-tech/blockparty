@@ -29,72 +29,72 @@ OG_IMAGE_ALT = f"{SITE_NAME} — {TAGLINE}"
 
 ICONS = {
     "cornhole": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="10" y="55" width="55" height="32" rx="4" transform="rotate(-8 10 55)" fill="#F2B134" stroke="#1D2731" stroke-width="3"/>
-<circle cx="38" cy="66" r="7" fill="#1D2731"/>
-<rect x="55" y="45" width="40" height="26" rx="4" transform="rotate(-8 55 45)" fill="#E4572E" stroke="#1D2731" stroke-width="3"/>
-<circle cx="18" cy="30" r="9" fill="#157A72"/>
-<circle cx="35" cy="20" r="9" fill="#157A72"/>
+<rect x="10" y="55" width="55" height="32" rx="4" transform="rotate(-8 10 55)" fill="#CB9F5C" stroke="#1D2334" stroke-width="3"/>
+<circle cx="38" cy="66" r="7" fill="#1D2334"/>
+<rect x="55" y="45" width="40" height="26" rx="4" transform="rotate(-8 55 45)" fill="#AC7044" stroke="#1D2334" stroke-width="3"/>
+<circle cx="18" cy="30" r="9" fill="#693F35"/>
+<circle cx="35" cy="20" r="9" fill="#693F35"/>
 </svg>""",
     "jenga": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="30" y="10" width="40" height="14" rx="2" fill="#F2B134" stroke="#1D2731" stroke-width="3"/>
-<rect x="30" y="26" width="40" height="14" rx="2" fill="#E4572E" stroke="#1D2731" stroke-width="3"/>
-<rect x="30" y="42" width="40" height="14" rx="2" fill="#157A72" stroke="#1D2731" stroke-width="3"/>
-<rect x="30" y="58" width="40" height="14" rx="2" fill="#F2B134" stroke="#1D2731" stroke-width="3"/>
-<rect x="20" y="74" width="60" height="14" rx="2" fill="#E4572E" stroke="#1D2731" stroke-width="3"/>
+<rect x="30" y="10" width="40" height="14" rx="2" fill="#CB9F5C" stroke="#1D2334" stroke-width="3"/>
+<rect x="30" y="26" width="40" height="14" rx="2" fill="#AC7044" stroke="#1D2334" stroke-width="3"/>
+<rect x="30" y="42" width="40" height="14" rx="2" fill="#693F35" stroke="#1D2334" stroke-width="3"/>
+<rect x="30" y="58" width="40" height="14" rx="2" fill="#CB9F5C" stroke="#1D2334" stroke-width="3"/>
+<rect x="20" y="74" width="60" height="14" rx="2" fill="#AC7044" stroke="#1D2334" stroke-width="3"/>
 </svg>""",
     "beerpong": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M22 35 L30 85 L70 85 L78 35 Z" fill="#F2B134" stroke="#1D2731" stroke-width="3"/>
-<ellipse cx="50" cy="35" rx="28" ry="8" fill="#FFF8EC" stroke="#1D2731" stroke-width="3"/>
-<circle cx="50" cy="18" r="9" fill="#E4572E" stroke="#1D2731" stroke-width="3"/>
+<path d="M22 35 L30 85 L70 85 L78 35 Z" fill="#CB9F5C" stroke="#1D2334" stroke-width="3"/>
+<ellipse cx="50" cy="35" rx="28" ry="8" fill="#F7E4C1" stroke="#1D2334" stroke-width="3"/>
+<circle cx="50" cy="18" r="9" fill="#AC7044" stroke="#1D2334" stroke-width="3"/>
 </svg>""",
     "slushie": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="25" y="15" width="50" height="34" rx="6" fill="#FFF8EC" stroke="#1D2731" stroke-width="3"/>
-<path d="M30 49 L50 85 L70 49 Z" fill="#157A72" stroke="#1D2731" stroke-width="3"/>
-<rect x="43" y="22" width="14" height="20" fill="#E4572E"/>
-<circle cx="50" cy="12" r="4" fill="#1D2731"/>
+<rect x="25" y="15" width="50" height="34" rx="6" fill="#F7E4C1" stroke="#1D2334" stroke-width="3"/>
+<path d="M30 49 L50 85 L70 49 Z" fill="#693F35" stroke="#1D2334" stroke-width="3"/>
+<rect x="43" y="22" width="14" height="20" fill="#AC7044"/>
+<circle cx="50" cy="12" r="4" fill="#1D2334"/>
 </svg>""",
     "basketball": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="50" cy="42" r="26" fill="#E4572E" stroke="#1D2731" stroke-width="3"/>
-<path d="M50 16 V68 M26 42 H74 M32 24 Q50 42 32 60 M68 24 Q50 42 68 60" stroke="#1D2731" stroke-width="2.5" fill="none"/>
-<rect x="42" y="68" width="16" height="22" fill="#157A72" stroke="#1D2731" stroke-width="3"/>
+<circle cx="50" cy="42" r="26" fill="#AC7044" stroke="#1D2334" stroke-width="3"/>
+<path d="M50 16 V68 M26 42 H74 M32 24 Q50 42 32 60 M68 24 Q50 42 68 60" stroke="#1D2334" stroke-width="2.5" fill="none"/>
+<rect x="42" y="68" width="16" height="22" fill="#693F35" stroke="#1D2334" stroke-width="3"/>
 </svg>""",
     "ballpit": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-<ellipse cx="50" cy="78" rx="42" ry="12" fill="none" stroke="#1D2731" stroke-width="3"/>
-<circle cx="30" cy="55" r="10" fill="#E4572E" stroke="#1D2731" stroke-width="2.5"/>
-<circle cx="50" cy="45" r="10" fill="#F2B134" stroke="#1D2731" stroke-width="2.5"/>
-<circle cx="70" cy="55" r="10" fill="#157A72" stroke="#1D2731" stroke-width="2.5"/>
-<circle cx="40" cy="68" r="10" fill="#157A72" stroke="#1D2731" stroke-width="2.5"/>
-<circle cx="62" cy="68" r="10" fill="#E4572E" stroke="#1D2731" stroke-width="2.5"/>
+<ellipse cx="50" cy="78" rx="42" ry="12" fill="none" stroke="#1D2334" stroke-width="3"/>
+<circle cx="30" cy="55" r="10" fill="#AC7044" stroke="#1D2334" stroke-width="2.5"/>
+<circle cx="50" cy="45" r="10" fill="#CB9F5C" stroke="#1D2334" stroke-width="2.5"/>
+<circle cx="70" cy="55" r="10" fill="#693F35" stroke="#1D2334" stroke-width="2.5"/>
+<circle cx="40" cy="68" r="10" fill="#693F35" stroke="#1D2334" stroke-width="2.5"/>
+<circle cx="62" cy="68" r="10" fill="#AC7044" stroke="#1D2334" stroke-width="2.5"/>
 </svg>""",
     "truck": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="10" y="35" width="50" height="30" rx="3" fill="#F2B134" stroke="#1D2731" stroke-width="3"/>
-<path d="M60 45 H82 L90 60 V65 H60 Z" fill="#157A72" stroke="#1D2731" stroke-width="3"/>
-<circle cx="28" cy="70" r="8" fill="#1D2731"/>
-<circle cx="76" cy="70" r="8" fill="#1D2731"/>
+<rect x="10" y="35" width="50" height="30" rx="3" fill="#CB9F5C" stroke="#1D2334" stroke-width="3"/>
+<path d="M60 45 H82 L90 60 V65 H60 Z" fill="#693F35" stroke="#1D2334" stroke-width="3"/>
+<circle cx="28" cy="70" r="8" fill="#1D2334"/>
+<circle cx="76" cy="70" r="8" fill="#1D2334"/>
 </svg>""",
     "phone": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="32" y="12" width="36" height="76" rx="8" fill="#FFF8EC" stroke="#1D2731" stroke-width="3"/>
-<path d="M40 70 Q50 60 60 70 Q65 75 60 82 Q50 90 40 82 Q35 75 40 70 Z" fill="#E4572E"/>
-<circle cx="50" cy="26" r="3" fill="#1D2731"/>
+<rect x="32" y="12" width="36" height="76" rx="8" fill="#F7E4C1" stroke="#1D2334" stroke-width="3"/>
+<path d="M40 70 Q50 60 60 70 Q65 75 60 82 Q50 90 40 82 Q35 75 40 70 Z" fill="#AC7044"/>
+<circle cx="50" cy="26" r="3" fill="#1D2334"/>
 </svg>""",
     "browse": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="42" cy="42" r="26" fill="none" stroke="#1D2731" stroke-width="4"/>
-<line x1="61" y1="61" x2="86" y2="86" stroke="#1D2731" stroke-width="5" stroke-linecap="round"/>
-<circle cx="42" cy="42" r="12" fill="#F2B134"/>
+<circle cx="42" cy="42" r="26" fill="none" stroke="#1D2334" stroke-width="4"/>
+<line x1="61" y1="61" x2="86" y2="86" stroke="#1D2334" stroke-width="5" stroke-linecap="round"/>
+<circle cx="42" cy="42" r="12" fill="#CB9F5C"/>
 </svg>""",
     "calendar": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="14" y="22" width="72" height="64" rx="6" fill="#FFF8EC" stroke="#1D2731" stroke-width="3"/>
-<rect x="14" y="22" width="72" height="18" fill="#E4572E"/>
-<line x1="30" y1="14" x2="30" y2="30" stroke="#1D2731" stroke-width="4" stroke-linecap="round"/>
-<line x1="70" y1="14" x2="70" y2="30" stroke="#1D2731" stroke-width="4" stroke-linecap="round"/>
-<circle cx="34" cy="58" r="5" fill="#157A72"/>
-<circle cx="50" cy="58" r="5" fill="#157A72"/>
-<circle cx="66" cy="58" r="5" fill="#F2B134"/>
+<rect x="14" y="22" width="72" height="64" rx="6" fill="#F7E4C1" stroke="#1D2334" stroke-width="3"/>
+<rect x="14" y="22" width="72" height="18" fill="#AC7044"/>
+<line x1="30" y1="14" x2="30" y2="30" stroke="#1D2334" stroke-width="4" stroke-linecap="round"/>
+<line x1="70" y1="14" x2="70" y2="30" stroke="#1D2334" stroke-width="4" stroke-linecap="round"/>
+<circle cx="34" cy="58" r="5" fill="#693F35"/>
+<circle cx="50" cy="58" r="5" fill="#693F35"/>
+<circle cx="66" cy="58" r="5" fill="#CB9F5C"/>
 </svg>""",
     "house": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 48 L50 16 L88 48" stroke="#1D2731" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="24" y="48" width="52" height="38" fill="#F2B134" stroke="#1D2731" stroke-width="3"/>
-<rect x="44" y="62" width="12" height="24" fill="#E4572E"/>
+<path d="M12 48 L50 16 L88 48" stroke="#1D2334" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="24" y="48" width="52" height="38" fill="#CB9F5C" stroke="#1D2334" stroke-width="3"/>
+<rect x="44" y="62" width="12" height="24" fill="#AC7044"/>
 </svg>""",
 }
 
@@ -147,6 +147,10 @@ CATALOG = [
     {
         "slug": "cornhole-rental-brooklyn",
         "icon": "cornhole",
+        "photo": "/images/social-square-cornhole.png",
+        "photo_alt": "Vintage BlockParty illustration of a cornhole tournament on a block-party street, a beanbag mid-air between two boards",
+        "photo_w": 1024,
+        "photo_h": 1024,
         "name": "Cornhole Set Rental",
         "price_label": "$65/day bundled",
         "offers": [{"price": 65}],
@@ -198,6 +202,10 @@ CATALOG = [
     {
         "slug": "slushie-machine-rental-brooklyn",
         "icon": "slushie",
+        "photo": "/images/social-wide-frozen-drinks.png",
+        "photo_alt": "Vintage BlockParty illustration of a frozen-drink station: a slushie machine and dispensers on a folding table under a white canopy, with a hand-painted sign reading frozen drinks and slushies",
+        "photo_w": 1376,
+        "photo_h": 768,
         "name": "Slushie & Frozen Cocktail Machine Rental",
         "price_label": "$275/day single-flavor, $375/day double-flavor",
         "offers": [
@@ -520,7 +528,9 @@ def nav_html(active=""):
     return f"""
 <header class="site-header">
   <div class="nav-wrap">
-    <a class="logo" href="/">Block<span class="dot">Party</span></a>
+    <a class="logo" href="/" aria-label="BlockParty — home">
+      <img src="/images/wordmark-transparent.png" alt="BlockParty" width="2444" height="616">
+    </a>
     <nav>
       <ul class="nav-links" id="navLinks">
         {links}
@@ -538,7 +548,9 @@ def footer_html():
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="footer-brand">BlockParty</div>
+        <a class="footer-wordmark" href="/" aria-label="BlockParty — home">
+          <img src="/images/wordmark-transparent.png" alt="BlockParty" width="2444" height="616">
+        </a>
         <p>{TAGLINE}. Brooklyn-based party-equipment rentals — we deliver, we pick up, and we call you first.</p>
         <p>Brooklyn only. <a href="mailto:{EMAIL}">{EMAIL}</a></p>
       </div>
@@ -561,6 +573,7 @@ def footer_html():
         </ul>
       </div>
     </div>
+    <p class="photo-credits">Photography: <a href="https://commons.wikimedia.org/wiki/File:BLOCK_PARTY_ON_EAST_35TH_STREET_BETWEEN_LEXINGTON_AND_MADISON_AVENUES._STREET_WAS_CLOSED_TO_MOTOR_TRAFFIC_AND_GIVEN..._-_NARA_-_551687.jpg">Block party on East 35th Street, NYC, 1973</a> by Suzanne Sz&aacute;sz, EPA DOCUMERICA, U.S. National Archives (public domain) &middot; <a href="https://unsplash.com/photos/houses-near-trees-RSILUMwabqc">Brownstone row</a> by Avi Werde (Unsplash) &middot; <a href="https://www.pexels.com/photo/vibrant-community-cornhole-game-outdoors-30388540/">Cornhole</a> &amp; <a href="https://www.pexels.com/photo/joyful-dance-party-in-sunlit-street-28424057/">street dance</a> photos via Pexels. Illustrations by BlockParty.</p>
     <div class="footer-bottom">
       <span>&copy; 2026 BlockParty. Brooklyn, NY.</span>
       <span>Rentals only — we don't sell equipment.</span>
@@ -879,6 +892,16 @@ def build_home():
   </div>
 </section>
 
+<section class="photo-band">
+  <div class="container">
+    <div class="photo-strip">
+      <figure class="photo-frame"><img src="/images/photo-brownstone-row.jpg" alt="Row of Brooklyn brownstones with stoops and street trees" width="1600" height="1067" loading="lazy"></figure>
+      <figure class="photo-frame"><img src="/images/photo-cornhole-community.jpg" alt="Neighbors playing cornhole at an outdoor block gathering" width="1066" height="1600" loading="lazy"></figure>
+      <figure class="photo-frame"><img src="/images/photo-street-dance.jpg" alt="Neighbors dancing at a sunny street party" width="1600" height="1600" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
 <section class="section-alt">
   <div class="container">
     <div class="section-head">
@@ -941,6 +964,10 @@ def build_about():
     <p>You don't need to purchase everything and store it for the year. Rent from us, and figure out what works for the people on your block. Let the party evolve with your neighbors. Try new stuff. Build traditions. Just don't be left figuring out what to do with the stuff all year.</p>
     <p>That's how we think good block-party traditions actually get built &mdash; not by locking in the same order every year because that's what's in the garage, but by neighbors trying things, keeping what works, and letting the party change as the block changes.</p>
     <p>We're a new company, and we're starting with a clear focus: we're your source for Brooklyn block party fun. No other boroughs, no padded r&eacute;sum&eacute; &mdash; just a straightforward rental model built for one neighborhood, starting now.</p>
+    <figure class="photo-frame photo-archival">
+      <img src="/images/photo-block-party-1973.jpg" alt="A New York street closed to traffic for a block party in June 1973, with sidewalk stalls and neighbors browsing" width="1600" height="1075" loading="lazy">
+      <figcaption>East 35th Street, New York, June 1973 &mdash; photograph by Suzanne Sz&aacute;sz, EPA DOCUMERICA, U.S. National Archives (public domain).</figcaption>
+    </figure>
   </div>
 </section>
 <section class="section-alt">
@@ -1075,6 +1102,14 @@ def build_catalog_index():
   </div>
 </section>
 
+<section style="padding-top:0;">
+  <div class="container">
+    <figure class="photo-frame photo-wide">
+      <img src="/images/photo-brownstone-row.jpg" alt="Row of Brooklyn brownstones with stoops and street trees" width="1600" height="1067" loading="lazy">
+    </figure>
+  </div>
+</section>
+
 <section>
   <div class="container">
     <div class="section-head">
@@ -1134,6 +1169,18 @@ def build_item_page(item):
         f'<div class="fact"><div class="label">{html.escape(label)}</div><div class="value">{html.escape(value)}</div></div>'
         for label, value in item["facts"]
     )
+    # Items with approved brand art show it in the hero; the rest keep the
+    # flat SVG icon (photo keys are optional by design).
+    if item.get("photo"):
+        hero_visual = (
+            f'<img class="item-photo" src="{item["photo"]}" '
+            f'alt="{html.escape(item["photo_alt"])}" '
+            f'width="{item["photo_w"]}" height="{item["photo_h"]}">'
+        )
+        wrap_cls = "icon-wrap photo-wrap"
+    else:
+        hero_visual = ICONS[item["icon"]]
+        wrap_cls = "icon-wrap"
     faq_html = "".join(
         f'<div class="faq-item"><h3>{html.escape(q)}</h3><p>{a}</p></div>'
         for q, a in item["item_faq"]
@@ -1152,7 +1199,7 @@ def build_item_page(item):
           <a class="btn btn-secondary" href="/rentals/">Back to catalog</a>
         </div>
       </div>
-      <div class="icon-wrap">{ICONS[item['icon']]}</div>
+      <div class="{wrap_cls}">{hero_visual}</div>
     </div>
   </div>
 </section>
@@ -1363,6 +1410,15 @@ def build_blog_hub():
 </section>
 
 {series_block}
+
+<section>
+  <div class="container">
+    <figure class="photo-frame photo-archival">
+      <img src="/images/photo-block-party-1973.jpg" alt="A New York street closed to traffic for a block party in June 1973, with sidewalk stalls and neighbors browsing" width="1600" height="1075" loading="lazy">
+      <figcaption>East 35th Street, New York, June 1973 &mdash; photograph by Suzanne Sz&aacute;sz, EPA DOCUMERICA, U.S. National Archives (public domain).</figcaption>
+    </figure>
+  </div>
+</section>
 
 <script>
   (function () {{
@@ -1607,9 +1663,9 @@ def llms_txt():
 
 BADGE_PATH = os.path.join(ROOT, "assets", "badge.png")
 FAVICON_ASSET_DIR = os.path.join(ROOT, "assets", "brand")
-CREAM = (255, 248, 236)   # #FFF8EC — site cream
-NAVY = (29, 39, 49)       # #1D2731 — site navy
-RUST = (228, 87, 46)      # #E4572E — site rust
+CREAM = (247, 228, 193)  # #F7E4C1 — brand Cream
+NAVY = (29, 35, 52)      # #1D2334 — brand Ink Navy
+RUST = (172, 112, 68)    # #AC7044 — brand Brick Rust
 
 def make_og_image(out_path):
     """Compose the 1200x630 social card: navy ground, script wordmark, tagline."""
@@ -1674,7 +1730,7 @@ def make_post_image(post, out_path):
     draw = ImageDraw.Draw(canvas)
 
     # Bunting along the top — the site's motif, in brand colors.
-    flags = [(228, 87, 46), (242, 177, 52), (255, 248, 236), (21, 122, 114)]
+    flags = [(172, 112, 68), (203, 159, 92), (247, 228, 193), (105, 63, 53)]
     flag_w, flag_h, gap = 44, 54, 66
     for i in range(width // gap + 1):
         x = 16 + i * gap
@@ -1711,6 +1767,27 @@ def make_post_images(dist_dir):
             shutil.copyfile(asset, dest)
         else:
             make_post_image(post, dest)
+
+# Site imagery (brand pass): wordmark, page photography, and social-format
+# art — approved assets shipped under assets/ and copied verbatim to dist/images/.
+SITE_IMAGES = [
+    ("brand", "wordmark-transparent.png"),
+    ("social", "social-square-cornhole.png"),
+    ("social", "social-wide-frozen-drinks.png"),
+    ("photos", "photo-brownstone-row.jpg"),
+    ("photos", "photo-cornhole-community.jpg"),
+    ("photos", "photo-street-dance.jpg"),
+    ("photos", "photo-block-party-1973.jpg"),
+]
+
+def make_site_images(dist_dir):
+    out_dir = os.path.join(dist_dir, "images")
+    os.makedirs(out_dir, exist_ok=True)
+    for subdir, name in SITE_IMAGES:
+        src = os.path.join(ROOT, "assets", subdir, name)
+        if not os.path.isfile(src):
+            raise SystemExit(f"make_site_images: missing site image: {src}")
+        shutil.copyfile(src, os.path.join(out_dir, name))
 
 # ---------------------------------------------------------------------------
 # Write files
@@ -1751,6 +1828,7 @@ def main():
     make_og_image(os.path.join(DIST, "og-image.png"))
     make_favicons(DIST)
     make_post_images(DIST)
+    make_site_images(DIST)
 
     print("Build complete ->", DIST)
 
