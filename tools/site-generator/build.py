@@ -16,7 +16,7 @@ DIST = os.path.join(ROOT, "dist")
 SITE_NAME = "BlockParty"
 DOMAIN = "https://blockpartysupply.co"
 EMAIL = "reserve@blockpartysupply.co"
-TAGLINE = "Your Source for Brooklyn Block Party Fun"
+TAGLINE = "We bought it so you don't have to"
 
 # Social card image (R4) — generated at build time from assets/badge.png
 OG_IMAGE_PATH = "/og-image.png"
@@ -291,12 +291,16 @@ CORE_PAGES = [
 ]
 
 # ---------------------------------------------------------------------------
-# Blog — Allie Intelligence (B1–B3)
+# Blog — Allie Intelligence (B1–B4)
 # Two authorship streams: "human" posts are written by Allie; "ai" posts are
 # written by the Allie Intelligence desk and ship only with a named human
-# reviewer (publish gate, enforced by check_publish_gate before anything
-# renders). Placeholder posts prove the pipeline end to end; real content
-# replaces them in the seed-content task (B4).
+# reviewer (publish gate, enforced by check_publish_gate). The B4 seed
+# content lands as DRAFTS: "published": False keeps every post out of the
+# live build — not rendered, not in the sitemap, not in llms.txt, absent
+# from the hub — until Allie reviews and the flags flip. AI posts
+# additionally require a named "reviewed_by" before they can ship.
+# Body items are paragraph strings, ("h2"/"h3", text) headings, or
+# ("html", raw) pre-built blocks.
 # ---------------------------------------------------------------------------
 
 POSTS = [
@@ -309,58 +313,123 @@ POSTS = [
         "modified": None,        # dateModified; None = never edited since publish
         "series": None,          # (key, label) or None
         "reviewed_by": None,     # AI posts only: name of the human reviewer
-        "placeholder": True,     # show the visible placeholder notice
+        "published": False,      # B4 gate: draft — ships only after Allie's sign-off
+        "note": "Draft for Allie to edit — every word is hers to change before publish.",
         "body": [
-            "A block party looks simple from the sidewalk: chairs out, kids sprinting between a cornhole board and the hydrant, somebody's uncle judging the Jenga stack. But anyone who has run one knows the day is carried by a handful of neighbors who decided it should happen.",
-            "That gap — between the fun everyone remembers and the labor almost nobody sees — is the whole reason BlockParty exists. The games, the slushie machine, the pickup afterward: we're renting back the organizer's evening so the people who planned the party actually get to be at it.",
-            "This blog is where we'll keep the notes: what blocks book, what they add late, and why the tradition is worth keeping. Written by Allie, and meant to be useful long before you ever email us to book.",
+            "You know the scene. The folding chairs come out at ten, somebody's uncle is judging the Jenga stack by noon, and the kids have claimed the hydrant spray like it's a water park they own. Nobody hands out trophies for any of this — and yet, every summer, the same handful of people make it happen again.",
+            ("h2", "The quiet tax on the fun part"),
+            "Here's what nobody sees when the party's good: the group chat that took four months to get an answer, the permit paperwork, the tables borrowed from three different stoops, the garage slowly turning into storage for games that come out twice a year. Block parties run on emotional labor, and it's usually the same neighbor paying the tax every year.",
+            "BlockParty started with a simple wish: the party should be exciting for the kids tearing around the hydrant spray and for the parents trying to have one conversation that isn't about logistics. Not another thing to manage. A thing that just happens, and is good.",
+            ("h2", "Why we rent instead of sell"),
+            "So here's the pitch: you don't need to purchase everything and store it for the year. Rent from us, and figure out what works for the people on your block. Let the party evolve with your neighbors. Try new stuff. Build traditions. Just don't be left figuring out what to do with the stuff all year.",
+            "That's the whole idea behind the company — <a href=\"/rentals/\">cornhole, giant Jenga, a slushie machine, a ball pit</a> that shows up on your block and leaves again, with delivery, pickup, and a confirmation call included either way.",
+            ("h2", "What this blog is for"),
+            "This is where we'll keep the notes: what Brooklyn blocks book, what they add late, what actually got played, and how the traditions got built. Some of it will be practical — permit timelines, tournament brackets, what to serve — and some of it will just be about why the block party might be the best thing a city ever invented.",
+            "Written by me, Allie — founder, Brooklynite, and the person who answers reserve@blockpartysupply.co. If your block is planning its day, <a href=\"mailto:reserve@blockpartysupply.co\">email me</a> and we'll figure it out together.",
         ],
     },
     {
-        "slug": "brooklyn-block-party-trends",
+        "slug": "the-lifestyle-business-i-started-now",
+        "stream": "human",
+        "title": "A lifestyle business, started mid-life",
+        "subhead": "Why BlockParty exists as a rental company, why now, and why a share of the profits flows back to the PTAs and PTOs of the blocks we serve.",
+        "date": "2026-10-23",
+        "modified": None,
+        "series": None,
+        "reviewed_by": None,
+        "published": False,      # B4 gate: draft — ships only after Allie's sign-off
+        "note": "Draft for Allie to edit. The bracketed paragraph needs the real profit-share terms before publish.",
+        "body": [
+            "The classic startup story is twenty-somethings in a garage. Mine is a woman in her forties looking at a folding table and thinking: this city's best tradition runs on borrowed stuff and burnout. There has to be a better way to throw a block party — and maybe a better way to build a business while I'm at it.",
+            ("h2", "What a lifestyle business means here"),
+            "BlockParty is a lifestyle business on purpose. It's built small and deliberate: Brooklyn only — no other boroughs, no exceptions. Rentals, never sales. Delivery, pickup, and a confirmation call on every booking. It's a company sized to the life around it, not the other way around — starting at this stage of life means I'm not chasing scale for its own sake, I'm building the thing I actually want to run.",
+            "The idea itself is simple: the fun stuff — <a href=\"/rentals/cornhole-rental-brooklyn.html\">cornhole</a>, <a href=\"/rentals/giant-jenga-rental-brooklyn.html\">giant Jenga</a>, a <a href=\"/rentals/slushie-machine-rental-brooklyn.html\">slushie machine</a> — shouldn't require a storage unit or a standing yearly commitment. Rent what your block wants this year. Skip it next year if the block's into something else.",
+            ("h2", "The profit-sharing part"),
+            "Here's the piece I care about most. Block parties don't happen in a vacuum — they happen around schools. The PTAs and PTOs are the ones running the bake sales, organizing the fairs, showing up for their blocks all year long. So BlockParty is built mission-first: a share of the company's profits goes back to the PTAs and PTOs of the communities we serve. When the blocks we rent to thrive, the schools inside them should feel it too.",
+            "[Allie: this is the paragraph to finish — the exact profit-share terms, the percentage or mechanism, and how schools get nominated. It ships with real numbers or not at all.]",
+            ("h2", "Why now"),
+            "Because the timing argument cuts both ways. I know what people say about starting over mid-life — that it's risky, that it's late. But the skills are real, the community is real, and the second act is allowed to be the good one. The garage full of games nobody uses is somebody else's business model; mine is making sure it never has to be yours.",
+            "If your block is planning its party, <a href=\"/how-it-works.html\">here's how it works</a> — and if you want the founder directly, that's <a href=\"mailto:reserve@blockpartysupply.co\">reserve@blockpartysupply.co</a>.",
+        ],
+    },
+    {
+        "slug": "brooklyn-block-party-permits",
         "stream": "ai",
-        "title": "Brooklyn block-party trends to watch",
-        "subhead": "What Brooklyn blocks are booking, building, and drinking this season — scanned by the Trends Desk.",
+        "title": "Block party permits: the 60-day rule",
+        "subhead": "Brooklyn block-party permits are due 60 days before your event — the CECM/SAPO timeline, the $25 fee, and when to book the fun stuff.",
         "date": "2026-10-23",
         "modified": None,
         "series": ("brooklyn-trends", "Brooklyn Trends"),
-        "reviewed_by": "Allie Esslinger",  # publish gate: AI posts ship only with a named reviewer
-        "placeholder": True,
+        "reviewed_by": "Allie Esslinger",   # approved via review card 2026-10-23
+        "published": True,       # approved for publish by Allie
+        "note": "Approved by Allie Esslinger, 2026-10-23.",
         "body": [
-            "Every season, Brooklyn blocks remix the same handful of ingredients — lawn games, a frozen-drink station, a court for the big kids, a patch of foam for the little ones. The trends worth watching are less about new equipment and more about new pairings: double-flavor slushie machines alongside a Classic package, ball pits on streets that used to skip the under-5s.",
-            "The Trends Desk tracks what blocks book, what they add late, and what they ask about first. Every claim here is checked by a human — Allie reviews each post before it ships — so the trends you read are the ones Brooklyn blocks are actually living.",
+            "File your block-party permit application at least 60 days before your event date. In New York City, block parties are permitted through the Street Activity Permit Office (SAPO) — now part of the Mayor's Office of Citywide Event Coordination and Management (CECM) — and the application carries a $25 processing fee that is not refunded if you withdraw or are denied.",
+            "Every summer, Brooklyn's block-party calendar fills through this exact process. On the public permit rolls you'll find parties like Tiffany Place between Degraw Street and Kane Street (Community Board 6, 76th precinct) or 17th Street between Prospect Park West and 10th Avenue (Community Board 7, 72nd precinct) — real blocks, real closures, all filed through the same system.",
+            ("h2", "How the application actually works"),
+            "Block parties are single-block street closures for a single day — exactly what the SAPO rules define as a community-sponsored street event — so the application is about your specific block, your date, and your community board. You apply online through CECM's permitting system, and your community board reviews the application and weighs in before final approval. Tell your board early, not just the form.",
+            "One wrinkle: some community boards ask organizers to file even earlier than the citywide deadline — Brooklyn Community Board 2's own guidance, for example, tells block parties to submit 90 days out. Treat 60 days as the floor, not a guarantee, and check your own board's page first.",
+            ("h2", "A timeline that works backwards"),
+            "Here's the sequence most Brooklyn organizers actually run:",
+            ("html", '<table class="bracket-table"><thead><tr><th>When</th><th>What</th><th>Why</th></tr></thead><tbody><tr><td>60+ days out</td><td>File the CECM/SAPO application</td><td>Citywide block-party deadline; some community boards want earlier</td></tr><tr><td>45&ndash;30 days out</td><td>Confirm with your community board</td><td>The board reviews and recommends before SAPO decides</td></tr><tr><td>2+ weeks out</td><td>Book equipment and lock logistics</td><td>BlockParty asks for at least 2 weeks&rsquo; lead to confirm delivery windows</td></tr><tr><td>Week of</td><td>Confirmation call</td><td>Every booking includes a call to lock timing, placement, and street specifics</td></tr></tbody></table>'),
+            "The order matters because the permit is the long pole. Equipment can move fast — <a href=\"/how-it-works.html\">a call and a delivery window</a> is genuinely all it takes — but the permit clock is fixed, and it runs on city time.",
+            ("h2", "What the permit doesn't cover"),
+            "The permit closes your street; it doesn't furnish it. The games, the tables, the <a href=\"/rentals/slushie-machine-rental-brooklyn.html\">slushie machine</a> — that part is ours to deliver, set up, and pick up, and <a href=\"/faq.html\">the permit itself stays the organizer's responsibility</a>. File the paperwork, then tell us what the block wants on it — <a href=\"/rentals/\">the full catalog is one trip away</a>.",
         ],
     },
     {
         "slug": "cornhole-tournament-brackets",
         "stream": "ai",
-        "title": "Cornhole tournament brackets that work",
-        "subhead": "How Brooklyn blocks are running cornhole tournaments a whole street can join — boards, timing, and prizes.",
-        "date": "2026-10-16",
+        "title": "Cornhole brackets that actually work",
+        "subhead": "The 8-team, single-elimination cornhole bracket Brooklyn blocks actually finish — timing, rules, board placement, and the bracket to print.",
+        "date": "2026-10-23",
         "modified": None,
         "series": ("brooklyn-trends", "Brooklyn Trends"),
-        "reviewed_by": "Allie Esslinger",
-        "placeholder": True,
+        "reviewed_by": "Allie Esslinger",   # approved via review card 2026-10-23
+        "published": True,       # approved for publish by Allie
+        "note": "Approved by Allie Esslinger, 2026-10-23.",
         "body": [
-            "This is a placeholder draft from the Trends Desk. AI-written trend posts ship only after review and approval by Allie Esslinger; the final version lands in the seed-content pass.",
-            "The tournament bracket is the quiet engine of a great block-party afternoon: a fixed bracket keeps the cornhole boards moving, and a losers' bracket keeps everyone playing. The final post will break down board counts, match timing, and prize ideas for a 16-player street bracket.",
+            "The cornhole tournament that works on a Brooklyn block is an 8-team, single-elimination bracket with a 21-point or 15-minute cap per game, run on two boards with a losers' game alongside. Sixteen teams sounds inclusive; it turns your afternoon into a bracket-management job. Eight teams, run well, plays everyone and still ends before the slushie melts.",
+            ("h2", "Why 8 teams is the sweet spot"),
+            "Eight teams of two is sixteen players — about what one regulation board set can keep fed in an afternoon, since most blocks rotate 2–4 boards' worth of players over a full day. A tournament should be a highlight, not the whole schedule. Sign-ups happen at the folding table by the grill: team name, a number drawn from a coffee can, done.",
+            ("h2", "The bracket to tape to the folding table"),
+            "Print this, fill in the winners, keep it moving:",
+            ("html", '<table class="bracket-table"><thead><tr><th>Round</th><th>Matchup</th><th>Played</th><th>Winner</th></tr></thead><tbody><tr><td>Quarterfinal 1</td><td>Team 1 vs Team 2</td><td>Board A</td><td>&mdash;</td></tr><tr><td>Quarterfinal 2</td><td>Team 3 vs Team 4</td><td>Board B</td><td>&mdash;</td></tr><tr><td>Quarterfinal 3</td><td>Team 5 vs Team 6</td><td>Board A</td><td>&mdash;</td></tr><tr><td>Quarterfinal 4</td><td>Team 7 vs Team 8</td><td>Board B</td><td>&mdash;</td></tr><tr><td>Semifinal 1</td><td>Winner QF1 vs Winner QF2</td><td>Board A</td><td>&mdash;</td></tr><tr><td>Semifinal 2</td><td>Winner QF3 vs Winner QF4</td><td>Board B</td><td>&mdash;</td></tr><tr><td>Third place</td><td>Semifinal losers</td><td>Board A</td><td>&mdash;</td></tr><tr><td>Final</td><td>Semifinal winners</td><td>Board B</td><td>&mdash;</td></tr></tbody></table>'),
+            "The empty Winner column is the point — a bracket everyone can see is a bracket nobody argues with.",
+            ("h2", "The three rules that keep it moving"),
+            "First: games go to 21 points or 15 minutes, whichever comes first — the cap is what guarantees the bracket finishes. Second: the losing team works — it resets the boards, keeps score for the next match, and keeps the line moving. Third: nobody's afternoon ends on one bad game — the two semifinal losers meet in a third-place match, and losing teams seed the running jokes that outlast the trophy.",
+            "Between the semifinals and the final, run a kids' exhibition round — shorter boards, sillier rules, no bracket. It's the breather that keeps the adults honest about the final.",
+            ("h2", "Where the boards go on your block"),
+            "Set the two boards facing each other on the flattest stretch of closed street you've got, away from the food table and well away from the <a href=\"/rentals/slushie-machine-rental-brooklyn.html\">slushie machine line</a>. Brooklyn pavement plays faster than grass — sweep the landing zone first and enjoy the speed.",
+            "BlockParty rents a regulation 2-board cornhole set — <a href=\"/rentals/cornhole-rental-brooklyn.html\">$65/day bundled, delivered and picked up</a> — and it comes standard in every package tier: <a href=\"/rentals/\">Classic, Full, and Deluxe</a>. Add <a href=\"/rentals/giant-jenga-rental-brooklyn.html\">giant Jenga</a> beside the boards and the non-tournament players have a reason to stay too.",
         ],
     },
     {
         "slug": "frozen-drink-station-trends",
         "stream": "ai",
-        "title": "Frozen-drink stations to watch",
-        "subhead": "The slushie station is becoming the block's main attraction — what Brooklyn hosts are pouring this season.",
-        "date": "2026-10-09",
+        "title": "Block party food & frozen-drink trends",
+        "subhead": "Frozen-drink stations are becoming the anchor of Brooklyn block-party menus — single- vs double-flavor machines, and food that survives a sidewalk.",
+        "date": "2026-10-23",
         "modified": None,
         "series": ("brooklyn-trends", "Brooklyn Trends"),
-        "reviewed_by": "Allie Esslinger",
-        "placeholder": True,
+        "reviewed_by": "Allie Esslinger",   # approved via review card 2026-10-23
+        "published": True,       # approved for publish by Allie
+        "note": "Approved by Allie Esslinger, 2026-10-23.",
         "body": [
-            "This is a placeholder draft from the Trends Desk. AI-written trend posts ship only after review and approval by Allie Esslinger; the final version lands in the seed-content pass.",
-            "Frozen-drink stations are quietly becoming the centerpiece rental: one machine, two flavors, and a line of kids on the slushie side while the adults discover the frozen-cocktail side. The final post will cover single- versus double-flavor setups and where the station belongs on a block.",
+            "The trend Brooklyn hosts are planning around this season: the frozen-drink station as the anchor of the block-party menu. One commercial slushie machine — a kids' flavor on one side, an adult frozen-cocktail mix on the other — does the work a cooler full of melting ice used to do, and it makes sense to plan the food around it instead of the other way around.",
+            ("h2", "Single flavor or double flavor?"),
+            "The machine comes two ways. Single-flavor ($275/day) runs one mix — one crowd-pleaser for the whole block, the simplest setup on the sidewalk. Double-flavor ($375/day) runs two mixes side by side, which is the configuration that ends the biggest planning argument before it starts: a kids' slushie flavor on the left, an adult frozen cocktail on the right, one line, no drama.",
+            "Either way it's a real commercial frozen-drink machine — delivered, set up, and picked up by us, with no self-pickup option, because a machine that heavy shouldn't ride home in anyone's SUV.",
+            ("h2", "Food that survives a sidewalk"),
+            "The menu pattern that works on a closed street is low-lift by design: one signature dish per household rather than a dozen side dishes nobody coordinated, make-ahead mains that hold at street temperature, and a shade tarp over anything dairy. A block party is not a catered dinner — the food that works is the food that forgives.",
+            "Hydration rides beside every drink station: a water pitcher within reach of the kids' line, especially on hydrant-spray days when nobody realizes how much sun they're getting.",
+            ("h2", "How it fits your order"),
+            "The slushie machine clears BlockParty's $150 solo-order minimum on its own, so it works as a standalone rental. It's also included, single-flavor, starting in the $420 <a href=\"/rentals/\">Full Block Party package</a> — and the $675 Deluxe adds a <a href=\"/rentals/ball-pit-rental-brooklyn.html\">ball pit</a> for the under-10 crowd while the machine holds the grown-ups' attention.",
+            "Full specs, flavors, and booking details live on the <a href=\"/rentals/slushie-machine-rental-brooklyn.html\">slushie &amp; frozen cocktail machine rental page</a> — and if you're building the whole day, <a href=\"/how-it-works.html\">here's how delivery and pickup work</a>.",
         ],
     },
+
+
 ]
 
 BLOG_PATH = "/blog/"
@@ -369,11 +438,23 @@ def post_path(post):
     return f"{BLOG_PATH}{post['slug']}.html"
 
 def post_image_path(post):
-    """Build-time cover art for a post, emitted to dist (absolute path)."""
+    """Host-relative URL for HTML/CSS references (img src, backgrounds) —
+    works on any host serving dist, including the non-canonical preview."""
     return f"{BLOG_PATH}images/{post['slug']}.png"
 
+def post_image_url(post):
+    """Absolute canonical URL for machine-facing metadata (BlogPosting image)."""
+    return f"{DOMAIN}{BLOG_PATH}images/{post['slug']}.png"
+
+def published_posts():
+    """POSTS that ship. Drafts (published=False — the B4 review gate) stay out
+    of every public artifact: not rendered, not in the sitemap, not in
+    llms.txt, absent from the hub. The flag defaults to True so a post
+    without one behaves as before."""
+    return [p for p in POSTS if p.get("published", True)]
+
 # The hub changes whenever a post lands, so its lastmod tracks the newest post.
-BLOG_LASTMOD = max((p["date"] for p in POSTS), default=DEFAULT_LASTMOD)
+BLOG_LASTMOD = max((p["date"] for p in published_posts()), default=DEFAULT_LASTMOD)
 
 MONTHS = [
     "January", "February", "March", "April", "May", "June", "July",
@@ -398,6 +479,8 @@ def check_publish_gate():
                 f"{post_path(post)}: unknown stream {post['stream']!r} (use 'human' or 'ai')"
             )
             continue
+        if not post.get("published", True):
+            continue  # drafts ship nowhere, so they cannot violate the gate
         if post["stream"] == "ai" and not (post.get("reviewed_by") or "").strip():
             problems.append(
                 f"{post_path(post)}: AI-written post has no 'reviewed_by' — "
@@ -418,7 +501,7 @@ def page_registry():
         for item in CATALOG
     ]
     pages += [{"path": BLOG_PATH, "lastmod": BLOG_LASTMOD}]
-    pages += [{"path": post_path(p), "lastmod": p["date"]} for p in POSTS]
+    pages += [{"path": post_path(p), "lastmod": p["date"]} for p in published_posts()]
     return pages
 
 # ---------------------------------------------------------------------------
@@ -732,7 +815,7 @@ def blogposting_jsonld(post):
         "url": page_url,
         "headline": post["title"],
         "description": post["subhead"],
-        "image": DOMAIN + post_image_path(post),
+        "image": post_image_url(post),
         "datePublished": post["date"],
         "dateModified": post.get("modified") or post["date"],
         "author": blog_author_jsonld(post),
@@ -1192,12 +1275,13 @@ def feature_card_html(post):
 def build_blog_hub():
     """Hub at /blog/ per Allie's sketch: hero feature, Trends Desk row, a
     second Allie feature, and titled series rows (B1)."""
+    posts = published_posts()
     human_posts = sorted(
-        (p for p in POSTS if p["stream"] == "human"),
+        (p for p in posts if p["stream"] == "human"),
         key=lambda p: p["date"], reverse=True,
     )
     ai_posts = sorted(
-        (p for p in POSTS if p["stream"] == "ai"),
+        (p for p in posts if p["stream"] == "ai"),
         key=lambda p: p["date"], reverse=True,
     )
 
@@ -1234,7 +1318,7 @@ def build_blog_hub():
     # series/tag index pages stay unmade until a series holds 3+ posts
     # (thin-page rule, B1) — the hub section itself is the only surface.
     groups = {}
-    for post in POSTS:
+    for post in published_posts():
         if post.get("series"):
             groups.setdefault(post["series"], []).append(post)
     series_rows = ""
@@ -1257,6 +1341,7 @@ def build_blog_hub():
     <span class="eyebrow">The BlockParty Blog</span>
     <h1>Allie Intelligence</h1>
     <p class="hero-sub">Field notes from Allie Esslinger on why block parties matter &mdash; plus trend scans from the AI desk she reviews before anything ships.</p>
+    <img class="blog-hero-img" src="/blog/images/hub-hero.png" alt="Illustration of a Brooklyn block party outside cream and rust brownstones, with bunting flags overhead" width="1344" height="750">
   </div>
 </section>
 
@@ -1310,20 +1395,45 @@ def build_blog_hub():
     )
 
 
+def render_post_body(post):
+    """B4 body renderer: strings are paragraphs, ("h2"/"h3", text) are
+    headings, ("html", raw) is a pre-built block (tables, lists). Unknown
+    shapes fail the build loudly instead of flattening into prose."""
+    out = []
+    for block in post["body"]:
+        if isinstance(block, str):
+            out.append(f"<p>{block}</p>")
+        elif isinstance(block, tuple) and len(block) == 2:
+            kind, text = block
+            if kind in ("h2", "h3"):
+                out.append(f"<{kind}>{text}</{kind}>")
+            elif kind == "html":
+                out.append(text)
+            else:
+                raise ValueError(f"{post['slug']}: unknown body block kind {kind!r}")
+        else:
+            raise ValueError(f"{post['slug']}: bad body block {block!r}")
+    return "".join(out)
+
 def build_post_page(post):
     """Post template: structural, visible authorship (B2) with breadcrumbs (B3)."""
-    paragraphs = "".join(f"<p>{text}</p>" for text in post["body"])
-    placeholder_note = (
-        '<p class="blog-placeholder-note"><strong>Placeholder copy.</strong> '
-        "This draft proves the blog pipeline end to end — final copy ships separately, after review.</p>"
-        if post.get("placeholder") else ""
-    )
+    paragraphs = render_post_body(post)
+    draft_note = ""
+    if not post.get("published", True):
+        extra = post.get("note") or ""
+        draft_note = (
+            '<p class="blog-placeholder-note"><strong>Draft &mdash; not published.</strong> '
+            "This post stays out of the live site until Allie reviews it and the "
+            "published flag flips. "
+            + (f"<em>{extra}</em>" if extra else "")
+            + "</p>"
+        )
     if post["stream"] == "human":
         byline = f'<div class="blog-byline">{stream_badge("human")} By <strong>Allie Esslinger</strong>, Founder</div>'
         disclosure = ""
     else:
         byline = f'<div class="blog-byline">{stream_badge("ai")} By <strong>Allie Intelligence</strong></div>'
-        disclosure = f'<p class="blog-disclosure">AI-written &middot; reviewed and approved by {post["reviewed_by"]}</p>'
+        disclosure = f'<p class="blog-disclosure">AI-written &middot; reviewed and approved by {post.get("reviewed_by") or "review pending"}</p>'
 
     body = f"""
 <section class="hero" style="padding-bottom:0;">
@@ -1343,7 +1453,7 @@ def build_post_page(post):
 </section>
 <section style="padding-top:12px;">
   <div class="container narrative">
-    {placeholder_note}
+    {draft_note}
     {paragraphs}
   </div>
 </section>
@@ -1486,7 +1596,7 @@ def llms_txt():
             if p["stream"] == "human"
             else f" AI-written, reviewed and approved by {p['reviewed_by']}."
         )
-        for p in POSTS
+        for p in published_posts()
     ]
     lines.append("")
     return "\n".join(lines)
@@ -1585,11 +1695,25 @@ def make_post_image(post, out_path):
     canvas.save(out_path, "PNG")
 
 def make_post_images(dist_dir):
-    """Emit one cover image per post to dist/blog/images/."""
+    """Emit one cover image per post to dist/blog/images/, plus the hub hero.
+
+    Generated brand art (B4) lives in assets/blog/<slug>.png and ships as-is;
+    a post without a generated asset falls back to the programmatic art below,
+    so the pipeline never breaks on a missing file. Draft posts still get
+    their art emitted (unlinked), which keeps preview builds complete."""
     out_dir = os.path.join(dist_dir, "blog", "images")
     os.makedirs(out_dir, exist_ok=True)
+    assets_dir = os.path.join(ROOT, "assets", "blog")
+    hero = os.path.join(assets_dir, "hub-hero.png")
+    if os.path.isfile(hero):
+        shutil.copyfile(hero, os.path.join(out_dir, "hub-hero.png"))
     for post in POSTS:
-        make_post_image(post, os.path.join(out_dir, f"{post['slug']}.png"))
+        dest = os.path.join(out_dir, f"{post['slug']}.png")
+        asset = os.path.join(assets_dir, f"{post['slug']}.png")
+        if os.path.isfile(asset):
+            shutil.copyfile(asset, dest)
+        else:
+            make_post_image(post, dest)
 
 # ---------------------------------------------------------------------------
 # Write files
@@ -1618,7 +1742,7 @@ def main():
     for item in CATALOG:
         write(f"rentals/{item['slug']}.html", build_item_page(item))
     write("blog/index.html", build_blog_hub())
-    for post in POSTS:
+    for post in published_posts():
         write(f"blog/{post['slug']}.html", build_post_page(post))
 
     shutil.copyfile(os.path.join(ROOT, "style.css"), os.path.join(DIST, "style.css"))
