@@ -331,6 +331,36 @@ POSTS = [
             "The Trends Desk tracks what blocks book, what they add late, and what they ask about first. Every claim here is checked by a human — Allie reviews each post before it ships — so the trends you read are the ones Brooklyn blocks are actually living.",
         ],
     },
+    {
+        "slug": "cornhole-tournament-brackets",
+        "stream": "ai",
+        "title": "Cornhole tournament brackets that work",
+        "subhead": "How Brooklyn blocks are running cornhole tournaments a whole street can join — boards, timing, and prizes.",
+        "date": "2026-10-16",
+        "modified": None,
+        "series": ("brooklyn-trends", "Brooklyn Trends"),
+        "reviewed_by": "Allie Esslinger",
+        "placeholder": True,
+        "body": [
+            "This is a placeholder draft from the Trends Desk. AI-written trend posts ship only after review and approval by Allie Esslinger; the final version lands in the seed-content pass.",
+            "The tournament bracket is the quiet engine of a great block-party afternoon: a fixed bracket keeps the cornhole boards moving, and a losers' bracket keeps everyone playing. The final post will break down board counts, match timing, and prize ideas for a 16-player street bracket.",
+        ],
+    },
+    {
+        "slug": "frozen-drink-station-trends",
+        "stream": "ai",
+        "title": "Frozen-drink stations to watch",
+        "subhead": "The slushie station is becoming the block's main attraction — what Brooklyn hosts are pouring this season.",
+        "date": "2026-10-09",
+        "modified": None,
+        "series": ("brooklyn-trends", "Brooklyn Trends"),
+        "reviewed_by": "Allie Esslinger",
+        "placeholder": True,
+        "body": [
+            "This is a placeholder draft from the Trends Desk. AI-written trend posts ship only after review and approval by Allie Esslinger; the final version lands in the seed-content pass.",
+            "Frozen-drink stations are quietly becoming the centerpiece rental: one machine, two flavors, and a line of kids on the slushie side while the adults discover the frozen-cocktail side. The final post will cover single- versus double-flavor setups and where the station belongs on a block.",
+        ],
+    },
 ]
 
 BLOG_PATH = "/blog/"
@@ -1209,7 +1239,10 @@ def build_blog_hub():
             groups.setdefault(post["series"], []).append(post)
     series_rows = ""
     for (_key, label), series_posts in groups.items():
-        cards = "".join(post_card_html(p, "tall") for p in series_posts)
+        cards = "".join(
+            post_card_html(p, "tall")
+            for p in sorted(series_posts, key=lambda p: p["date"], reverse=True)
+        )
         series_rows += f"""
   <div class="blog-series">
     <div class="section-head"><h2>{html.escape(label)}</h2></div>
