@@ -8,6 +8,7 @@ import os
 import json
 import html
 import shutil
+import sys
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DIST = os.path.join(ROOT, "dist")
@@ -266,6 +267,7 @@ FAQS = [
 
 NAV_ITEMS = [
     ("Rentals", "/rentals/"),
+    ("Blog", "/blog/"),
     ("How It Works", "/how-it-works.html"),
     ("About", "/about.html"),
     ("FAQ", "/faq.html"),
@@ -288,13 +290,135 @@ CORE_PAGES = [
     {"path": "/rentals/", "lastmod": "2026-10-23"},
 ]
 
+# ---------------------------------------------------------------------------
+# Blog — Allie Intelligence (B1–B3)
+# Two authorship streams: "human" posts are written by Allie; "ai" posts are
+# written by the Allie Intelligence desk and ship only with a named human
+# reviewer (publish gate, enforced by check_publish_gate before anything
+# renders). Placeholder posts prove the pipeline end to end; real content
+# replaces them in the seed-content task (B4).
+# ---------------------------------------------------------------------------
+
+POSTS = [
+    {
+        "slug": "why-we-throw-the-party",
+        "stream": "human",  # "human" (Allie) or "ai" (Allie Intelligence)
+        "title": "Why we throw the party",
+        "subhead": "Block parties are how a block becomes a neighborhood — a note on what BlockParty is really for.",
+        "date": "2026-10-23",   # datePublished (ISO)
+        "modified": None,        # dateModified; None = never edited since publish
+        "series": None,          # (key, label) or None
+        "reviewed_by": None,     # AI posts only: name of the human reviewer
+        "placeholder": True,     # show the visible placeholder notice
+        "body": [
+            "A block party looks simple from the sidewalk: chairs out, kids sprinting between a cornhole board and the hydrant, somebody's uncle judging the Jenga stack. But anyone who has run one knows the day is carried by a handful of neighbors who decided it should happen.",
+            "That gap — between the fun everyone remembers and the labor almost nobody sees — is the whole reason BlockParty exists. The games, the slushie machine, the pickup afterward: we're renting back the organizer's evening so the people who planned the party actually get to be at it.",
+            "This blog is where we'll keep the notes: what blocks book, what they add late, and why the tradition is worth keeping. Written by Allie, and meant to be useful long before you ever email us to book.",
+        ],
+    },
+    {
+        "slug": "brooklyn-block-party-trends",
+        "stream": "ai",
+        "title": "Brooklyn block-party trends to watch",
+        "subhead": "What Brooklyn blocks are booking, building, and drinking this season — scanned by the Trends Desk.",
+        "date": "2026-10-23",
+        "modified": None,
+        "series": ("brooklyn-trends", "Brooklyn Trends"),
+        "reviewed_by": "Allie Esslinger",  # publish gate: AI posts ship only with a named reviewer
+        "placeholder": True,
+        "body": [
+            "Every season, Brooklyn blocks remix the same handful of ingredients — lawn games, a frozen-drink station, a court for the big kids, a patch of foam for the little ones. The trends worth watching are less about new equipment and more about new pairings: double-flavor slushie machines alongside a Classic package, ball pits on streets that used to skip the under-5s.",
+            "The Trends Desk tracks what blocks book, what they add late, and what they ask about first. Every claim here is checked by a human — Allie reviews each post before it ships — so the trends you read are the ones Brooklyn blocks are actually living.",
+        ],
+    },
+    {
+        "slug": "cornhole-tournament-brackets",
+        "stream": "ai",
+        "title": "Cornhole tournament brackets that work",
+        "subhead": "How Brooklyn blocks are running cornhole tournaments a whole street can join — boards, timing, and prizes.",
+        "date": "2026-10-16",
+        "modified": None,
+        "series": ("brooklyn-trends", "Brooklyn Trends"),
+        "reviewed_by": "Allie Esslinger",
+        "placeholder": True,
+        "body": [
+            "This is a placeholder draft from the Trends Desk. AI-written trend posts ship only after review and approval by Allie Esslinger; the final version lands in the seed-content pass.",
+            "The tournament bracket is the quiet engine of a great block-party afternoon: a fixed bracket keeps the cornhole boards moving, and a losers' bracket keeps everyone playing. The final post will break down board counts, match timing, and prize ideas for a 16-player street bracket.",
+        ],
+    },
+    {
+        "slug": "frozen-drink-station-trends",
+        "stream": "ai",
+        "title": "Frozen-drink stations to watch",
+        "subhead": "The slushie station is becoming the block's main attraction — what Brooklyn hosts are pouring this season.",
+        "date": "2026-10-09",
+        "modified": None,
+        "series": ("brooklyn-trends", "Brooklyn Trends"),
+        "reviewed_by": "Allie Esslinger",
+        "placeholder": True,
+        "body": [
+            "This is a placeholder draft from the Trends Desk. AI-written trend posts ship only after review and approval by Allie Esslinger; the final version lands in the seed-content pass.",
+            "Frozen-drink stations are quietly becoming the centerpiece rental: one machine, two flavors, and a line of kids on the slushie side while the adults discover the frozen-cocktail side. The final post will cover single- versus double-flavor setups and where the station belongs on a block.",
+        ],
+    },
+]
+
+BLOG_PATH = "/blog/"
+
+def post_path(post):
+    return f"{BLOG_PATH}{post['slug']}.html"
+
+def post_image_path(post):
+    """Build-time cover art for a post, emitted to dist (absolute path)."""
+    return f"{BLOG_PATH}images/{post['slug']}.png"
+
+# The hub changes whenever a post lands, so its lastmod tracks the newest post.
+BLOG_LASTMOD = max((p["date"] for p in POSTS), default=DEFAULT_LASTMOD)
+
+MONTHS = [
+    "January", "February", "March", "April", "May", "June", "July",
+    "August", "September", "October", "November", "December",
+]
+
+def format_date(iso_date):
+    """ISO date -> 'October 23, 2026' for display."""
+    year, month, day = (int(part) for part in iso_date.split("-"))
+    return f"{MONTHS[month - 1]} {day}, {year}"
+
+def check_publish_gate():
+    """B2 publish gate: an AI-written post ships only with a named reviewer.
+
+    Runs before any output is written, so an unreviewed post fails the build
+    instead of quietly rendering.
+    """
+    problems = []
+    for post in POSTS:
+        if post["stream"] not in ("human", "ai"):
+            problems.append(
+                f"{post_path(post)}: unknown stream {post['stream']!r} (use 'human' or 'ai')"
+            )
+            continue
+        if post["stream"] == "ai" and not (post.get("reviewed_by") or "").strip():
+            problems.append(
+                f"{post_path(post)}: AI-written post has no 'reviewed_by' — "
+                "it cannot ship until Allie (or a named human) has reviewed it"
+            )
+    if problems:
+        print("Publish gate failed — unreviewed post(s) blocked:", file=sys.stderr)
+        for problem in problems:
+            print(f"  - {problem}", file=sys.stderr)
+        sys.exit(1)
+
 def page_registry():
-    """Core pages plus one registry entry per catalog item page."""
+    """Core pages, one entry per catalog item page, and the blog (B1):
+    hub plus one entry per post. Every indexable URL lives here (R1)."""
     pages = [dict(p) for p in CORE_PAGES]
     pages += [
         {"path": f"/rentals/{item['slug']}.html", "lastmod": DEFAULT_LASTMOD}
         for item in CATALOG
     ]
+    pages += [{"path": BLOG_PATH, "lastmod": BLOG_LASTMOD}]
+    pages += [{"path": post_path(p), "lastmod": p["date"]} for p in POSTS]
     return pages
 
 # ---------------------------------------------------------------------------
@@ -339,6 +463,7 @@ def footer_html():
         <h4>Explore</h4>
         <ul>
           <li><a href="/rentals/">Packages &amp; Catalog</a></li>
+          <li><a href="/blog/">Allie Intelligence</a></li>
           <li><a href="/how-it-works.html">How It Works</a></li>
           <li><a href="/about.html">Our Story</a></li>
           <li><a href="/faq.html">FAQ</a></li>
@@ -575,6 +700,57 @@ def breadcrumb_jsonld(trail):
             }
             for i, (name, path) in enumerate(trail)
         ],
+    }
+
+def blog_author_jsonld(post):
+    """Structural authorship for schema (B2/B3): human posts by Allie the
+    Person; AI posts by a transparent Organization that says what it is and
+    that a human reviews everything it publishes."""
+    if post["stream"] == "human":
+        return {
+            "@type": "Person",
+            "@id": f"{DOMAIN}/#allie-esslinger",
+            "name": "Allie Esslinger",
+            "jobTitle": "Founder",
+        }
+    return {
+        "@type": "Organization",
+        "@id": f"{DOMAIN}/blog/#allie-intelligence",
+        "name": "Allie Intelligence",
+        "description": "The AI-written trends desk of the BlockParty blog. Every post it publishes is reviewed and approved by Allie Esslinger before it ships.",
+        "parentOrganization": {"@id": f"{DOMAIN}/#business"},
+    }
+
+def blogposting_jsonld(post):
+    """BlogPosting node for a post page (B3): stable @id, absolute image
+    URL, publish/modified dates, and the author per stream."""
+    page_url = DOMAIN + post_path(post)
+    return {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "@id": f"{page_url}#blogposting",
+        "url": page_url,
+        "headline": post["title"],
+        "description": post["subhead"],
+        "image": DOMAIN + post_image_path(post),
+        "datePublished": post["date"],
+        "dateModified": post.get("modified") or post["date"],
+        "author": blog_author_jsonld(post),
+        "publisher": {"@id": f"{DOMAIN}/#business"},
+        "isPartOf": {"@id": f"{DOMAIN}/blog/#blog"},
+        "mainEntityOfPage": page_url,
+    }
+
+def blog_jsonld():
+    """Blog node for the hub (B3), joined to the business entity."""
+    return {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "@id": f"{DOMAIN}/blog/#blog",
+        "url": f"{DOMAIN}/blog/",
+        "name": "Allie Intelligence",
+        "description": "The BlockParty blog: Allie Esslinger on block-party life, plus AI-written trend scans reviewed and approved by Allie before they ship.",
+        "publisher": {"@id": f"{DOMAIN}/#business"},
     }
 
 # ---------------------------------------------------------------------------
@@ -973,6 +1149,233 @@ def build_faq():
     )
 
 
+def stream_badge(stream):
+    """Stream badge shown on every blog card and post header (B2)."""
+    label = "Allie" if stream == "human" else "AI"
+    return f'<span class="blog-badge blog-badge-{stream}">{label}</span>'
+
+
+def post_card_html(post, variant):
+    """Card for the blog rows: date badge, title, stream badge, image background."""
+    alt = html.escape(f"Cover art for the post {post['title']}")
+    return f"""
+      <a class="blog-card blog-card-{variant}" href="{post_path(post)}">
+        <img class="blog-card-img" src="{post_image_path(post)}" alt="{alt}">
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            {stream_badge(post['stream'])}
+            <span class="blog-date-badge">{format_date(post['date'])}</span>
+          </div>
+          <h3>{html.escape(post['title'])}</h3>
+        </div>
+      </a>"""
+
+
+def feature_card_html(post):
+    """Full-width feature card for a human post (hero and second feature)."""
+    alt = html.escape(f"Cover art for the post {post['title']}")
+    return f"""
+      <a class="blog-feature" href="{post_path(post)}">
+        <img class="blog-feature-img" src="{post_image_path(post)}" alt="{alt}">
+        <div class="blog-feature-overlay">
+          <div class="blog-card-meta">
+            {stream_badge('human')}
+            <span class="blog-date-badge">{format_date(post['date'])}</span>
+          </div>
+          <h2>{html.escape(post['title'])}</h2>
+          <p>{html.escape(post['subhead'])}</p>
+          <div class="blog-byline">By <strong>Allie Esslinger</strong>, Founder</div>
+        </div>
+      </a>"""
+
+
+def build_blog_hub():
+    """Hub at /blog/ per Allie's sketch: hero feature, Trends Desk row, a
+    second Allie feature, and titled series rows (B1)."""
+    human_posts = sorted(
+        (p for p in POSTS if p["stream"] == "human"),
+        key=lambda p: p["date"], reverse=True,
+    )
+    ai_posts = sorted(
+        (p for p in POSTS if p["stream"] == "ai"),
+        key=lambda p: p["date"], reverse=True,
+    )
+
+    # Sketch section 1: hero — the most recent Allie-written post.
+    hero = feature_card_html(human_posts[0]) if human_posts else ""
+
+    # Sketch section 2: The Trends Desk — scrollable row of AI-post cards.
+    trends_cards = "".join(post_card_html(p, "trend") for p in ai_posts)
+    trends_section = f"""
+  <div class="container">
+    <div class="section-head">
+      <h2>The Trends Desk</h2>
+      <p>AI-written scans of Brooklyn block-party trends &mdash; every post reviewed and approved by Allie Esslinger before it ships.</p>
+    </div>
+    <div class="blog-row" id="trendsRow">{trends_cards}</div>
+    <div class="blog-row-nav">
+      <button class="blog-nav-btn" id="trendsPrev" aria-label="Scroll the trends row back">&larr;</button>
+      <button class="blog-nav-btn" id="trendsNext" aria-label="Scroll the trends row forward">&rarr;</button>
+    </div>
+  </div>"""
+
+    # Sketch section 3: a second Allie-written feature. When only one human
+    # post exists yet, render an honest coming-soon state instead of a card.
+    if len(human_posts) > 1:
+        second = feature_card_html(human_posts[1])
+    else:
+        second = """
+      <div class="blog-soon">
+        <h3>More from Allie is on the way</h3>
+        <p>Her next piece is being written &mdash; it lands here when it's ready.</p>
+      </div>"""
+
+    # Sketch section 4: titled series rows, built from post data. Standalone
+    # series/tag index pages stay unmade until a series holds 3+ posts
+    # (thin-page rule, B1) — the hub section itself is the only surface.
+    groups = {}
+    for post in POSTS:
+        if post.get("series"):
+            groups.setdefault(post["series"], []).append(post)
+    series_rows = ""
+    for (_key, label), series_posts in groups.items():
+        cards = "".join(
+            post_card_html(p, "tall")
+            for p in sorted(series_posts, key=lambda p: p["date"], reverse=True)
+        )
+        series_rows += f"""
+  <div class="blog-series">
+    <div class="section-head"><h2>{html.escape(label)}</h2></div>
+    <div class="blog-row">{cards}</div>
+  </div>"""
+    series_block = f'<section class="section-alt">{series_rows}</section>' if series_rows else ""
+
+    body = f"""
+<section class="hero" style="padding-bottom:32px;">
+  <div class="container hero-inner">
+    <div class="bunting">{''.join('<span></span>' for _ in range(11))}</div>
+    <span class="eyebrow">The BlockParty Blog</span>
+    <h1>Allie Intelligence</h1>
+    <p class="hero-sub">Field notes from Allie Esslinger on why block parties matter &mdash; plus trend scans from the AI desk she reviews before anything ships.</p>
+  </div>
+</section>
+
+<section style="padding-top:12px;">
+  <div class="container">
+    {hero}
+  </div>
+</section>
+
+<section class="section-alt">{trends_section}</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <h2>More from Allie</h2>
+    </div>
+    {second}
+  </div>
+</section>
+
+{series_block}
+
+<script>
+  (function () {{
+    var row = document.getElementById('trendsRow');
+    var prev = document.getElementById('trendsPrev');
+    var next = document.getElementById('trendsNext');
+    if (!row || !prev || !next) return;
+    function stepSize() {{ return Math.max(Math.round(row.clientWidth * 0.8), 300); }}
+    prev.addEventListener('click', function () {{ row.scrollBy({{ left: -stepSize(), behavior: 'smooth' }}); }});
+    next.addEventListener('click', function () {{ row.scrollBy({{ left: stepSize(), behavior: 'smooth' }}); }});
+    function updateArrows() {{
+      var overflow = row.scrollWidth > row.clientWidth + 1;
+      prev.style.display = overflow ? '' : 'none';
+      next.style.display = overflow ? '' : 'none';
+    }}
+    updateArrows();
+    window.addEventListener('resize', updateArrows);
+  }})();
+</script>
+"""
+    return page(
+        title="Allie Intelligence — The BlockParty Blog",
+        description="The BlockParty blog: Allie Esslinger on why block parties matter, plus AI-written Brooklyn trend scans — reviewed and approved by Allie before they ship.",
+        path=BLOG_PATH,
+        body=body,
+        json_ld_objects=[
+            breadcrumb_jsonld([("Home", "/"), ("Allie Intelligence", BLOG_PATH)]),
+            blog_jsonld(),
+        ],
+    )
+
+
+def build_post_page(post):
+    """Post template: structural, visible authorship (B2) with breadcrumbs (B3)."""
+    paragraphs = "".join(f"<p>{text}</p>" for text in post["body"])
+    placeholder_note = (
+        '<p class="blog-placeholder-note"><strong>Placeholder copy.</strong> '
+        "This draft proves the blog pipeline end to end — final copy ships separately, after review.</p>"
+        if post.get("placeholder") else ""
+    )
+    if post["stream"] == "human":
+        byline = f'<div class="blog-byline">{stream_badge("human")} By <strong>Allie Esslinger</strong>, Founder</div>'
+        disclosure = ""
+    else:
+        byline = f'<div class="blog-byline">{stream_badge("ai")} By <strong>Allie Intelligence</strong></div>'
+        disclosure = f'<p class="blog-disclosure">AI-written &middot; reviewed and approved by {post["reviewed_by"]}</p>'
+
+    body = f"""
+<section class="hero" style="padding-bottom:0;">
+  <div class="container hero-inner" style="text-align:left; max-width:820px;">
+    <div class="breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/blog/">Allie Intelligence</a> &rsaquo; {html.escape(post['title'])}</div>
+    {byline}
+    <h1>{html.escape(post['title'])}</h1>
+    <p class="hero-sub" style="margin:0;">{html.escape(post['subhead'])}</p>
+    <div class="blog-post-meta"><span class="blog-date-badge">{format_date(post['date'])}</span></div>
+    {disclosure}
+  </div>
+</section>
+<section style="padding-top:24px;">
+  <div class="container" style="max-width:820px;">
+    <img class="blog-post-img" src="{post_image_path(post)}" alt="Cover art for the post {html.escape(post['title'])}">
+  </div>
+</section>
+<section style="padding-top:12px;">
+  <div class="container narrative">
+    {placeholder_note}
+    {paragraphs}
+  </div>
+</section>
+<section class="section-alt">
+  <div class="container">
+    <div class="cta-band">
+      <h2>Planning your block's party?</h2>
+      <p>Browse the packages or the full catalog &mdash; delivery, pickup, and a confirmation call are included either way.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/rentals/">Browse rentals</a>
+        <a class="btn btn-secondary" href="/blog/">&larr; Back to Allie Intelligence</a>
+      </div>
+    </div>
+  </div>
+</section>
+"""
+    return page(
+        title=f"{post['title']} — Allie Intelligence",
+        description=post["subhead"],
+        path=post_path(post),
+        body=body,
+        json_ld_objects=[
+            breadcrumb_jsonld([
+                ("Home", "/"),
+                ("Allie Intelligence", BLOG_PATH),
+                (post["title"], post_path(post)),
+            ]),
+            blogposting_jsonld(post),
+        ],
+    )
+
+
 def build_404():
     body = f"""
 <section class="hero">
@@ -1072,6 +1475,19 @@ def llms_txt():
         f"- [{item['name']}]({DOMAIN}/rentals/{item['slug']}.html): {item['short']} {item['price_label']}."
         for item in CATALOG
     ]
+    lines += ["", "## Allie Intelligence (blog)", ""]
+    lines += [
+        f"- [Allie Intelligence]({DOMAIN}/blog/): the BlockParty blog — Allie Esslinger on block-party life, plus AI-written trend scans (every AI post is reviewed and approved by Allie before it ships)."
+    ]
+    lines += [
+        f"- [{p['title']}]({DOMAIN}/blog/{p['slug']}.html): {p['subhead']}"
+        + (
+            " By Allie Esslinger, Founder."
+            if p["stream"] == "human"
+            else f" AI-written, reviewed and approved by {p['reviewed_by']}."
+        )
+        for p in POSTS
+    ]
     lines.append("")
     return "\n".join(lines)
 
@@ -1082,6 +1498,7 @@ def llms_txt():
 BADGE_PATH = os.path.join(ROOT, "assets", "badge.png")
 CREAM = (255, 248, 236)   # #FFF8EC — site cream
 NAVY = (29, 39, 49)       # #1D2731 — site navy
+RUST = (228, 87, 46)      # #E4572E — site rust
 
 def make_og_image(out_path):
     """Compose the 1200x630 social card: navy ground, script wordmark, tagline."""
@@ -1138,6 +1555,42 @@ def make_favicons(dist_dir):
             output_height=size,
         )
 
+def make_post_image(post, out_path):
+    """Branded cover art for a post: stream-colored ground, bunting strip,
+    centered badge. Titles stay in the HTML overlay (they double-read and
+    crop badly inside card cutouts); placeholder posts get this generated
+    art until real photography ships with the seed content (B4)."""
+    from PIL import Image, ImageDraw
+
+    width, height = 1600, 1000
+    canvas = Image.new("RGB", (width, height), NAVY if post["stream"] == "human" else RUST)
+    draw = ImageDraw.Draw(canvas)
+
+    # Bunting along the top — the site's motif, in brand colors.
+    flags = [(228, 87, 46), (242, 177, 52), (255, 248, 236), (21, 122, 114)]
+    flag_w, flag_h, gap = 44, 54, 66
+    for i in range(width // gap + 1):
+        x = 16 + i * gap
+        draw.polygon([(x, 0), (x + flag_w, 0), (x + flag_w // 2, flag_h)], fill=flags[i % 4])
+
+    badge = Image.open(BADGE_PATH).convert("RGBA")
+    badge = badge.crop(badge.getbbox())
+    # 200px height leaves clear margins inside the narrowest card cutout
+    # (a 3:4 tall card shows the central 750px of this 1600x1000 image;
+    # a 200px badge is ~600px wide and clears both edges).
+    badge_h = 200
+    badge = badge.resize((round(badge.width * badge_h / badge.height), badge_h), Image.LANCZOS)
+    canvas.paste(badge, ((width - badge.width) // 2, (height - badge_h) // 2), badge)
+
+    canvas.save(out_path, "PNG")
+
+def make_post_images(dist_dir):
+    """Emit one cover image per post to dist/blog/images/."""
+    out_dir = os.path.join(dist_dir, "blog", "images")
+    os.makedirs(out_dir, exist_ok=True)
+    for post in POSTS:
+        make_post_image(post, os.path.join(out_dir, f"{post['slug']}.png"))
+
 # ---------------------------------------------------------------------------
 # Write files
 # ---------------------------------------------------------------------------
@@ -1149,6 +1602,9 @@ def write(path, content):
         f.write(content)
 
 def main():
+    # B2 publish gate first: an unreviewed AI post stops the build before
+    # any output is written, so it can never render or deploy.
+    check_publish_gate()
     if os.path.exists(DIST):
         shutil.rmtree(DIST)
     os.makedirs(DIST, exist_ok=True)
@@ -1161,6 +1617,9 @@ def main():
     write("rentals/index.html", build_catalog_index())
     for item in CATALOG:
         write(f"rentals/{item['slug']}.html", build_item_page(item))
+    write("blog/index.html", build_blog_hub())
+    for post in POSTS:
+        write(f"blog/{post['slug']}.html", build_post_page(post))
 
     shutil.copyfile(os.path.join(ROOT, "style.css"), os.path.join(DIST, "style.css"))
     shutil.copyfile(os.path.join(ROOT, "favicon.svg"), os.path.join(DIST, "favicon.svg"))
@@ -1171,6 +1630,7 @@ def main():
     write("llms.txt", llms_txt())
     make_og_image(os.path.join(DIST, "og-image.png"))
     make_favicons(DIST)
+    make_post_images(DIST)
 
     print("Build complete ->", DIST)
 
