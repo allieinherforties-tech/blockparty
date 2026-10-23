@@ -1064,6 +1064,9 @@ def llms_txt():
         "",
     ]
     lines += [f"- [{name}]({DOMAIN}{path}): {blurb}" for path, name, blurb in pages]
+    # R11: llms.txt must reference the sitemap so answer engines can find the
+    # machine-readable page index too.
+    lines += ["", f"- [Sitemap]({DOMAIN}/sitemap.xml): machine-readable index of every page."]
     lines += ["", "## Rentals", ""]
     lines += [
         f"- [{item['name']}]({DOMAIN}/rentals/{item['slug']}.html): {item['short']} {item['price_label']}."
@@ -1111,8 +1114,9 @@ def make_favicons(dist_dir):
     sizes = [(32, "favicon-32.png"), (16, "favicon-16.png"), (180, "apple-touch-icon.png")]
     try:
         import cairosvg
-    except ImportError:
+    except (ImportError, OSError):
         # Documented fallback: derive the PNGs from the badge raster with PIL.
+        # OSError covers cairosvg present but its native cairo lib missing.
         from PIL import Image
         badge = Image.open(BADGE_PATH).convert("RGBA")
         side = min(badge.size)
