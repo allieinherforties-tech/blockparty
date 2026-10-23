@@ -17,6 +17,11 @@ DOMAIN = "https://blockpartysupply.co"
 EMAIL = "reserve@blockpartysupply.co"
 TAGLINE = "Your Source for Brooklyn Block Party Fun"
 
+# Social card image (R4) — generated at build time from assets/badge.png
+OG_IMAGE_PATH = "/og-image.png"
+OG_IMAGE_URL = f"{DOMAIN}{OG_IMAGE_PATH}"
+OG_IMAGE_ALT = f"{SITE_NAME} — {TAGLINE}"
+
 # ---------------------------------------------------------------------------
 # Icons (simple inline SVGs, consistent line style, teal/red/yellow palette)
 # ---------------------------------------------------------------------------
@@ -251,6 +256,32 @@ NAV_ITEMS = [
 ]
 
 # ---------------------------------------------------------------------------
+# Page registry — the single source of truth for every indexable URL (R1).
+# The sitemap is generated from this registry, so it cannot drift from the
+# pages the build emits. Bump `lastmod` when a page's copy or structured
+# data meaningfully changes; it is an honest date, not a build stamp.
+# ---------------------------------------------------------------------------
+
+DEFAULT_LASTMOD = "2026-10-23"
+
+CORE_PAGES = [
+    {"path": "/", "lastmod": "2026-10-23"},
+    {"path": "/about.html", "lastmod": "2026-10-23"},
+    {"path": "/how-it-works.html", "lastmod": "2026-10-23"},
+    {"path": "/faq.html", "lastmod": "2026-10-23"},
+    {"path": "/rentals/", "lastmod": "2026-10-23"},
+]
+
+def page_registry():
+    """Core pages plus one registry entry per catalog item page."""
+    pages = [dict(p) for p in CORE_PAGES]
+    pages += [
+        {"path": f"/rentals/{item['slug']}.html", "lastmod": DEFAULT_LASTMOD}
+        for item in CATALOG
+    ]
+    return pages
+
+# ---------------------------------------------------------------------------
 # Layout helpers
 # ---------------------------------------------------------------------------
 
@@ -337,9 +368,19 @@ def page(title, description, path, body, json_ld_objects=None, extra_head=""):
 <meta property="og:description" content="{html.escape(description)}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{canonical}">
-<meta name="twitter:card" content="summary">
+<meta property="og:site_name" content="{SITE_NAME}">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="{OG_IMAGE_URL}">
+<meta property="og:image:alt" content="{OG_IMAGE_ALT}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{OG_IMAGE_URL}">
+<meta name="twitter:image:alt" content="{OG_IMAGE_ALT}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 {extra_head}
@@ -862,6 +903,146 @@ def build_404():
     )
 
 # ---------------------------------------------------------------------------
+# Crawl artifacts — generated from the registry and site data (R1–R3).
+# Nothing crawl-related stays hand-maintained: these render from the same
+# data that renders the pages.
+# ---------------------------------------------------------------------------
+
+def sitemap_xml():
+    """One <url> per indexable page with per-URL lastmod (R1).
+
+    changefreq/priority are omitted — Google ignores them.
+    """
+    urls = "".join(
+        f"  <url><loc>{DOMAIN}{p['path']}</loc><lastmod>{p['lastmod']}</lastmod></url>\n"
+        for p in page_registry()
+    )
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f"{urls}</urlset>\n"
+    )
+
+# AI retrieval bots surface the site in answer engines; training bots are a
+# separate, reversible visibility-first choice (locked for v1). Explicit
+# per-bot entries document the policy even where the default already allows.
+RETRIEVAL_BOTS = ["OAI-SearchBot", "PerplexityBot", "Claude-SearchBot"]
+TRAINING_BOTS = ["GPTBot", "ClaudeBot", "CCBot", "Google-Extended"]
+
+def robots_txt():
+    """Explicit AI-crawler policy plus the sitemap pointer (R2)."""
+    lines = ["User-agent: *", "Allow: /", ""]
+    lines += ["# AI answer engines (retrieval) — allowed"]
+    for bot in RETRIEVAL_BOTS:
+        lines += [f"User-agent: {bot}", "Allow: /", ""]
+    lines += ["# AI training crawlers — allowed (visibility-first; revisit any time)"]
+    for bot in TRAINING_BOTS:
+        lines += [f"User-agent: {bot}", "Allow: /", ""]
+    lines += [f"Sitemap: {DOMAIN}/sitemap.xml", ""]
+    return "\n".join(lines)
+
+def llms_txt():
+    """Curated Markdown for AI answer engines, generated from site data (R3)."""
+    pkg_prices = " / ".join(
+        f"{p['name'].replace(' Block Party Package', '')} {p['price']}"
+        for p in PACKAGES
+    )
+    summary = (
+        "BlockParty is a Brooklyn-only party equipment rental company: cornhole, giant Jenga, "
+        "giant/human-sized beer pong, a slushie or frozen cocktail machine, a portable basketball "
+        "hoop, and a ball pit — delivered to your block, set up, and picked up after the party, "
+        "with a confirmation call included in every booking. Packages: "
+        f"{pkg_prices}. À la carte rentals are also available; standalone single-item orders "
+        "carry a $150 minimum order value. To book, email "
+        f"{EMAIL} and we'll set up your confirmation call."
+    )
+    pages = [
+        ("/", "Home", "Brooklyn block party and backyard party rentals — we deliver, we pick up, and we call you first."),
+        ("/rentals/", "Packages & Rentals", "Every package and à la carte item, with prices."),
+        ("/how-it-works.html", "How It Works", "Browse, book a confirmation call, and we deliver and pick up."),
+        ("/about.html", "Our Story", "Why BlockParty exists."),
+        ("/faq.html", "FAQ", "Delivery, booking lead time, order minimums, and street permits."),
+    ]
+    lines = [
+        f"# {SITE_NAME}",
+        "",
+        f"> {summary}",
+        "",
+        "## Pages",
+        "",
+    ]
+    lines += [f"- [{name}]({DOMAIN}{path}): {blurb}" for path, name, blurb in pages]
+    lines += ["", "## Rentals", ""]
+    lines += [
+        f"- [{item['name']}]({DOMAIN}/rentals/{item['slug']}.html): {item['short']} {item['price_label']}."
+        for item in CATALOG
+    ]
+    lines.append("")
+    return "\n".join(lines)
+
+# ---------------------------------------------------------------------------
+# Brand image assets (R4, R7)
+# ---------------------------------------------------------------------------
+
+BADGE_PATH = os.path.join(ROOT, "assets", "badge.png")
+CREAM = (255, 248, 236)   # #FFF8EC — site cream
+NAVY = (29, 39, 49)       # #1D2731 — site navy
+
+def make_og_image(out_path):
+    """Compose the 1200x630 social card: navy ground, script wordmark, tagline."""
+    from PIL import Image, ImageDraw, ImageFont
+
+    width, height = 1200, 630
+    canvas = Image.new("RGB", (width, height), NAVY)
+
+    badge = Image.open(BADGE_PATH).convert("RGBA")
+    badge = badge.crop(badge.getbbox())  # trim any transparent padding
+    badge_w = 1000
+    badge_h = round(badge.height * badge_w / badge.width)
+    badge = badge.resize((badge_w, badge_h), Image.LANCZOS)
+
+    font = ImageFont.truetype(
+        "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf", 40
+    )
+    gap = 52
+    top = (height - badge_h - gap - 44) // 2
+    canvas.paste(badge, ((width - badge_w) // 2, top), badge)
+
+    draw = ImageDraw.Draw(canvas)
+    tagline_w = draw.textlength(TAGLINE, font=font)
+    draw.text(((width - tagline_w) / 2, top + badge_h + gap), TAGLINE, font=font, fill=CREAM)
+
+    canvas.save(out_path, "PNG")
+
+def make_favicons(dist_dir):
+    """Rasterize favicon.svg to PNG fallbacks: 32/16 + apple-touch 180 (R7)."""
+    sizes = [(32, "favicon-32.png"), (16, "favicon-16.png"), (180, "apple-touch-icon.png")]
+    try:
+        import cairosvg
+    except ImportError:
+        # Documented fallback: derive the PNGs from the badge raster with PIL.
+        from PIL import Image
+        badge = Image.open(BADGE_PATH).convert("RGBA")
+        side = min(badge.size)
+        square = badge.crop((
+            (badge.width - side) // 2,
+            (badge.height - side) // 2,
+            (badge.width + side) // 2,
+            (badge.height + side) // 2,
+        ))
+        for size, name in sizes:
+            square.resize((size, size), Image.LANCZOS).save(os.path.join(dist_dir, name), "PNG")
+        return
+    svg = os.path.join(ROOT, "favicon.svg")
+    for size, name in sizes:
+        cairosvg.svg2png(
+            url=svg,
+            write_to=os.path.join(dist_dir, name),
+            output_width=size,
+            output_height=size,
+        )
+
+# ---------------------------------------------------------------------------
 # Write files
 # ---------------------------------------------------------------------------
 
@@ -887,9 +1068,13 @@ def main():
 
     shutil.copyfile(os.path.join(ROOT, "style.css"), os.path.join(DIST, "style.css"))
     shutil.copyfile(os.path.join(ROOT, "favicon.svg"), os.path.join(DIST, "favicon.svg"))
-    shutil.copyfile(os.path.join(ROOT, "robots.txt"), os.path.join(DIST, "robots.txt"))
-    shutil.copyfile(os.path.join(ROOT, "sitemap.xml"), os.path.join(DIST, "sitemap.xml"))
     shutil.copyfile(os.path.join(ROOT, "CNAME"), os.path.join(DIST, "CNAME"))
+
+    write("sitemap.xml", sitemap_xml())
+    write("robots.txt", robots_txt())
+    write("llms.txt", llms_txt())
+    make_og_image(os.path.join(DIST, "og-image.png"))
+    make_favicons(DIST)
 
     print("Build complete ->", DIST)
 
