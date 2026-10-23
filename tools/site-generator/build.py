@@ -352,6 +352,83 @@ POSTS = [
             "If your block is planning its party, <a href=\"/how-it-works.html\">here's how it works</a> — and if you want the founder directly, that's <a href=\"mailto:reserve@blockpartysupply.co\">reserve@blockpartysupply.co</a>.",
         ],
     },
+    {
+        "slug": "brooklyn-block-party-permits",
+        "stream": "ai",
+        "title": "Block party permits: the 60-day rule",
+        "subhead": "Brooklyn block-party permits are due 60 days before your event — the CECM/SAPO timeline, the $25 fee, and when to book the fun stuff.",
+        "date": "2026-10-23",
+        "modified": None,
+        "series": ("brooklyn-trends", "Brooklyn Trends"),
+        "reviewed_by": None,     # publish gate: stays empty until Allie reviews
+        "published": False,      # B4 gate: draft — reviewed_by stamps at approval
+        "note": "Awaiting Allie's review — reviewed_by gets stamped and published flips after approval.",
+        "body": [
+            "File your block-party permit application at least 60 days before your event date. In New York City, block parties are permitted through the Street Activity Permit Office (SAPO) — now part of the Mayor's Office of Citywide Event Coordination and Management (CECM) — and the application carries a $25 processing fee that is not refunded if you withdraw or are denied.",
+            "Every summer, Brooklyn's block-party calendar fills through this exact process. On the public permit rolls you'll find parties like Tiffany Place between Degraw Street and Kane Street (Community Board 6, 76th precinct) or 17th Street between Prospect Park West and 10th Avenue (Community Board 7, 72nd precinct) — real blocks, real closures, all filed through the same system.",
+            ("h2", "How the application actually works"),
+            "Block parties are single-block street closures for a single day — exactly what the SAPO rules define as a community-sponsored street event — so the application is about your specific block, your date, and your community board. You apply online through CECM's permitting system, and your community board reviews the application and weighs in before final approval. Tell your board early, not just the form.",
+            "One wrinkle: some community boards ask organizers to file even earlier than the citywide deadline — Brooklyn Community Board 2's own guidance, for example, tells block parties to submit 90 days out. Treat 60 days as the floor, not a guarantee, and check your own board's page first.",
+            ("h2", "A timeline that works backwards"),
+            "Here's the sequence most Brooklyn organizers actually run:",
+            ("html", '<table class="bracket-table"><thead><tr><th>When</th><th>What</th><th>Why</th></tr></thead><tbody><tr><td>60+ days out</td><td>File the CECM/SAPO application</td><td>Citywide block-party deadline; some community boards want earlier</td></tr><tr><td>45&ndash;30 days out</td><td>Confirm with your community board</td><td>The board reviews and recommends before SAPO decides</td></tr><tr><td>2+ weeks out</td><td>Book equipment and lock logistics</td><td>BlockParty asks for at least 2 weeks&rsquo; lead to confirm delivery windows</td></tr><tr><td>Week of</td><td>Confirmation call</td><td>Every booking includes a call to lock timing, placement, and street specifics</td></tr></tbody></table>'),
+            "The order matters because the permit is the long pole. Equipment can move fast — <a href=\"/how-it-works.html\">a call and a delivery window</a> is genuinely all it takes — but the permit clock is fixed, and it runs on city time.",
+            ("h2", "What the permit doesn't cover"),
+            "The permit closes your street; it doesn't furnish it. The games, the tables, the <a href=\"/rentals/slushie-machine-rental-brooklyn.html\">slushie machine</a> — that part is ours to deliver, set up, and pick up, and <a href=\"/faq.html\">the permit itself stays the organizer's responsibility</a>. File the paperwork, then tell us what the block wants on it — <a href=\"/rentals/\">the full catalog is one trip away</a>.",
+        ],
+    },
+    {
+        "slug": "cornhole-tournament-brackets",
+        "stream": "ai",
+        "title": "Cornhole brackets that actually work",
+        "subhead": "The 8-team, single-elimination cornhole bracket Brooklyn blocks actually finish — timing, rules, board placement, and the bracket to print.",
+        "date": "2026-10-23",
+        "modified": None,
+        "series": ("brooklyn-trends", "Brooklyn Trends"),
+        "reviewed_by": None,     # publish gate: stays empty until Allie reviews
+        "published": False,      # B4 gate: draft — reviewed_by stamps at approval
+        "note": "Awaiting Allie's review — reviewed_by gets stamped and published flips after approval.",
+        "body": [
+            "The cornhole tournament that works on a Brooklyn block is an 8-team, single-elimination bracket with a 21-point or 15-minute cap per game, run on two boards with a losers' game alongside. Sixteen teams sounds inclusive; it turns your afternoon into a bracket-management job. Eight teams, run well, plays everyone and still ends before the slushie melts.",
+            ("h2", "Why 8 teams is the sweet spot"),
+            "Eight teams of two is sixteen players — about what one regulation board set can keep fed in an afternoon, since most blocks rotate 2–4 boards' worth of players over a full day. A tournament should be a highlight, not the whole schedule. Sign-ups happen at the folding table by the grill: team name, a number drawn from a coffee can, done.",
+            ("h2", "The bracket to tape to the folding table"),
+            "Print this, fill in the winners, keep it moving:",
+            ("html", '<table class="bracket-table"><thead><tr><th>Round</th><th>Matchup</th><th>Played</th><th>Winner</th></tr></thead><tbody><tr><td>Quarterfinal 1</td><td>Team 1 vs Team 2</td><td>Board A</td><td>&mdash;</td></tr><tr><td>Quarterfinal 2</td><td>Team 3 vs Team 4</td><td>Board B</td><td>&mdash;</td></tr><tr><td>Quarterfinal 3</td><td>Team 5 vs Team 6</td><td>Board A</td><td>&mdash;</td></tr><tr><td>Quarterfinal 4</td><td>Team 7 vs Team 8</td><td>Board B</td><td>&mdash;</td></tr><tr><td>Semifinal 1</td><td>Winner QF1 vs Winner QF2</td><td>Board A</td><td>&mdash;</td></tr><tr><td>Semifinal 2</td><td>Winner QF3 vs Winner QF4</td><td>Board B</td><td>&mdash;</td></tr><tr><td>Third place</td><td>Semifinal losers</td><td>Board A</td><td>&mdash;</td></tr><tr><td>Final</td><td>Semifinal winners</td><td>Board B</td><td>&mdash;</td></tr></tbody></table>'),
+            "The empty Winner column is the point — a bracket everyone can see is a bracket nobody argues with.",
+            ("h2", "The three rules that keep it moving"),
+            "First: games go to 21 points or 15 minutes, whichever comes first — the cap is what guarantees the bracket finishes. Second: the losing team works — it resets the boards, keeps score for the next match, and keeps the line moving. Third: nobody's afternoon ends on one bad game — the two semifinal losers meet in a third-place match, and losing teams seed the running jokes that outlast the trophy.",
+            "Between the semifinals and the final, run a kids' exhibition round — shorter boards, sillier rules, no bracket. It's the breather that keeps the adults honest about the final.",
+            ("h2", "Where the boards go on your block"),
+            "Set the two boards facing each other on the flattest stretch of closed street you've got, away from the food table and well away from the <a href=\"/rentals/slushie-machine-rental-brooklyn.html\">slushie machine line</a>. Brooklyn pavement plays faster than grass — sweep the landing zone first and enjoy the speed.",
+            "BlockParty rents a regulation 2-board cornhole set — <a href=\"/rentals/cornhole-rental-brooklyn.html\">$65/day bundled, delivered and picked up</a> — and it comes standard in every package tier: <a href=\"/rentals/\">Classic, Full, and Deluxe</a>. Add <a href=\"/rentals/giant-jenga-rental-brooklyn.html\">giant Jenga</a> beside the boards and the non-tournament players have a reason to stay too.",
+        ],
+    },
+    {
+        "slug": "frozen-drink-station-trends",
+        "stream": "ai",
+        "title": "Block party food & frozen-drink trends",
+        "subhead": "Frozen-drink stations are becoming the anchor of Brooklyn block-party menus — single- vs double-flavor machines, and food that survives a sidewalk.",
+        "date": "2026-10-23",
+        "modified": None,
+        "series": ("brooklyn-trends", "Brooklyn Trends"),
+        "reviewed_by": None,     # publish gate: stays empty until Allie reviews
+        "published": False,      # B4 gate: draft — reviewed_by stamps at approval
+        "note": "Awaiting Allie's review — reviewed_by gets stamped and published flips after approval.",
+        "body": [
+            "The trend Brooklyn hosts are planning around this season: the frozen-drink station as the anchor of the block-party menu. One commercial slushie machine — a kids' flavor on one side, an adult frozen-cocktail mix on the other — does the work a cooler full of melting ice used to do, and it makes sense to plan the food around it instead of the other way around.",
+            ("h2", "Single flavor or double flavor?"),
+            "The machine comes two ways. Single-flavor ($275/day) runs one mix — one crowd-pleaser for the whole block, the simplest setup on the sidewalk. Double-flavor ($375/day) runs two mixes side by side, which is the configuration that ends the biggest planning argument before it starts: a kids' slushie flavor on the left, an adult frozen cocktail on the right, one line, no drama.",
+            "Either way it's a real commercial frozen-drink machine — delivered, set up, and picked up by us, with no self-pickup option, because a machine that heavy shouldn't ride home in anyone's SUV.",
+            ("h2", "Food that survives a sidewalk"),
+            "The menu pattern that works on a closed street is low-lift by design: one signature dish per household rather than a dozen side dishes nobody coordinated, make-ahead mains that hold at street temperature, and a shade tarp over anything dairy. A block party is not a catered dinner — the food that works is the food that forgives.",
+            "Hydration rides beside every drink station: a water pitcher within reach of the kids' line, especially on hydrant-spray days when nobody realizes how much sun they're getting.",
+            ("h2", "How it fits your order"),
+            "The slushie machine clears BlockParty's $150 solo-order minimum on its own, so it works as a standalone rental. It's also included, single-flavor, starting in the $420 <a href=\"/rentals/\">Full Block Party package</a> — and the $675 Deluxe adds a <a href=\"/rentals/ball-pit-rental-brooklyn.html\">ball pit</a> for the under-10 crowd while the machine holds the grown-ups' attention.",
+            "Full specs, flavors, and booking details live on the <a href=\"/rentals/slushie-machine-rental-brooklyn.html\">slushie &amp; frozen cocktail machine rental page</a> — and if you're building the whole day, <a href=\"/how-it-works.html\">here's how delivery and pickup work</a>.",
+        ],
+    },
+
 
 ]
 
