@@ -672,6 +672,57 @@ def breadcrumb_jsonld(trail):
         ],
     }
 
+def blog_author_jsonld(post):
+    """Structural authorship for schema (B2/B3): human posts by Allie the
+    Person; AI posts by a transparent Organization that says what it is and
+    that a human reviews everything it publishes."""
+    if post["stream"] == "human":
+        return {
+            "@type": "Person",
+            "@id": f"{DOMAIN}/#allie-esslinger",
+            "name": "Allie Esslinger",
+            "jobTitle": "Founder",
+        }
+    return {
+        "@type": "Organization",
+        "@id": f"{DOMAIN}/blog/#allie-intelligence",
+        "name": "Allie Intelligence",
+        "description": "The AI-written trends desk of the BlockParty blog. Every post it publishes is reviewed and approved by Allie Esslinger before it ships.",
+        "parentOrganization": {"@id": f"{DOMAIN}/#business"},
+    }
+
+def blogposting_jsonld(post):
+    """BlogPosting node for a post page (B3): stable @id, absolute image
+    URL, publish/modified dates, and the author per stream."""
+    page_url = DOMAIN + post_path(post)
+    return {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "@id": f"{page_url}#blogposting",
+        "url": page_url,
+        "headline": post["title"],
+        "description": post["subhead"],
+        "image": DOMAIN + post_image_path(post),
+        "datePublished": post["date"],
+        "dateModified": post.get("modified") or post["date"],
+        "author": blog_author_jsonld(post),
+        "publisher": {"@id": f"{DOMAIN}/#business"},
+        "isPartOf": {"@id": f"{DOMAIN}/blog/#blog"},
+        "mainEntityOfPage": page_url,
+    }
+
+def blog_jsonld():
+    """Blog node for the hub (B3), joined to the business entity."""
+    return {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "@id": f"{DOMAIN}/blog/#blog",
+        "url": f"{DOMAIN}/blog/",
+        "name": "Allie Intelligence",
+        "description": "The BlockParty blog: Allie Esslinger on block-party life, plus AI-written trend scans reviewed and approved by Allie before they ship.",
+        "publisher": {"@id": f"{DOMAIN}/#business"},
+    }
+
 # ---------------------------------------------------------------------------
 # Page builders
 # ---------------------------------------------------------------------------
@@ -1221,6 +1272,7 @@ def build_blog_hub():
         body=body,
         json_ld_objects=[
             breadcrumb_jsonld([("Home", "/"), ("Allie Intelligence", BLOG_PATH)]),
+            blog_jsonld(),
         ],
     )
 
@@ -1286,6 +1338,7 @@ def build_post_page(post):
                 ("Allie Intelligence", BLOG_PATH),
                 (post["title"], post_path(post)),
             ]),
+            blogposting_jsonld(post),
         ],
     )
 
