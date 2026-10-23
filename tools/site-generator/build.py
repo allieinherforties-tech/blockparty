@@ -1575,7 +1575,10 @@ def make_post_image(post, out_path):
 
     badge = Image.open(BADGE_PATH).convert("RGBA")
     badge = badge.crop(badge.getbbox())
-    badge_h = 300
+    # 240px height keeps the whole badge inside the narrowest card cutout
+    # (a 3:4 tall card shows the central 750px of this 1600x1000 image;
+    # a 240px badge is ~720px wide and never crops).
+    badge_h = 240
     badge = badge.resize((round(badge.width * badge_h / badge.height), badge_h), Image.LANCZOS)
     canvas.paste(badge, ((width - badge.width) // 2, (height - badge_h) // 2), badge)
 
