@@ -77,6 +77,18 @@ ICONS = {
 <path d="M40 70 Q50 60 60 70 Q65 75 60 82 Q50 90 40 82 Q35 75 40 70 Z" fill="#AC7044"/>
 <circle cx="50" cy="26" r="3" fill="#1D2334"/>
 </svg>""",
+    "sparkles": """<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M28 14 C30 26 32 28 44 30 C32 33 30 35 28 46 C26 35 24 33 13 30 C24 28 26 26 28 14 Z" fill="#CB9F5C"/>
+<path d="M78 34 C80 44 82 46 92 48 C82 50 80 52 78 62 C76 52 74 50 64 48 C74 46 76 44 78 34 Z" fill="none" stroke="#1D2334" stroke-width="3" stroke-linejoin="round"/>
+<path d="M44 66 C46 74 48 76 56 78 C48 80 46 82 44 90 C42 82 40 80 32 78 C40 76 42 74 44 66 Z" fill="none" stroke="#1D2334" stroke-width="3" stroke-linejoin="round"/>
+<path d="M92 84 L92 96 M86 90 L98 90" stroke="#1D2334" stroke-width="3" stroke-linecap="round"/>
+<circle cx="14" cy="98" r="3.5" fill="#AC7044"/>
+<circle cx="106" cy="18" r="3.5" fill="#1D2334"/>
+</svg>""",
+    "arrow_doodle": """<svg viewBox="0 0 90 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 12 C 28 40, 50 44, 74 38" stroke="#1D2334" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M64 28 L 76 38 L 61 45" stroke="#1D2334" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>""",
     "browse": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
 <circle cx="42" cy="42" r="26" fill="none" stroke="#1D2334" stroke-width="4"/>
 <line x1="61" y1="61" x2="86" y2="86" stroke="#1D2334" stroke-width="5" stroke-linecap="round"/>
@@ -869,6 +881,8 @@ def build_home():
 <section class="hero">
   <div class="container hero-inner">
     <div class="bunting">{''.join('<span></span>' for _ in range(11))}</div>
+    <span class="hs hs-left" aria-hidden="true">{ICONS['sparkles']}</span>
+    <span class="hs hs-right" aria-hidden="true">{ICONS['sparkles']}</span>
     <span class="eyebrow">Brooklyn Block Party Rentals</span>
     <h1>Your block's party. Our gear. Nobody's garage.</h1>
     <p class="hero-sub">Cornhole, a slushie machine, giant Jenga, a ball pit — whatever your street wants this year. We deliver it, we pick it up, and we call you first to lock down the details. Brooklyn only. Your source for Brooklyn block party fun.</p>
@@ -883,7 +897,10 @@ def build_home():
   <div class="container narrative">
     <p>Every block has that one person who ends up running the party. Permits, borrowed folding tables, a group chat nobody answers, a garage that's slowly turning into storage for games you used twice. By August it's not fun anymore &mdash; it's a second job.</p>
     <p>BlockParty started with a simple wish: block parties in Brooklyn should be exciting for the kids tearing around the hydrant spray and the parents trying to have one conversation that isn't about logistics. Not another thing to manage. A thing that just happens, and is good.</p>
+    <div class="notice-arrow" aria-hidden="true">{ICONS['arrow_doodle']}</div>
+    <div class="notice">
     <p>So here's the pitch: <strong>you don't need to purchase everything and store it for the year. Rent from us, and figure out what works for the people on your block. Let the party evolve with your neighbors. Try new stuff. Build traditions. Just don't be left figuring out what to do with the stuff all year.</strong></p>
+    </div>
     <p>We're Brooklyn-based, we deliver and pick up everything ourselves, and before your date we get on the phone with you to make sure the truck shows up at the right time, to the right spot, with the right stuff. No self-service pickup, no guessing &mdash; just a straightforward way to make your block's day better. We're your source for Brooklyn block party fun.</p>
     <div class="section-links">
       <a href="/how-it-works.html">How It Works &rarr;</a>
