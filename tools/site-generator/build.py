@@ -288,6 +288,7 @@ FAQS = [
 NAV_ITEMS = [
     ("Rentals", "/rentals/"),
     ("Blog", "/blog/"),
+    ("Guides", "/guides/"),
     ("How It Works", "/how-it-works.html"),
     ("About", "/about.html"),
     ("FAQ", "/faq.html"),
@@ -378,7 +379,7 @@ POSTS = [
         "title": "Block party permits: the 60-day rule",
         "subhead": "Brooklyn block-party permits are due 60 days before your event — the CECM/SAPO timeline, the $25 fee, and when to book the fun stuff.",
         "date": "2026-10-23",
-        "modified": None,
+        "modified": "2026-10-27",   # added link to the definitive /guides/ permit walkthrough
         "series": ("brooklyn-trends", "Brooklyn Trends"),
         "reviewed_by": "Allie Esslinger",   # approved via review card 2026-10-23
         "published": True,       # approved for publish by Allie
@@ -394,7 +395,7 @@ POSTS = [
             ("html", '<table class="bracket-table"><thead><tr><th>When</th><th>What</th><th>Why</th></tr></thead><tbody><tr><td>60+ days out</td><td>File the CECM/SAPO application</td><td>Citywide block-party deadline; some community boards want earlier</td></tr><tr><td>45&ndash;30 days out</td><td>Confirm with your community board</td><td>The board reviews and recommends before SAPO decides</td></tr><tr><td>2+ weeks out</td><td>Book equipment and lock logistics</td><td>BlockParty asks for at least 2 weeks&rsquo; lead to confirm delivery windows</td></tr><tr><td>Week of</td><td>Confirmation call</td><td>Every booking includes a call to lock timing, placement, and street specifics</td></tr></tbody></table>'),
             "The order matters because the permit is the long pole. Equipment can move fast — <a href=\"/how-it-works.html\">a call and a delivery window</a> is genuinely all it takes — but the permit clock is fixed, and it runs on city time.",
             ("h2", "What the permit doesn't cover"),
-            "The permit closes your street; it doesn't furnish it. The games, the tables, the <a href=\"/rentals/slushie-machine-rental-brooklyn.html\">slushie machine</a> — that part is ours to deliver, set up, and pick up, and <a href=\"/faq.html\">the permit itself stays the organizer's responsibility</a>. File the paperwork, then tell us what the block wants on it — <a href=\"/rentals/\">the full catalog is one trip away</a>.",
+            "The permit closes your street; it doesn't furnish it. The games, the tables, the <a href=\"/rentals/slushie-machine-rental-brooklyn.html\">slushie machine</a> — that part is ours to deliver, set up, and pick up, and <a href=\"/faq.html\">the permit itself stays the organizer's responsibility</a>. File the paperwork, then tell us what the block wants on it — <a href=\"/rentals/\">the full catalog is one trip away</a>. For the whole process in order — eligibility, E-Apply, the fee, and the extras that trip people up — <a href=\"/guides/nyc-block-party-permit-guide.html\">the full permit guide walks it step by step</a>.",
         ],
     },
     {
@@ -476,6 +477,341 @@ def published_posts():
 # The hub changes whenever a post lands, so its lastmod tracks the newest post.
 BLOG_LASTMOD = max((p["date"] for p in published_posts()), default=DEFAULT_LASTMOD)
 
+# ---------------------------------------------------------------------------
+# Guides — practical reference pages at /guides/ (G1). These are business
+# reference content (like how-it-works/faq), not editorial blog posts, so
+# they don't run through the B2 blog publish gate; they ship through PR
+# review. NYC permit facts cite the nyc.gov pages they came from; anything
+# not verifiable from city sources is phrased as guidance-to-confirm.
+# Body items follow the POSTS convention: strings are paragraphs,
+# ("h2"/"h3", text) headings, ("html", raw) pre-built blocks.
+# ---------------------------------------------------------------------------
+
+GUIDES_PATH = "/guides/"
+GUIDES_LASTMOD = "2026-10-27"
+
+GUIDES = [
+    {
+        "slug": "nyc-block-party-permit-guide",
+        "title": "NYC Block Party Permit Guide",
+        "label": "NYC block party permit, step by step",
+        "blurb": "Eligibility, E-Apply steps, the 60-day rule, the $25 fee, and what happens after you file.",
+        "description": "How to get an NYC block party permit: eligibility, the E-Apply application, the 60-day deadline, the $25 fee, community board review, and what happens next.",
+        "updated": "2026-10-27",
+        "body": [
+            "Short version: a block party on a closed Brooklyn street runs on a Street Activity Permit, filed through the city's E-Apply system at least 60 days before your date, with a $25 non-refundable fee. The permit itself is the organizer's job — <a href=\"/faq.html\">that's been the deal since day one</a> — and this page walks the whole process in order.",
+            ("h2", "What counts as a block party (to the city)"),
+            "New York City defines a block party as a community-sponsored, public event — one block, one day, no sale of goods or services, no fundraising, generally limited to nine consecutive hours (<a href=\"https://www.nyc.gov/site/cecm/permitting/permit-types/block-parties.page\" rel=\"nofollow\">CECM's block party rules</a>). That \"no sales\" line is the hinge: the moment money changes hands on the street, you're describing a street festival, which is a different permit with different requirements — including insurance and Health Department clearances.",
+            ("h2", "Before you apply: two checks that prevent rejections"),
+            "First, your community board. The citywide rule is 60 days, but boards run their own calendars on top of it — Brooklyn Community Board 2's guidance, for example, asks block parties to submit 90 days out, and Brooklyn CB9 set July 14 as the last day to apply for a summer 2026 party (<a href=\"https://www.nyc.gov/site/brooklyncb9/resources/block-parties-and-street-activities.page\" rel=\"nofollow\">CB9's block party page</a>). Check your own board's page for its deadline and any extra paperwork.",
+            "Second, your police precinct. Some precincts keep lists of blocks that can't close and dates that are already spoken for — Brooklyn CB4, for instance, tells organizers to check the 83rd Precinct's street-closing denial and blocked-off date lists before applying (<a href=\"https://www.nyc.gov/site/brooklyncb4/resources/block-parties-and-street-fairs.page\" rel=\"nofollow\">CB4's process</a>). One look at that list can save you $25 and a summer of waiting.",
+            ("h2", "The application, step by step"),
+            ("html", "<ol><li><strong>Create an E-Apply account.</strong> Block party permits are filed online through the city's E-Apply system at nyc.gov — and if you've held a permit from SAPO or another city agency, you may already have the account.</li><li><strong>Choose \"Block Party\" as the event type,</strong> then enter your date and the sponsor contact. If a community organization is sponsoring, the contact should be a person in that organization, not \"whoever answers the group chat fastest.\"</li><li><strong>Enter the location:</strong> the specific block you're closing.</li><li><strong>Fill out the questionnaire.</strong> Describe the event and list everything that will occupy the street, sidewalk, or curb lane — tables, games, the drink station. Honesty here is what keeps the agencies from surprises later.</li><li><strong>Upload what your board asks for.</strong> Some boards want resident signatures, a site plan, or an event schedule.</li><li><strong>Pay the $25 processing fee</strong> by credit or debit card. It's non-refundable — denied or withdrawn, it stays with the city (<a href=\"https://home4.nyc.gov/site/cecm/permitting/fees.page\" rel=\"nofollow\">CECM's fee schedule</a>).</li></ol>"),
+            "From there the application routes to SAPO — the Street Activity Permit Office, now part of the Mayor's Office of Citywide Event Coordination and Management — along with the NYPD and your community board.",
+            ("h2", "After you file: the review"),
+            "Your community board reviews the application and weighs in before final approval, and SAPO coordinates with the NYPD and other city agencies. Answer document requests fast — a slow email thread is how August dates get lost. Approval isn't real until you're holding it.",
+            ("h2", "The extras that trip people up"),
+            "Amplified sound needs a separate NYPD sound permit, and sound permits generally expire at 7:00 p.m. — plan the speeches accordingly. Rides and some inflatables trigger insurance and clearance requirements. Food for the general public runs on its own Health Department track (<a href=\"/guides/block-party-food-bbq-rules-insurance.html\">covered here</a>), and a tent or temporary structure over 10 feet tall can pull in the Department of Buildings. None of these are reasons to skip the party; they're just not on the main form.",
+            ("h2", "Approved. Now what?"),
+            "Download the permit from E-Apply, print it, and keep it on the block on party day — it's the document that answers \"who said this was okay?\" before anyone has to ask it twice.",
+            ("html", "<table class=\"bracket-table\"><thead><tr><th>When</th><th>What</th><th>Why</th></tr></thead><tbody><tr><td>90 days out</td><td>Check your community board's own deadline</td><td>Some boards want more than the citywide 60 days</td></tr><tr><td>60 days out</td><td>File the E-Apply application and pay the $25 fee</td><td>Citywide floor for block party applications</td></tr><tr><td>45&ndash;30 days out</td><td>Follow up with your board; answer document requests</td><td>The board reviews and recommends before approval</td></tr><tr><td>30 days out</td><td>Coordinate food with DOHMH if the public is eating</td><td>Temporary food service permits take their own track</td></tr><tr><td>2+ weeks out</td><td>Book the equipment</td><td><a href=\"/guides/when-to-book-block-party-rentals.html\">BlockParty's minimum lead is 2 weeks</a></td></tr><tr><td>Week of</td><td>Confirmation call</td><td>Delivery window, placement, and pickup get locked</td></tr></tbody></table>"),
+            "The permit is the long pole; the equipment is the easy part. When the paperwork's in, <a href=\"/rentals/\">browse the catalog</a> or <a href=\"mailto:reserve@blockpartysupply.co\">email us</a> — the street's closed either way, so it might as well be fun.",
+        ],
+        "faq": [
+            ("How far in advance do I need to apply for an NYC block party permit?", "At least 60 days before your event, through the city's E-Apply system. Treat 60 days as the floor — some community boards ask for earlier filing on top of that."),
+            ("How much does a block party permit cost in NYC?", "A $25 non-refundable processing fee, paid online when you apply. The fee is not returned if your application is denied or withdrawn."),
+            ("Can I sell food at an NYC block party?", "Not under a standard block party permit — block parties are community events with no sales of goods or services. Events with vendors or food sales are a different permit type with Health Department requirements."),
+            ("Do I need a separate permit for amplified sound at a block party?", "Yes — amplified sound needs its own NYPD sound permit, separate from the street activity permit, and sound permits generally expire at 7:00 p.m."),
+        ],
+    },
+    {
+        "slug": "block-party-street-closure-logistics",
+        "title": "Block Party Street Closure Logistics",
+        "label": "Street closure logistics",
+        "blurb": "Barricades, the emergency lane, closure hours, hydrant spray caps, and the no-list.",
+        "description": "What a closed Brooklyn street involves: barricades, the emergency lane, closure hours, hydrant spray caps, generators, and the rules that keep it clean.",
+        "updated": "2026-10-27",
+        "body": [
+            "The permit closes your street on paper. Logistics close it in real life — and \"logistics\" here means one planning conversation with your precinct, a lane for ambulances, and a short list of rules that all boil down to the same idea: the street comes back by night.",
+            ("h2", "Know your hours before you plan anything"),
+            "Block party permits run for one day, generally no more than nine consecutive hours. Community board rules commonly let you close as early as 9:00 a.m. and require the street fully reopened by 9:00 p.m. — tables, chairs, and games out of the roadway — and your precinct can require an earlier reopening (<a href=\"https://www.nyc.gov/site/queenscb10/resources/block-party-procedure.page\" rel=\"nofollow\">an example of the 9 p.m. rule, from Queens CB10</a>). Build your schedule backwards from reopening, not forwards from the first coffee.",
+            ("h2", "Barricades and the emergency lane"),
+            "No city crew arrives to dress your block. Current guidance puts arranging the closure on the organizer, coordinated with the local precinct — so ask your precinct directly what they require at each end of the block. What's non-negotiable everywhere: a clear emergency lane all day, and no blocking of intersections, hydrants, or building entrances (<a href=\"https://www.nyc.gov/html/dot/html/pedestrians/openstreets.shtml\" rel=\"nofollow\">the same access rule DOT applies to Open Streets</a>).",
+            ("h2", "Hydrants: spray caps or nothing"),
+            "An opened hydrant without a spray cap is illegal, dangerous, and the fastest way to end a good party — the pressure turns the gutter into a river and the Fire Department turns it off. The legal version: the FDNY installs spray caps, so arrange it before your date, and keep the hydrant visible and unblocked either way (<a href=\"https://www.nyc.gov/site/fdny/education/fire-and-life-safety/block-parties.page\" rel=\"nofollow\">FDNY's block party safety page</a>).",
+            ("h2", "Power, generators, and cooking"),
+            "Generators at permitted street events need an FDNY certificate. Cooking is its own question: the city's 2026 event permitting guide says permitted street events may not barbecue on location (<a href=\"/guides/block-party-food-bbq-rules-insurance.html\">the food page has the details</a>). The games in our catalog were chosen in part because none of them need power, water, or an open flame: <a href=\"/rentals/cornhole-rental-brooklyn.html\">cornhole</a>, <a href=\"/rentals/giant-jenga-rental-brooklyn.html\">giant Jenga</a>, and <a href=\"/rentals/human-beer-pong-rental-brooklyn.html\">giant beer pong</a> work anywhere on a closed block. The <a href=\"/rentals/slushie-machine-rental-brooklyn.html\">slushie machine</a> we deliver, set up, and pick up — talk placement with us on the confirmation call.",
+            ("h2", "The no-list"),
+            "Alcohol is prohibited on the street and sidewalk at permitted block parties, along with vendors, commercial branding, and admission charges. Fireworks are illegal, full stop. Yes, some blocks bend these rules every summer; also yes, one call from one neighbor can end the whole afternoon early. The list is short. Keep all of it.",
+            "One practical translation for the games: the <a href=\"/rentals/human-beer-pong-rental-brooklyn.html\">human beer pong</a> buckets play with water or any drink of your choice — and on a closed street, the drink is water. The street version of the game is about the toss, not the tab.",
+            "Your permit and your precinct decide the shape of the day; we bring what goes in the middle of it. <a href=\"/rentals/\">See the full catalog</a> — everything on it was picked for closed-pavement Brooklyn blocks.",
+        ],
+        "faq": [
+            ("Who sets up barricades for an NYC block party?", "The organizer arranges the closure with the local NYPD precinct — city guidance doesn't have DOT or NYPD routinely supplying barricades for block parties. Ask your precinct what they require, and keep an emergency lane clear all day."),
+            ("What time does a block party street have to reopen?", "Community board rules commonly require the street fully reopened — tables, chairs, and games out of the roadway — by 9:00 p.m., and your precinct can require an earlier time. Plan backwards from reopening."),
+            ("Can we open the fire hydrant during the party?", "Only with an FDNY-approved spray cap, arranged before your event. Uncapped hydrants are illegal and dangerous, and they wreck water pressure for the whole block."),
+        ],
+    },
+    {
+        "slug": "block-party-food-bbq-rules-insurance",
+        "title": "Block Party Food, BBQ & Insurance",
+        "label": "Food, BBQ & insurance rules",
+        "blurb": "The BBQ rule, Health Department permits for public food, and when insurance applies.",
+        "description": "Can you grill at an NYC block party, when does food need a permit, and does a block party need insurance? What the city's rules say, and what to confirm.",
+        "updated": "2026-10-27",
+        "body": [
+            "Food is where block parties get ambitious and permits get technical. The rules split three ways — cooking on the street, serving the public, and who's liable if something goes wrong — so here's each, straight.",
+            ("h2", "The BBQ question"),
+            "The city's Comprehensive Event Permitting Guide for 2026 is blunt: at permitted street and sidewalk events, the permittee must not barbecue on location, and there are no sit-down catered meals on public streets (<a href=\"https://www.nyc.gov/assets/cecm/downloads/pdf/CECM-Comprehensive-Event-Permitting-Guide-2026.pdf\" rel=\"nofollow\">CECM guide, PDF</a>). Plenty of blocks run grills anyway; that's the \"one neighbor's phone call\" category from our <a href=\"/guides/block-party-street-closure-logistics.html\">closure logistics page</a>. If a grill is central to your plan, get written confirmation from your community board and SAPO before you count on it — don't assume practice equals permission.",
+            "The menu shape that works with the rules instead of against them: one signature dish per household, made ahead, served from folding tables. That's not a compromise — it's how the best block parties already eat.",
+            ("h2", "If the public is eating, that's a different lane"),
+            "Handing plates to your neighbors is the normal block-party shape. Serving food to the general public at a temporary event — a booth, a stand — runs on Health Department rules: vendors typically need a Temporary Food Service Establishment permit, and organizers should coordinate with DOHMH about 30 days out (<a href=\"https://www.nyc.gov/site/doh/business/food-operators/temporary-food-service-establishments.page\" rel=\"nofollow\">DOHMH's temporary food page</a>, <a href=\"https://portal.311.nyc.gov/article/?kanumber=KA-01825\" rel=\"nofollow\">311's plain-English version</a>). And selling food or anything else is off the table under a block party permit — vendor events are a different permit type entirely.",
+            ("h2", "Insurance: probably not — but confirm your classification"),
+            "A standard block party doesn't automatically trigger the city's $1 million commercial liability requirement. That requirement attaches to street festivals, commercial and promotional events, and block parties with rides — typically a certificate of liability naming New York City as an additional insured (<a href=\"https://www.nyc.gov/site/cecm/support/frequently-asked-questions.page\" rel=\"nofollow\">CECM's permit FAQ</a>). Which side your event lands on depends on its classification, so ask SAPO what your event counts as before you apply. If you need a certificate, that's a question for your insurer or broker — the city names what it requires; who you buy it from is your call. And keep the division of labor straight: the street permit — and anything the city requires alongside it — belongs to the organizer; <a href=\"/how-it-works.html\">the equipment logistics are ours</a>.",
+            ("h2", "A menu that survives a sidewalk"),
+            "Whatever the permit situation, the food that works on a closed street is the food that forgives: made-ahead mains that hold at street temperature, shade over anything dairy, and a water pitcher within reach of the kids' line. For the cold stuff, the <a href=\"/rentals/slushie-machine-rental-brooklyn.html\">slushie machine</a> does the work a cooler full of melting ice used to (<a href=\"/blog/frozen-drink-station-trends.html\">more on that here</a>) — and it clears our $150 solo-order minimum on its own.",
+            "Rules change; check the city pages linked above when you plan, and ask your community board the specific questions early. Then <a href=\"/rentals/\">let us handle the not-food part</a>.",
+        ],
+        "faq": [
+            ("Can you barbecue at an NYC block party?", "The city's 2026 event permitting guide says permitted street and sidewalk events may not barbecue on location. If a grill is central to your plan, get written confirmation from your community board and SAPO before you commit — don't assume practice equals permission."),
+            ("Do I need a permit to give out food at a block party?", "Food for your neighbors is the normal block-party case. Serving the general public at a temporary event is Health Department territory — vendors typically need a Temporary Food Service Establishment permit, and organizers should coordinate with DOHMH about 30 days ahead."),
+            ("Does a NYC block party need insurance?", "Usually not for a standard block party. The city's insurance requirements attach to street festivals, commercial events, and block parties with rides — typically a $1 million certificate of liability naming the City as an additional insured. Confirm your event's classification with SAPO before applying."),
+        ],
+    },
+    {
+        "slug": "block-party-planning-timeline",
+        "title": "Block Party Planning Timeline",
+        "label": "Planning timeline & checklist",
+        "blurb": "90/60/30/14 — the whole timeline backwards from party day, plus the checklist.",
+        "description": "A Brooklyn block party timeline that works backwards from the fun: the 60-day permit clock, board follow-up, food notices, and when to book equipment.",
+        "updated": "2026-10-27",
+        "body": [
+            "A block party has one immovable object — the city's permit clock — and a dozen movable parts around it. Plan backwards from party day and the whole thing stays calm. Here's the sequence that works, with the two dates nobody should have to learn twice: the permit application goes in 60 days out, minimum, and equipment gets booked at least 2 weeks out.",
+            ("html", "<table class=\"bracket-table\"><thead><tr><th>When</th><th>What</th><th>Why</th></tr></thead><tbody><tr><td>90 days out</td><td>Check your community board's own rules and deadline</td><td>Some boards want more than the citywide 60 days</td></tr><tr><td>60 days out</td><td>File the E-Apply permit application, pay the $25 fee</td><td>The citywide floor — the long pole starts here</td></tr><tr><td>45&ndash;30 days out</td><td>Follow up with your board; answer document requests fast</td><td>The board reviews and recommends before approval</td></tr><tr><td>30 days out</td><td>If the public is eating, coordinate with DOHMH</td><td>Temporary food permits run their own track</td></tr><tr><td>2+ weeks out</td><td>Book the equipment &mdash; <a href=\"mailto:reserve@blockpartysupply.co\">email us</a></td><td>BlockParty's minimum lead for delivery windows and availability</td></tr><tr><td>Week of</td><td>Confirmation call</td><td>Delivery window, placement on the block, and pickup get locked</td></tr><tr><td>Day before</td><td>Whatever your precinct asked for &mdash; notices, signage &mdash; happens now</td><td>Not on party morning, when half the block is inflating pools</td></tr><tr><td>Party day</td><td>Setup, then the fun</td><td>Keep the emergency lane clear; hydrant stays capped or closed</td></tr><tr><td>9 p.m.</td><td>Street reopened, roadway clear</td><td>Community board rules commonly require it; the precinct can want earlier</td></tr></tbody></table>"),
+            ("h2", "The checklist version"),
+            ("html", "<ul><li>Permit filed on E-Apply (60 days out, $25 fee)</li><li>Community board's own deadline checked — and met</li><li>Precinct's denied-block and blocked-date lists checked</li><li>Sound permit filed if anything's amplified</li><li>Food plan set — DOHMH coordinated if the public is eating</li><li>Spray cap requested from the FDNY if the hydrant's in the plan</li><li>Equipment booked (2+ weeks out)</li><li>Rain plan agreed (<a href=\"/guides/block-party-rain-plan.html\">there's a page for that</a> — the city doesn't do rain dates)</li><li>Budget collected (<a href=\"/guides/block-party-budget-planner.html\">the planner</a> helps)</li><li>Confirmation call done</li></ul>"),
+            "Notice what's not on the list: anything about games, tables, or the drink station after the 2-week mark. That's deliberate — <a href=\"/guides/when-to-book-block-party-rentals.html\">the equipment is the easy part</a>, and it stays easy right up until the confirmation call makes it certain.",
+            "Want the long version of the permit steps? <a href=\"/guides/nyc-block-party-permit-guide.html\">Start here</a> — then hand this page to whoever inherits the group chat next year.",
+        ],
+        "faq": [
+            ("What is the most common block party planning mistake?", "Treating the 60-day permit filing as the only deadline. Community boards can want more notice, food for the public adds a 30-day Health Department track, and precinct requirements vary. File early, then work the checklist backwards from party day."),
+            ("When should I book rentals for a block party?", "At least 2 weeks before your date — BlockParty's minimum lead — but book as soon as your permit filing is in. The permit is the long pole; early booking locks your equipment while it's still available."),
+        ],
+    },
+    {
+        "slug": "block-party-budget-planner",
+        "title": "Block Party Budget Planner",
+        "label": "Budget planner",
+        "blurb": "Real rental prices, the city's $25 fee, and where packages beat à la carte.",
+        "description": "What a Brooklyn block party costs: real rental prices from $65/day, the $25 permit fee, the line items to price locally, and where packages beat à la carte.",
+        "updated": "2026-10-27",
+        "body": [
+            "Here's the honest math. A block party has one small fixed city cost and one big equipment line, and everything else is food and folding chairs you price out locally. We'll give you our actual numbers — the same ones on our <a href=\"/rentals/\">catalog pages</a> — and mark clearly what we're not the source for.",
+            ("h2", "The fixed city cost"),
+            "The street activity permit runs $25, non-refundable even if you're denied or withdraw. If anything's amplified, there's a separate sound permit. That's the city's share of the budget — the permit fee is not where block party money goes.",
+            ("h2", "The equipment math (our real prices)"),
+            ("html", "<table class=\"bracket-table\"><thead><tr><th>Option</th><th>Price</th><th>Sized for</th></tr></thead><tbody><tr><td>Classic Block Party Package</td><td>$185</td><td>~10&ndash;25 people: cornhole, giant Jenga, giant beer pong</td></tr><tr><td>Full Block Party Package</td><td>$420</td><td>~25&ndash;50 people: everything in Classic plus a single-flavor slushie machine</td></tr><tr><td>Deluxe Block Party Package</td><td>$675</td><td>~40&ndash;75 people: everything in Full plus a ball pit</td></tr><tr><td>Cornhole set</td><td>$65/day bundled</td><td>2&ndash;4 players at a time, all-day rotation</td></tr><tr><td>Giant Jenga</td><td>$65/day bundled</td><td>All ages, any pavement</td></tr><tr><td>Giant/human beer pong</td><td>$75/day bundled</td><td>Teens and adults</td></tr><tr><td>Portable basketball hoop</td><td>$85/day bundled</td><td>Closed street or driveway</td></tr><tr><td>Slushie machine</td><td>$275/day single-flavor, $375/day double-flavor</td><td>Drink-station anchor for ~25+</td></tr><tr><td>Ball pit</td><td>$325/day</td><td>Blocks with younger kids (supervision required)</td></tr></tbody></table>"),
+            "Every price above includes delivery, pickup, and the pre-event confirmation call. Standalone single-item orders carry a $150 minimum order value — or a flat $75 delivery/pickup fee on items priced under $150 — and bundling with any other item clears that automatically.",
+            "And the packages earn their keep: the Classic trio books à la carte for $65 + $65 + $75 = $205, and the package is $185. Full is $420 against $460 for Classic-plus-slushie. Deluxe is $675 against $745 for Full-plus-ball-pit. Same equipment, same service, less money — that's the whole trick.",
+            ("h2", "The line items we're not the source for"),
+            "Food and drinks, tables and chairs, ice, cups, a canopy, trash bags, a banner for the corner — we don't rent any of it (rentals only, we don't sell equipment), so price those with local vendors. Budget honest numbers for the crowd you actually expect; the <a href=\"/guides/what-to-rent-for-crowd-size.html\">crowd-size guide</a> keeps the equipment side from bloating.",
+            ("h2", "Splitting it fairly"),
+            "The budget conversation is the group chat's final boss. What works: one post with the real total, small asks split the way the block splits everything, and collection finished before the week of — not on party morning. Keep the ask modest: for most blocks, the equipment is the cheapest memorable thing on the budget.",
+            "When the numbers look right, <a href=\"mailto:reserve@blockpartysupply.co\">email us</a> — the confirmation call is where the plan gets locked.",
+        ],
+        "faq": [
+            ("How much does a block party cost in Brooklyn?", "The city's share is small — a $25 permit fee. Equipment is the main line item: BlockParty packages run $185 (Classic), $420 (Full), and $675 (Deluxe), with à la carte games from $65/day. Food, tables, and supplies are separate line items to price locally."),
+            ("Does BlockParty charge for delivery?", "Delivery, pickup, and the confirmation call are included with every booking. Standalone single-item orders carry a $150 minimum order value, or a flat $75 delivery/pickup fee on items priced under $150 — cleared automatically by bundling or a package."),
+        ],
+    },
+    {
+        "slug": "block-party-rain-plan",
+        "title": "Rain Plan for a Brooklyn Block Party",
+        "label": "Rain contingency plan",
+        "blurb": "No rain dates in NYC — here's the wet-weather plan instead.",
+        "description": "NYC doesn't do rain dates for block parties — build a wet-weather plan instead: the go/no-go call, what moves under cover, and how the rental fits in.",
+        "updated": "2026-10-27",
+        "body": [
+            "First, the fact that shapes everything: New York City doesn't accept rain-date applications for block parties. Your permit is for one specific date — there's no \"and if it rains, the following Saturday\" box on the form. Check the forecast like it owes you money, and build the plan that works in both weathers.",
+            ("h2", "The go/no-go call"),
+            "Pick a decision time — morning of, early — and a decider: one person, not a committee of the whole group chat. Summer rain in Brooklyn is usually a passing shower, not an event-killer; the plan that works is \"start late\" or \"shorten the day\" more often than \"cancel.\"",
+            ("h2", "What moves, what stays"),
+            "Under cover goes anything with a plug or a pour: the drink station first. Give the <a href=\"/rentals/slushie-machine-rental-brooklyn.html\">slushie machine</a> the most covered spot on the block — shade is good practice on a sunny day anyway (<a href=\"/blog/frozen-drink-station-trends.html\">more on drink-station setup here</a>). The lawn games shake off a drizzle; pause play when the bags soak through or the Jenga stack goes slippery — nobody's proud moment happens with wet gear.",
+            ("h2", "Canopies and the 10-foot line"),
+            "A pop-up canopy keeps the food table usable and the adults upright. The rule to know: a temporary structure over 10 feet tall can pull in a Department of Buildings permit — so keep the setup modest and weighted, and your rain plan simple.",
+            ("h2", "How the rental fits in"),
+            "The confirmation call every booking includes is exactly where this gets settled: delivery window, placement, pickup — matched to what the day actually needs. If the forecast turns ugly before your date, <a href=\"mailto:reserve@blockpartysupply.co\">email us</a> and we'll talk through it. Rescheduling terms are a booking detail we confirm with you directly — ask at booking, get a straight answer, no fine print.",
+            "And when the sky does cooperate: <a href=\"/rentals/\">the catalog</a> is built for exactly one kind of day — the kind where the street is closed and the block is out.",
+        ],
+        "faq": [
+            ("Does NYC give rain dates for block parties?", "No — the city doesn't accept rain-date or make-up-date applications for block parties. Your permit covers one specific date, so build a wet-weather plan instead of banking on a do-over."),
+            ("What happens if it rains on my block party?", "Light rain: cover the drink station and electronics, pause the lawn games, keep going. Steady rain: make the morning-of go/no-go call with your neighbors. If the forecast turns before your date, email us — the confirmation call is where delivery, setup, and pickup get matched to what the day actually needs."),
+        ],
+    },
+    {
+        "slug": "what-to-rent-for-crowd-size",
+        "title": "What to Rent for Your Crowd Size",
+        "label": "What to rent for your crowd size",
+        "blurb": "Packages sized for 10–75 people, and the à la carte calls that change a party.",
+        "description": "Matching block party rentals to your headcount: packages sized for 10–75 people, à la carte games from $65/day, and when a slushie machine or ball pit fits.",
+        "updated": "2026-10-27",
+        "body": [
+            "Rent for the crowd you have, not the one you're picturing at peak. Here's the sizing we use when blocks ask us — and it's the same sizing our packages were built around.",
+            ("h2", "The quick answer"),
+            ("html", "<table class=\"bracket-table\"><thead><tr><th>Your crowd</th><th>Rent</th><th>Why it works</th></tr></thead><tbody><tr><td>~10&ndash;25 people (small block, backyard-scale)</td><td><strong>Classic package — $185</strong>: cornhole, giant Jenga, giant beer pong</td><td>Three games cover a crowd this size with rotation</td></tr><tr><td>~25&ndash;50 people (a full block out)</td><td><strong>Full package — $420</strong>: Classic plus a single-flavor slushie machine</td><td>The drink station earns its spot at this scale</td></tr><tr><td>~40&ndash;75 people (family-heavy, multiple generations)</td><td><strong>Deluxe package — $675</strong>: Full plus a ball pit</td><td>The under-10s get their own anchor</td></tr></tbody></table>"),
+            ("h2", "Why packages beat picking items one by one"),
+            "Arithmetic, mostly: the Classic trio books à la carte for $65 + $65 + $75 = $205, and the package is $185 with the same delivery, pickup, and confirmation call. Packages are also sized by the people who deliver the stuff — they're what we'll recommend on the call if they fit.",
+            ("h2", "The à la carte calls that change a party"),
+            "Hot day or long party: the <a href=\"/rentals/slushie-machine-rental-brooklyn.html\">slushie machine</a> ($275/day single-flavor, $375/day double-flavor — one kids' flavor and one adult mix side by side). Blocks with a lot of under-10s: the <a href=\"/rentals/ball-pit-rental-brooklyn.html\">ball pit</a> ($325/day, supervision required). A block with teenagers: the <a href=\"/rentals/basketball-hoop-rental-brooklyn.html\">portable hoop</a> ($85/day) buys you four quiet hours. Every item works on closed pavement; each <a href=\"/rentals/\">item page</a> notes what it needs.",
+            ("h2", "Two placement rules that matter more than quantity"),
+            "First: two or three well-placed games beat five scattered ones — players rotate, and nobody wonders where the crowd is. Second: keep the games where people can see them from the food table. A game nobody can see from the food table is a game that plays twice all day.",
+            "Measure the block, count the kids, <a href=\"/rentals/\">pick the tier</a> — or <a href=\"mailto:reserve@blockpartysupply.co\">email us</a> and we'll size it with you on the confirmation call.",
+        ],
+        "faq": [
+            ("What should I rent for 30 people at a block party?", "The Full Block Party package ($420) is sized for roughly 25–50 people: cornhole, giant Jenga, giant beer pong, and a single-flavor slushie machine, delivered and picked up. Skew young? Add the ball pit. A teenager-heavy block? Add the portable basketball hoop."),
+            ("How many games does a block party need?", "Fewer than you think: two or three well-placed games rotate players all day. A regulation two-board cornhole set plays 2–4 at a time, and a game nobody can see from the food table plays twice all day."),
+        ],
+    },
+    {
+        "slug": "when-to-book-block-party-rentals",
+        "title": "When to Book Block Party Rentals",
+        "label": "When to book rentals",
+        "blurb": "The city's 60-day clock, our 2-week lead, and why you book the same week you file.",
+        "description": "The deadline math for a block party: the city's 60-day permit clock, our 2-week minimum lead, and why you book equipment the same week you file the permit.",
+        "updated": "2026-10-27",
+        "body": [
+            "Two clocks run your block party: the city's and ours. One takes 60 days and doesn't bend; the other takes 2 weeks and a phone call. Here's how to make them line up.",
+            ("h2", "The city's clock: 60 days, minimum"),
+            "Block party permit applications go in at least 60 days before your date through the city's E-Apply system. That's the citywide floor — some community boards ask for more (Brooklyn Community Board 2's guidance says 90 days), and summer calendars can have hard cutoffs. The full sequence lives in our <a href=\"/guides/nyc-block-party-permit-guide.html\">permit guide</a>.",
+            ("h2", "Our clock: 2 weeks, and it's a minimum, not a target"),
+            "BlockParty asks for at least 2 weeks' lead before your event. That's what it takes to confirm your delivery window, your setup spot, and your pickup with you — the confirmation call is part of every booking, not an upsell. But 2 weeks is the minimum we ask for, not a promise that your first-choice setup is still sitting free. Book the week your permit filing goes in and the question never comes up.",
+            ("h2", "The move: same-week booking"),
+            "The permit application and the rental email can go out the same afternoon. One of them starts 60 days of city time; the other starts two weeks of, honestly, pretty light logistics. Organizer note: whoever fills out the E-Apply form should <a href=\"mailto:reserve@blockpartysupply.co\">send us the email</a> before closing the laptop.",
+            ("h2", "What booking late actually costs"),
+            "File at 60 days and book at 13, and the street still closes — with nothing on it. A closed block with no games is just a very public parking complaint. The fix costs nothing: book when you file.",
+            "Your date's real the moment the application's in. <a href=\"/rentals/\">Pick the package</a>, send the email, and get back to the group chat — you've done the hard parts.",
+        ],
+        "faq": [
+            ("How far in advance should I book block party rentals?", "BlockParty asks for at least 2 weeks' lead to confirm delivery windows and equipment availability. Book the same week you file your permit application — the permit is the long pole at 60 days, and early booking locks your equipment."),
+            ("Is two weeks really enough lead time?", "It's the minimum, not the target. Two weeks covers the logistics on our side; the 60-day permit clock and your community board's own deadlines are what actually pace the planning. Book as early as your date is real."),
+        ],
+    },
+]
+
+def guide_path(guide):
+    return f"{GUIDES_PATH}{guide['slug']}.html"
+
+def build_guides_hub():
+    """Hub at /guides/: hero, one tile per guide, cross-link band."""
+    tiles = "".join(
+        f"""
+        <a class="tile-link" href="{guide_path(g)}">
+        <div class="tile">
+          <h3>{html.escape(g['label'])}</h3>
+          <p>{html.escape(g['blurb'])}</p>
+        </div>
+        </a>"""
+        for g in GUIDES
+    )
+    body = f"""
+<section class="hero" style="padding-bottom:24px;">
+  <div class="container hero-inner" style="text-align:left; max-width:820px;">
+    <div class="breadcrumb"><a href="/">Home</a> &rsaquo; Block Party Guides</div>
+    <h1>Block party guides for Brooklyn organizers</h1>
+    <p class="hero-sub" style="margin:0;">The practical side of throwing the party: permits, street closures, food rules, budgets, rain plans, and what to rent &mdash; written by the company that delivers, sets up, and picks up the fun.</p>
+  </div>
+</section>
+<section style="padding-top:24px;">
+  <div class="container">
+    <div class="icon-grid">
+        {tiles}
+    </div>
+  </div>
+</section>
+<section class="section-alt">
+  <div class="container">
+    <div class="cta-band">
+      <h2>Reading is step one</h2>
+      <p>When you're ready for the equipment, the catalog's one click away &mdash; delivery, pickup, and a confirmation call included.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/rentals/">Browse rentals</a>
+        <a class="btn btn-secondary" href="/blog/">The Block Party Playbook</a>
+      </div>
+    </div>
+  </div>
+</section>
+"""
+    return page(
+        title="Block Party Guides — BlockParty Brooklyn",
+        description="Guides for Brooklyn block-party organizers: permits, street closures, food and insurance rules, budgets, rain plans, and what to rent for your crowd.",
+        path=GUIDES_PATH,
+        body=body,
+        json_ld_objects=[
+            breadcrumb_jsonld([("Home", "/"), ("Block Party Guides", GUIDES_PATH)]),
+        ],
+    )
+
+def build_guide_page(guide):
+    """Guide template: hero with updated badge, body, optional FAQ, CTA band."""
+    paragraphs = render_post_body(guide)
+    faq_section = ""
+    faq_ld = []
+    if guide.get("faq"):
+        qa_pairs = guide["faq"]
+        items = "".join(
+            f'<div class="faq-item"><h3>{html.escape(q)}</h3><p>{html.escape(a)}</p></div>'
+            for q, a in qa_pairs
+        )
+        faq_section = (
+            '<section class="section-alt"><div class="container">'
+            '<div class="section-head" style="text-align:left; margin-bottom:24px;"><h2>Frequently asked</h2></div>'
+            f'<div class="faq-list">{items}</div>'
+            "</div></section>"
+        )
+        faq_ld = [faqpage_jsonld(qa_pairs)]
+    body = f"""
+<section class="hero" style="padding-bottom:0;">
+  <div class="container hero-inner" style="text-align:left; max-width:820px;">
+    <div class="breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/guides/">Block Party Guides</a> &rsaquo; {html.escape(guide['title'])}</div>
+    <h1>{html.escape(guide['title'])}</h1>
+    <p class="hero-sub" style="margin:0;">{html.escape(guide['description'])}</p>
+    <div class="blog-post-meta"><span class="blog-date-badge">Updated {format_date(guide['updated'])}</span></div>
+  </div>
+</section>
+<section style="padding-top:24px;">
+  <div class="container narrative">
+    {paragraphs}
+  </div>
+</section>
+{faq_section}
+<section>
+  <div class="container">
+    <div class="cta-band">
+      <h2>Planning your block's party?</h2>
+      <p>Browse the packages or the full catalog &mdash; delivery, pickup, and a confirmation call are included either way.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/rentals/">Browse rentals</a>
+        <a class="btn btn-secondary" href="/guides/">&larr; All block party guides</a>
+      </div>
+    </div>
+  </div>
+</section>
+"""
+    return page(
+        title=f"{guide['title']} — BlockParty Brooklyn",
+        description=guide["description"],
+        path=guide_path(guide),
+        body=body,
+        json_ld_objects=[
+            breadcrumb_jsonld([
+                ("Home", "/"),
+                ("Block Party Guides", GUIDES_PATH),
+                (guide["title"], guide_path(guide)),
+            ]),
+            *faq_ld,
+        ],
+    )
+
 MONTHS = [
     "January", "February", "March", "April", "May", "June", "July",
     "August", "September", "October", "November", "December",
@@ -521,7 +857,9 @@ def page_registry():
         for item in CATALOG
     ]
     pages += [{"path": BLOG_PATH, "lastmod": BLOG_LASTMOD}]
-    pages += [{"path": post_path(p), "lastmod": p["date"]} for p in published_posts()]
+    pages += [{"path": post_path(p), "lastmod": p.get("modified") or p["date"]} for p in published_posts()]
+    pages += [{"path": GUIDES_PATH, "lastmod": GUIDES_LASTMOD}]
+    pages += [{"path": guide_path(g), "lastmod": g["updated"]} for g in GUIDES]
     return pages
 
 # ---------------------------------------------------------------------------
@@ -571,6 +909,7 @@ def footer_html():
         <ul>
           <li><a href="/rentals/">Packages &amp; Catalog</a></li>
           <li><a href="/blog/">The Block Party Playbook</a></li>
+          <li><a href="/guides/">Block Party Guides</a></li>
           <li><a href="/how-it-works.html">How It Works</a></li>
           <li><a href="/about.html">Our Story</a></li>
           <li><a href="/faq.html">FAQ</a></li>
@@ -1658,6 +1997,11 @@ def llms_txt():
         f"- [{item['name']}]({DOMAIN}/rentals/{item['slug']}.html): {item['short']} {item['price_label']}."
         for item in CATALOG
     ]
+    lines += ["", "## Block Party Guides", ""]
+    lines += [
+        f"- [{g['title']}]({DOMAIN}{guide_path(g)}): {g['description']}"
+        for g in GUIDES
+    ]
     lines += ["", "## The Block Party Playbook (blog)", ""]
     lines += [
         f"- [The Block Party Playbook]({DOMAIN}/blog/): the BlockParty blog — Allie Esslinger's From the Stoop essays on block-party life, plus AI-written trend scans (every AI post is reviewed and approved by Allie before it ships)."
@@ -1835,6 +2179,9 @@ def main():
     write("blog/index.html", build_blog_hub())
     for post in published_posts():
         write(f"blog/{post['slug']}.html", build_post_page(post))
+    write("guides/index.html", build_guides_hub())
+    for guide in GUIDES:
+        write(f"guides/{guide['slug']}.html", build_guide_page(guide))
 
     shutil.copyfile(os.path.join(ROOT, "style.css"), os.path.join(DIST, "style.css"))
     shutil.copyfile(os.path.join(ROOT, "CNAME"), os.path.join(DIST, "CNAME"))
