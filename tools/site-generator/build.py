@@ -374,6 +374,120 @@ POSTS = [
         ],
     },
     {
+        # S1 — From the Stoop (column opener). Body transcribed verbatim from
+        # art_C20j1DB1 as approved unedited by Allie; internal links wired per
+        # the draft's suggested link plan.
+        "slug": "the-party-is-won-in-the-off-season",
+        "stream": "human",
+        "title": "The party is won in the off-season",
+        "subhead": "Block parties are made in the cold months: the January date, the March permit, the gear prepped while the street sits empty. Allie Esslinger on the off-season.",
+        "date": "2026-10-28",   # datePublished (ISO)
+        "modified": None,
+        "series": None,
+        "reviewed_by": None,
+        "published": True,       # approved for publish by Allie
+        "note": "Approved by Allie Esslinger unedited, 2026-10-28.",
+        "meta_title": "The party is won in the off-season",
+        "body": [
+            "My street is at its best-looking right now, and nobody is looking. It's November in Brooklyn: the honey locusts have dropped everything, the stoops are swept, and the pavement — the same pavement that in June held three grills, two water tables, and the loudest game of cornhole this side of the bridge — just sits there being smooth and available. No traffic. No folding chairs. The street is a venue with nothing scheduled.",
+            "I find this unbearable, and I mean that as a professional.",
+            "BlockParty is <a href=\"/about.html\">my company</a>: we rent block-party equipment — cornhole, giant Jenga, a slushie machine that means business — to blocks in this borough, and we deliver it, set it up, and take it away. I started it in my forties, which is either terrible planning or the only planning that was ever going to happen, and I built it for Brooklyn and only Brooklyn on purpose. This is our first winter. The trucks are ready, the boards are sourced, and no street has closed on our behalf yet. What I have instead of a season is an off-season — and I've already learned it isn't the downtime. It's the job.",
+            "Here is the thing nobody tells you about block parties: the party is won in the cold months. The day itself is theater — lovely, sticky, short — and the production meeting ran all winter. Somebody's group chat settles on a date in January, and that date is the whole ballgame; everything downstream, from the permit to the playlist, is just honoring it. In February, someone walks the block knocking on doors, collecting the yeses that become twenty signatures by the time the community board asks. In March, someone files the permit — because <a href=\"/guides/block-party-planning-timeline.html\">a June party hits the city's 60-day filing floor in April</a>, and boards like CB6 ask for 90 days, which is to say March. The street show in June? That's the flower. Winter is the root system.",
+            "I know how this sounds in November, when the holidays eat everyone's calendar and the last thing a person wants is homework. But that's exactly the point: the off-season is when the party is cheap. Decisions cost nothing in January. Signatures are easy in February, when the ask is a conversation on a warm stoop instead of a clipboard chase in June. The difference between blocks that have the party every year and blocks that \"keep meaning to\" is almost never money, and it's almost never energy on the day. It's whether somebody spent one hour in January writing a date down.",
+            "My winter version of the same discipline looks different, but it rhymes. I've spent these weeks sourcing regulation cornhole boards that can survive asphalt and enthusiasm, pricing folding tables, and testing a commercial slushie machine in a space not zoned for the laughter that test produced. Kids' flavor on one side, an adult frozen cocktail on the other — the machine does both at once, which I have verified with a scientifically irrelevant but emotionally conclusive sample size of one founder. While the street sits empty, I'm prepping for the loudest day it will have all year. The block that plans the same way — a date in the chat, twenty doors in February, a permit in March — and I will both be ready when the light gets long.",
+            "And the date does one more thing: it makes every later ask small. \"Can you take the grill shift on June 12?\" lands completely differently than \"we should do something this summer sometime.\" A date on a calendar is a promise the whole block can see; \"sometime\" is a suggestion nobody has to answer. The best-run blocks run on three sentences — a date, a door knock, a filing — and none of them takes more than an hour, and all of them happen when nothing is happening.",
+            "So here is your off-season assignment, and it's short. Don't plan the party. Plan the meeting where the party gets planned: one hour, January, the group chat that already exists. Put \"June\" in it now. We've built a <a href=\"/blog/2027-brooklyn-block-party-calendar.html\">month-by-month 2027 calendar</a> that walks the whole thing — the January date, the February doors, the late-March filing, the gear — and it's the next post on this blog, written so you can print it and forward it instead of memorizing anything. And when you want the permit mechanics themselves, line by line, <a href=\"/blog/brooklyn-block-party-permits.html\">the permits post</a> has them.",
+            "The street fills up again. It always does. The blocks that get the best June are the ones that decided so in the cold, quietly, while the pavement sat smooth and available — and if the equipment part ever feels like the wrong kind of winter project, that's the part we keep on our side of the street. We bought it so you don't have to.",
+        ],
+    },
+    {
+        # T6 — Trends Desk. Body transcribed verbatim from art_C20j1DB1 as
+        # approved unedited by Allie (the comparison table and bullet lists
+        # carry the draft's markdown as pre-built HTML blocks); internal
+        # links wired per the draft's suggested link plan, including the
+        # required link-back to the permits post.
+        "slug": "block-party-vs-single-block-festival",
+        "stream": "ai",
+        "title": "When your party outgrows the block-party permit",
+        "subhead": "Selling food or fundraising? When a block party needs a different NYC permit — block party vs. single-block festival vs. street festival, decoded for 2027.",
+        "date": "2026-10-28",
+        "modified": None,
+        "series": ("brooklyn-trends", "Brooklyn Trends"),
+        "reviewed_by": "Allie Esslinger",   # approved unedited, 2026-10-28
+        "published": True,       # approved for publish by Allie
+        "note": "Approved by Allie Esslinger unedited, 2026-10-28.",
+        "meta_title": "Block party vs. single-block festival: NYC permit decoder",
+        "body": [
+            "Every block-party idea that dies, dies in one sentence: \"I checked with the city, and we can't do that.\" Almost always, what actually happened is that someone described the wrong party on the right form. The block-party permit — the one due 60 days out, the one whose mechanics <a href=\"/blog/brooklyn-block-party-permits.html\">our permits post</a> walks line by line — is built for a specific thing: one block, one day, no money changing hands. The moment your plan adds a food truck, a fundraiser for the firehouse, or five-dollar wristbands, you have described a different event. The city has a different form for it, and a different clock.",
+            "With 2027 plans starting to stir, here is the decoder for that moment: the three formats a block event can wear, what each one costs, and the deadline that actually applies to yours.",
+            ("h2", "Three formats, one table"),
+            "New York <a href=\"/guides/nyc-block-party-permit-guide.html\">permits events on its streets through SAPO</a>, the Street Activity Permit Office, now part of the Mayor's Office of Citywide Event Coordination and Management (CECM). Three of its event types cover almost everything a residential block would call a party. The differences are the whole story:",
+            ("html", '<table class="bracket-table"><thead><tr><th></th><th>Block party</th><th>Single-block festival</th><th>Street festival</th></tr></thead><tbody><tr><td>Who applies</td><td>A block association member, with the neighbors\' permission</td><td>A nonprofit organization, with an EIN and proof of nonprofit status</td><td>A nonprofit organization</td></tr><tr><td>Application deadline</td><td>60 days before the event</td><td>90 days before the event</td><td>December 31 of the year before</td></tr><tr><td>Duration</td><td>One block, one day, up to 9 consecutive hours</td><td>One block, up to 12 consecutive hours</td><td>One or more blocks, often multiple days</td></tr><tr><td>Money</td><td>No sales, no admission, no fundraising</td><td>Sales and fundraising allowed — that\'s the point</td><td>Public buys from vendors; vendors may pay to participate</td></tr><tr><td>Insurance</td><td>Not required (unless you add rides)</td><td>$1 million liability, City of New York as additional insured</td><td>$1 million liability, City as additional insured</td></tr><tr><td>Application fee</td><td>$25, nonrefundable</td><td>$25, and possibly additional fees</td><td>$25, plus fees</td></tr></tbody></table>'),
+            "Print the table. Most \"can we do X?\" arguments end at the Money row.",
+            ("h2", "The block party: beloved, and deliberately limited"),
+            "The block party is the format the city makes easiest, and its limits are not fine print — they are the definition. On a block-party permit you may not sell food, goods, or services; you may not charge a fee to participate or fundraise; vendors, alcohol, commercial branding, and sponsorships are all out. The event is one block, one day, capped at nine consecutive hours, and open to everyone on the block — it cannot be a private birthday party with a street closure attached. Rain dates are not permitted, and the applicant must be a member of the block association with the neighbors' permission behind them.",
+            "None of that is the city being difficult. The block party trades commerce for simplicity: no insurance requirement, no nonprofit paperwork, a $25 fee, and a 60-day clock. If the party you want is the classic one — grills out, games on, the whole block invited — this remains the best permit in the city, and the mechanics of getting one live in <a href=\"/blog/brooklyn-block-party-permits.html\">our permits post</a>. This post is about the moment your plans poke past those edges.",
+            ("h2", "The single-block festival: where the fundraiser goes"),
+            "The moment money moves — plate sales, a raffle, vendors, a fundraiser for the church roof — you are describing a single-block festival. That is the permit the city's own block-party page points to when you want to fundraise or sell.",
+            "What changes, in order of how much it hurts:",
+            ("html", "<ul><li><strong>The clock.</strong> Ninety days before the event, not sixty. For a June 2027 festival, the filing deadline lands in early March — which quietly makes the festival decision a winter decision.</li><li><strong>The applicant.</strong> A block association is not enough on its own. The application needs a nonprofit organization with an EIN and proof of nonprofit status attached. Plenty of blocks already have one standing behind them — the church, the civic association, the little league. Some don't, and finding your nonprofit is an off-season errand, not a deadline-week scramble.</li><li><strong>The insurance.</strong> A $1 million liability policy, with the City of New York listed as additional insured — the certificate holder line reads \"City of New York c/o Street Activity Permit Office, 253 Broadway.\" It's the same coverage the city requires for street festivals, and it's the item that takes the longest to assemble.</li><li><strong>The fees.</strong> The $25 application fee is the floor; the city warns there may be additional fees for a single-block festival.</li><li><strong>The paperwork behind the food.</strong> Selling or distributing food to the general public requires a <a href=\"/guides/block-party-food-bbq-rules-insurance.html\">temporary food service license</a> from the Department of Health and Mental Hygiene.</li></ul>"),
+            "What all of that buys: twelve consecutive hours instead of nine, and the right to raise money or host vendors on your own block. If your party has no budget to speak of, that's your answer — stay a block party. The festival format exists for the event with a purpose and a budget.",
+            ("h2", "The street festival: the December 31 deadline, and why it probably isn't yours"),
+            "One number causes outsized confusion: December 31. Applications for street festivals are due December 31 of the year before the event — so December 31, 2026 is the filing deadline for street festivals that run in 2027. But a street festival is a different animal: a nonprofit-sponsored festival with vendors, typically spanning one or more blocks and often multiple days.",
+            "Two more rules make this deadline mostly irrelevant to residential blocks. First, the city is not taking applications for new multi-block, multi-day events — a moratorium is in effect, and only organizations that ran one the previous year can apply. Second, an existing street festival must run on the same days and in the same locations as the year before. December 31, 2026 is therefore a deadline for festivals that already exist. Your block's 2027 event is a block party or a single-block festival, and both of those run on days-before-the-event math.",
+            "One more caution belongs in every planning folder: the city reorganized these categories recently — the SAPO rules were last amended effective December 31, 2023 — and deadlines are set by event type. Confirm any date you plan around on CECM's current permit deadlines page, and if your event has grown a vendor list, a call to your community board's district office is cheap insurance.",
+            ("h2", "What doesn't change when you upgrade"),
+            "Some rules follow you up the ladder:",
+            ("html", "<ul><li><strong>No rain dates</strong> on either format — applications for make-up dates are not accepted.</li><li><strong>Amplified sound</strong> requires an NYPD sound permit at any scale, from a block party on up.</li><li><strong>Generators</strong> need an FDNY certificate; over 40 kilowatts, add one from the Department of Environmental Protection.</li><li><strong>Rides and inflatables</strong> trigger a Department of Buildings inspection certificate and insurance; petting zoos need a Health Department permit; raffles need one from the Human Resources Administration — and all other agency permits must be in hand before SAPO grants yours.</li><li><strong>The permit must be on location</strong> during the event. Paper on the block, or it didn't happen.</li></ul>"),
+            "And the question we get most: alcohol. The city's prohibition covers block parties and street festivals alike — whatever format you land on, plan the toast accordingly and confirm with your board before anything colder is promised.",
+            ("h2", "The clock is the argument"),
+            "Compressed: if the party makes money or hosts vendors, it's a single-block festival — 90 days out, filed by a nonprofit, insured for $1 million. If it doesn't, it's a block party — 60 days out, $25, no insurance required. And if someone in the group chat says \"December 31,\" that's the street festival calendar, and unless your block already runs one, that date belongs to someone else.",
+            "For a June 2027 event in either resident-scale format, both clocks expire in the spring — which means the real decisions happen this winter, while the street is empty. <a href=\"/blog/2027-brooklyn-block-party-calendar.html\">Our month-by-month 2027 planning calendar</a> schedules all of it, January through June. And once the format question is settled, the fun part — cornhole, giant Jenga, the slushie machine — needs only a <a href=\"/faq.html\">two-week lead</a>. We bought it so you don't have to.",
+        ],
+    },
+    {
+        # T1 — Trends Desk. Body transcribed verbatim from art_C20j1DB1 as
+        # approved unedited by Allie (the month table carries the draft's
+        # markdown as a pre-built HTML block); internal links wired per the
+        # draft's suggested link plan.
+        "slug": "2027-brooklyn-block-party-calendar",
+        "stream": "ai",
+        "title": "The 2027 Brooklyn block-party calendar: a month-by-month plan",
+        "subhead": "Month-by-month planning for a June 2027 Brooklyn block party: settle the date in January, sound out the board, file by late March, book gear, confirm.",
+        "date": "2026-10-28",
+        "modified": None,
+        "series": ("brooklyn-trends", "Brooklyn Trends"),
+        "reviewed_by": "Allie Esslinger",   # approved unedited, 2026-10-28
+        "published": True,       # approved for publish by Allie
+        "note": "Approved by Allie Esslinger unedited, 2026-10-28.",
+        "meta_title": "The 2027 Brooklyn block-party calendar: month by month",
+        "body": [
+            "Block parties are decided months before the first folding chair hits the pavement; the street just hosts what the winter settled. So let's do in November what the January group chat never quite does: <a href=\"/guides/block-party-planning-timeline.html\">work backward from the party</a>.",
+            "Take a Saturday in June — June 12, 2027, for the sake of the math. New York City block-party applications are due 60 days before the event, which puts the citywide floor for that date at April 13, 2027. Brooklyn Community Board 6's FAQ asks its blocks to file 90 days ahead — March 14, for a June 12 party. Hold both clocks and the whole year falls into place.",
+            ("h2", "January: settle the date"),
+            "The single highest-leverage hour of the entire year happens in a group chat, in January, and it produces exactly one output: the date. Pick your Saturday — and pick the shape of the day while everyone's present, because a block party runs at most nine consecutive hours, and whether yours is 11-to-6 or noon-to-8 changes the food plan, the bracket, and the bedtime of every under-ten on the block.",
+            "Pick a backup Saturday too, and then let it go: the city does not do rain dates for block parties — applications for make-up dates aren't accepted — so the plan for a soggy June 12 has to be <a href=\"/guides/block-party-rain-plan.html\">a plan for June 12</a>. Write the date down somewhere that survives December. Future-you will not remember what the chat agreed to.",
+            ("h2", "February: sound out the street, then the board"),
+            "February belongs to the two approvals that don't have forms. First the neighbors: the city expects the applicant to be a member of the block association, with the block's permission behind the application. In practice, that permission gets documented at the community board — CB6, for one, asks for either a letter from the block association or signatures of 20 residents who live on the block, and its review can sit marked \"denied\" until those signatures actually reach the district office.",
+            "Twenty doors is a February-and-March errand, not an April one. Start early and thank people by name. While you're at it, read your own board's website: 60 days is the citywide floor, and boards like CB6 post earlier guidance — 90 days.",
+            ("h2", "Late March: file the application, then book the fun"),
+            "By late March, file the CECM/SAPO application online. For our June 12 example, the 60-day floor is April 13; filing in late March clears it with weeks to spare and satisfies the 90-day boards in the same stroke. What happens inside the application — the fee, the board review, the approval mechanics — is <a href=\"/blog/brooklyn-block-party-permits.html\">the permits post</a>'s job. This post is the calendar, not the paperwork.",
+            "The same week you file, book the equipment. It sounds backwards — the permit isn't approved yet — but the two decisions travel together: BlockParty asks for <a href=\"/guides/when-to-book-block-party-rentals.html\">at least two weeks' lead</a> to confirm delivery windows, and the popular June Saturdays are popular for everyone. The city even runs its own version of this logic: if two applicants request the same date and the same location, the block that held the permit there last year gets priority, and otherwise first-filed wins. Around here, early is a strategy.",
+            ("h2", "April: work the board's clock"),
+            "April is the waiting month, and it is not passive. SAPO routes block-party applications to the community board for review and comment; the board sends its recommendation — approval, approval with conditions, or denial — and if conditions or a denial come back, the applicant has five business days to file written comments with SAPO. Decide now which person on the block checks email in April. Nothing here is urgent in the emergency sense — it's urgent in the calendar sense, which is quieter and much easier to drop.",
+            "April is also when the auxiliary permits get moving, because every one of them must be in hand before SAPO issues yours: amplified sound needs an NYPD sound permit; a generator needs an FDNY certificate (over 40 kilowatts, add the Department of Environmental Protection); rides and inflatables need a DOB inspection certificate and insurance before they touch your street.",
+            ("h2", "May: plan the fun you'll be accused of over-planning"),
+            "May is logistics with a grin. The <a href=\"/blog/cornhole-tournament-brackets.html\">cornhole bracket</a> — eight teams, single elimination, a third-place game so nobody's afternoon ends on one bad throw — gets written and printed. The menu is assigned: <a href=\"/blog/frozen-drink-station-trends.html\">one signature dish per household</a> beats a dozen sides nobody coordinated, and anything dairy gets a shade tarp. The water pitchers are counted. The gear list settles into final form: which games go where on the block, who's stationing the ball pit, where the slushie machine line forms. Changing any of it now costs a click; changing it in June costs a delivery window.",
+            "None of this is strictly necessary. All of it is why the day feels effortless — the work was visible all spring, so on the day it can disappear.",
+            ("h2", "The final week: confirm and print"),
+            "The last week runs on confirmations. Every BlockParty booking includes a confirmation call that locks timing, placement, and street specifics; take the call, walk the block mentally, and move the one thing that needs moving while moving it is still free.",
+            "Then do the one print job everyone forgets: the permit itself must be on location during the event. Tape it to the folding table by the grill, next to the bracket.",
+            ("h2", "The year on one page"),
+            ("html", '<table class="bracket-table"><thead><tr><th>Month</th><th>The move</th><th>Why it lands here</th></tr></thead><tbody><tr><td>January</td><td>Settle the date and the day\'s shape</td><td>No rain dates; the sketch costs nothing now</td></tr><tr><td>February</td><td>Neighbors, then the community board</td><td>Block-association permission and 20 signatures are errands, not clicks</td></tr><tr><td>Late March</td><td>File with CECM/SAPO; book equipment the same week</td><td>Clears April 13 for June 12 and the 90-day boards in one stroke</td></tr><tr><td>April</td><td>Board review; auxiliary permits</td><td>Five business days to answer the board; NYPD, FDNY, and DOB paperwork in parallel</td></tr><tr><td>May</td><td>Bracket, menu, gear list</td><td>The fun decisions, made while the street is still free</td></tr><tr><td>Final week</td><td>Confirmation call; print the permit</td><td>The permit must be on location during the event</td></tr></tbody></table>'),
+            "Swap in your own Saturday and the math holds: 60 days is the citywide floor, some boards want 90, and a June party is therefore a March decision. The calendar only looks long — in January it is one hour and one date. Print this, forward it to the chat, and when the gear list is the last thing left, <a href=\"/rentals/\">you know where we are</a>.",
+        ],
+    },
+    {
         "slug": "brooklyn-block-party-permits",
         "stream": "ai",
         "title": "Block party permits: the 60-day rule",
@@ -1688,8 +1802,10 @@ def build_blog_hub():
         key=lambda p: p["date"], reverse=True,
     )
 
-    # Sketch section 1: hero — the most recent Allie-written post.
-    hero = feature_card_html(human_posts[0]) if human_posts else ""
+    # Sketch section 1: hero — the most recent Allie-written post. While the
+    # Stoop column holds a single post, that post opens the From the Stoop
+    # section below instead of doubling up in the hero slot.
+    hero = feature_card_html(human_posts[0]) if len(human_posts) > 1 else ""
 
     # Sketch section 2: The Trends Desk — scrollable row of AI-post cards.
     trends_cards = "".join(post_card_html(p, "trend") for p in ai_posts)
@@ -1706,10 +1822,14 @@ def build_blog_hub():
     </div>
   </div>"""
 
-    # Sketch section 3: a second Allie-written feature. When only one human
-    # post exists yet, render an honest coming-soon state instead of a card.
+    # Sketch section 3: the From the Stoop column — its published posts,
+    # newest first, opening the column. With 2+ posts the newest fronts the
+    # hero above, so the section lists the rest; the coming-soon state
+    # renders only while the column is empty.
     if len(human_posts) > 1:
-        second = feature_card_html(human_posts[1])
+        second = "".join(feature_card_html(p) for p in human_posts[1:])
+    elif human_posts:
+        second = feature_card_html(human_posts[0])
     else:
         second = """
       <div class="blog-soon">
@@ -1883,7 +2003,10 @@ def build_post_page(post):
 </section>
 """
     return page(
-        title=f"{post['title']} — The Block Party Playbook",
+        # Optional per-post <title> override: posts whose approved meta title
+        # differs from the H1 (or reads better short) set meta_title; the
+        # default remains title + blog masthead.
+        title=post.get("meta_title") or f"{post['title']} — The Block Party Playbook",
         description=post["subhead"],
         path=post_path(post),
         body=body,
